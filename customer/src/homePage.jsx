@@ -67,7 +67,7 @@ function HomePage(props) {
           <div className="james-truck robotocondensed-regular-normal-black-36px">{jamesTruck}</div>
           <div className="rectangle-16"></div>
           <div className="search-a-location">{searchALocation}</div>
-          <img className="untitled-design-03-03-t191256-2" src="/Downloads/homepage-asset/untitled-design---2021-03-03t191256-1@2x.png"  />
+          <img className="untitled-design-03-03-t191256-2" src={untitledDesign20210303T1912562}  />
           <img className="untitled-design-03-03-t191256-8" src={untitledDesign20210303T1912568} />
           <img className="untitled-design-03-03-t191256-9" src={untitledDesign20210303T1912569} />
           <img className="untitled-design-3-03-t191256-12" src={untitledDesign20210303T19125612} />
@@ -142,3 +142,12 @@ const homePageData = {
     address11: "250 Lower Heidelberg Rd, Fairfield VIC 3079",
 };
 
+// button example
+
+<button
+    type="button"
+    onClick={(e) => {
+      e.preventDefault();
+      window.location.href='http://google.com';
+      }}
+> Click here </button>
