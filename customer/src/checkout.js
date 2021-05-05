@@ -1,4 +1,5 @@
 import React from 'react';
+import './checkout.css';
 
 function App() {
   return <CheckOut {...checkOutData} />;
@@ -56,3 +57,4 @@ const checkOutData = {
     writeAReview: "Write a Review",
     place: " Home",
 };
+

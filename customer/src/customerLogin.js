@@ -1,4 +1,5 @@
 import React from 'react';
+import './customerLogin.css';
 
 function App() {
   return <CheckOut {...checkOutData} />;
@@ -56,4 +57,3 @@ const checkOutData = {
     writeAReview: "Write a Review",
     place: " Home",
 };
-

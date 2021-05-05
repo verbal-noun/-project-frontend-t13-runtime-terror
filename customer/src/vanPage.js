@@ -1,4 +1,5 @@
 import React from 'react';
+import './vanPage.css';
 
 function App() {
   return <VanPage {...vanPageData} />;
