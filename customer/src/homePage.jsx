@@ -106,7 +106,7 @@ function HomePage(props) {
 }
 
 const homePageData = {
-    homepage: "https://www.youtube.com/watch?v=EnG7zf9Uuk8",
+    homepage: "",
     rectangle9: "",
     ellipse1: "",
     address: "242 St Kilda Rd, St Kilda VIC 3182",
