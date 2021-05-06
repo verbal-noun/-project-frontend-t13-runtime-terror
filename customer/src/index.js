@@ -7,8 +7,9 @@ import {
 } from "react-router-dom";
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './homePage';
 import reportWebVitals from './reportWebVitals';
+
+import HomePage from './homePage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,41 +21,11 @@ ReactDOM.render(
 export default function App() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">van-page</Link>
-            </li>
-            <li>
-              <Link to="/users">order-page</Link>
-            </li>
-            <li>
-              <Link to="/users">checkout</Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/van-page">
-            <About />
-          </Route>
-          <Route path="/order">
-            <Users />
-          </Route>
-          <Route path="/checkout">
-            <Checkout />
-          </Route>
           <Route path="/">
-            <Home />
+            <HomePage />
           </Route>
         </Switch>
-      </div>
     </Router>
   );
 }

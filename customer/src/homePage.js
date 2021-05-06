@@ -140,11 +140,4 @@ const homePageData = {
 };
 
 // button example
-
-<button
-    type="button"
-    onClick={(e) => {
-      e.preventDefault();
-      window.location.href='http://google.com';
-      }}
-> Click here </button>
+export default HomePage;
