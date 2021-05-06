@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './vanPage.css';
 import redTruck from './assets/redTruck.png';
 
 function ItemCard(props) {
   return(
-    <div className="item-card-base">
+    <div className="item-card-base" onClick={props.onClick}>
       <h1 className="item-card-name">{props.item.name}</h1>
       <h1 className="item-card-price">{props.item.unitPrice}$</h1>
       <img className="item-card-image" alt="something to eat" src={props.item.photoURL}/>
@@ -13,21 +14,71 @@ function ItemCard(props) {
   );
 }
 
+function OrderItemCard(props) {
+  return(
+    <div className="order-item-card-base">
+      <span className="order-item-card-quantity">x{props.quantity}</span><br/>
+      <img className="order-item-card-image" src={props.image}/>
+    </div>
+  );
+}
+
 function VanPage(props) {
   let [items, loadItems] = useState([]);
   let [vendor, loadVendor] = useState({});
+  let [vendorDistance, setVendorDistance] = useState(null);
+  let [order, setOrder] = useState([]);
+  let [checkout, gotoCheckout] = useState(false);
+  
+  // Invalid access
+  if(!props.location.state) {
+    return <Redirect to="/"/>
+  }
 
   axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/menu`)
     .then((res) => {
       loadItems(res.data);
     }
   );
-  axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/vendor/${props.match.params.id}`)
+  axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/vendor/${props.location.state.selectedID}`)
     .then((res) => {
       loadVendor(res.data);
-    }
-  );
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          let dlong = position.coords.longitude - res.data.position.longitude;
+          let dlat = position.coords.latitude - res.data.position.latitude;
+          let dist = Math.sqrt(dlong * dlong + dlat * dlat);
+          setVendorDistance(Math.round(dist));
+        });
+      }
+    });
 
+  // Functions to update the order items
+  let addOrder = (itemID) => {
+    let found = order.find(orderItem => orderItem.item == itemID);
+    if(!found) {
+      order.push({item: itemID, quantity: 1});
+    }
+    else {
+      found.quantity++;
+    }
+    setOrder(order);
+  }
+  let removeOrder = (itemID) => {
+    let found = order.find(orderItem => orderItem.item == itemID);
+    if(found) {
+      found.quantity--;
+      if(found.quantity == 0) {
+        let index = order.indexOf(found);
+        order.splice(index, 1);
+      }
+      setOrder(order);
+    }
+  }
+
+  if(checkout) { // TODO: Change pathname to approprate url path
+    return <Redirect to={{pathname: `/checkout`, state: {order}}}/>;
+  }
   return (
     <div className="vanpage">
       <div className="row">
@@ -36,13 +87,27 @@ function VanPage(props) {
         <div className="menu-items">
           {
             items.map((item, index) => (
-              <ItemCard key={`item${index}`} item={item}/>
+              <ItemCard key={`item${index}`} item={item} onClick={() => addOrder(item._id)}/>
             ))
           }
         </div>
         <div className="vendor-bubble">
-          <h1>{vendor.name}</h1>
-          <img src={redTruck}/>
+          <div className="vendor-bubble-left">
+            <h1 className="vendor-bubble-name">{vendor.name}</h1>
+            <img className="vendor-bubble-image" src={redTruck}/>
+            {vendorDistance == null ? null : <h3 className="vendor-bubble-distance">{vendorDistance} km</h3>}
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="order-items">
+          {
+            order.map((orderItem) => {
+              let item = items.find(i => i._id == orderItem.item);
+              return <OrderItemCard image={item.photoURL} quantity={orderItem.quantity}/>;
+            })
+          }
+          <button className="order-button" onClick={gotoCheckout}>Order</button>
         </div>
       </div>
     </div>

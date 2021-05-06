@@ -38,7 +38,7 @@ function HomePage(props) {
   
   // Visit a vendor page
   if(selectedID) {
-    return <Redirect to={`/van/${selectedID}`}/>;
+    return <Redirect to={{pathname: `/van`, state: {selectedID}}}/>;
   }
   return (
     <div className="homepage">

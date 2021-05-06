@@ -21,6 +21,18 @@
   display: inline-block;
   margin-left: 3%;
   margin-top: 3%;
+  cursor: pointer;
+
+  -webkit-transition: all .2s linear;
+  -moz-transition: all .2s linear;
+  -ms-transition: all .2s linear;
+  -o-transition: all .2s linear;
+  transition: all .2s linear;
+}
+
+.item-card-base:hover {
+  box-shadow: 0px 16px 32px -3px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
 }
 
 .item-card-name{
@@ -34,8 +46,6 @@
 }
 
 .item-card-image {
-  mix-blend-mode: normal;
-  object-fit: cover;
   width: 50%;
   height: 50%;
 }
@@ -45,6 +55,61 @@
   background-color: rgba(95, 255, 216, 0.4);
   padding-bottom: 2%;
   border-radius: 20px;
+}
+
+.row {
+  display: inline-block;
+}
+
+.vendor-bubble {
+  width: 30%;
+  height: 40vh;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  border-radius: 70% / 100%;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.vendor-bubble-left {
+  padding-top: 10%;
+  text-align: center;
+  position: relative;
+}
+
+.vendor-bubble-name {
+
+}
+
+.vendor-bubble-image {
+  width: 150px;
+  height: auto;
+  position: absolute;
+  top: 50px;
+}
+
+.vendor-bubble-distance {
+
+}
+
+.order-items {
+  order-items: 
+}
+
+.order-item-card-base {
+  width: 300px;
+  height: 300px;
+  text-align: center;
+}
+
+.order-item-card-quantity {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.order-item-card-image {
+  width: 50%;
+  height: 50%;
 }
 
 /* 

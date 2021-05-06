@@ -22,7 +22,7 @@ export default function App() {
   return (
     <Router>
         <Switch>
-          <Route path="/van/:id" component={VanPage}/>
+          <Route path="/van" render={(props) => <VanPage {...props}/>}/>
           <Route path="/" component={HomePage}/>
         </Switch>
     </Router>
