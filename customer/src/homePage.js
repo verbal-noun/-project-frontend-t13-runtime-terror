@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './homePage.css';
@@ -30,11 +30,13 @@ function HomePage(props) {
   let [trucks, loadTrucks] = useState([]);
   let [selectedID, setSelectedID] = useState(null);
   
-  axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/nearby/${longitude},${latitude}`)
-    .then((res) => {
-      loadTrucks(res.data);
-    }
-  );
+  useEffect(() => {
+    axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/nearby/${longitude},${latitude}`)
+      .then((res) => {
+        loadTrucks(res.data);
+      }
+    );
+  }, []);
   
   // Visit a vendor page
   if(selectedID) {
