@@ -31,6 +31,18 @@
     width: 70%;
     mix-blend-mode: normal;
     margin: 5%;
+    cursor: pointer;
+
+  -webkit-transition: all .2s linear;
+  -moz-transition: all .2s linear;
+  -ms-transition: all .2s linear;
+  -o-transition: all .2s linear;
+  transition: all .2s linear;
+}
+
+.truck-card-base:hover {
+    box-shadow: 0px 16px 32px -3px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3px);
 }
 
 .truck-card-base:after {
@@ -45,8 +57,7 @@
 }
 
 .truck-card-icon {
-    width: 100px;
-    margin-left: 10%;
+    width: 25%;
 }
 
 .truck-card-icon > img {
@@ -57,8 +68,7 @@
 }
 
 .truck-card-info-section {
-    padding-left: 5%;
-    padding-top: 5%;
+    padding-top: 3%;
     width: 60%;
 }
 
