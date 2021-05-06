@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import './homePage.css';
 import redTruck from './assets/redTruck.png';
-
-
 
 function App() {
   return <HomePage {...homePageData} />;
@@ -11,7 +10,18 @@ function App() {
 export default App;
 
 function TruckCard(props) {
-
+  return (
+    <div className="truck-card-base">
+      <img className="truck-card-icon" src={redTruck} />
+      <div className="truck-card-info-section">
+        <h1 className="robotocondensed-regular-normal-black-36px">{props.name}</h1>
+        <span className="robotocondensed-bold-black-20px">{props.address}</span>
+      </div>
+      <div className="truck-card-distance-section">
+        <span className="truck-card-distance">{props.distance}</span>
+      </div>
+    </div>
+  );
 }
 
 function HomePage(props) {
@@ -52,60 +62,69 @@ function HomePage(props) {
     address11,
   } = props;
 
+  let [cards, loadCards] = useState([]);
+
+
+
   return (
-    <div class="container-center-horizontal">
-      <div className="homepage screen" style={{ backgroundImage: `url(${homepage})` }}>
-        <div className="overlap-group">
-          <img className="rectangle-9" src={rectangle9} />
-          <img className="ellipse-1" src={ellipse1} />
-          <div className="rectangle-12"></div>
-          <div className="rectangle-13"></div>
-          <div className="rectangle-14"></div>
-          <div className="address-2 robotocondensed-regular-normal-black-20px">{address}</div>
-          <div className="address-3 robotocondensed-bold-black-20px">{address2}</div>
-          <div className="address-8 robotocondensed-bold-black-20px">{address3}</div>
-          <div className="address-5 robotocondensed-bold-black-20px">{address4}</div>
-          <h1 className="title robotocondensed-regular-normal-black-36px">{fancyTruck3}</h1>
-          <div className="address-7 robotocondensed-regular-normal-black-20px">{address5}</div>
-          <div className="fancy-truck robotocondensed-regular-normal-black-36px">{fancyTruck22}</div>
-          <div className="address-6 robotocondensed-regular-normal-black-20px">{address6}</div>
-          <div className="james-truck robotocondensed-regular-normal-black-36px">{jamesTruck}</div>
-          <div className="rectangle-16"></div>
-          <div className="search-a-location">{searchALocation}</div>
-          <img className="untitled-design-03-03-t191256-2" src={untitledDesign20210303T1912562}  />
-          <img className="untitled-design-03-03-t191256-8" src={untitledDesign20210303T1912568} />
-          <img className="untitled-design-03-03-t191256-9" src={untitledDesign20210303T1912569} />
-          <img className="untitled-design-3-03-t191256-12" src={untitledDesign20210303T19125612} />
-          <img className="untitled-design-3-03-t191256-10" src={untitledDesign20210303T19125610} />
-          <img className="untitled-design-03-03-t191256-3" src={untitledDesign20210303T1912563} />
-          <img className="untitled-design-03-03-t191256-4" src={redTruck} />
-          <div className="rectangle-17"></div>
-          <div className="address-4 robotocondensed-regular-normal-black-20px">{address7}</div>
-          <div className="address-9 robotocondensed-bold-black-20px">{address8}</div>
-          <div className="fancy-truck-1 robotocondensed-regular-normal-black-36px">{fancyTruck32}</div>
-          <img className="untitled-design-3-03-t191256-11" src={untitledDesign20210303T19125611} />
-          <img className="untitled-design-03-10-t103255-2" src={untitledDesign20210310T1032552} />
-          <img className="truck1" src={untitledDesign20210310T1735541} />
-          <img className="untitled-design-03-10-t181146-3" src={untitledDesign20210310T1811463} />
+    <div className="homepage">
+      <div className="truck-card-list">
+        <div className="logo">
+          <h1>Find A Van</h1>
         </div>
-        <div className="overlap-group2">
-          <div className="text-1">
-            <span className="span0 ">{spanText}</span>
-            <span className="span1 ">{spanText2}</span>
-          </div>
-        </div>
-        <div className="overlap-group1">
-          <div className="flex-row">
-            <img className="untitled-design-03-03-t191256-1" src={untitledDesign20210303T1912561} />
-            <div className="cool-truck robotocondensed-regular-normal-black-36px">{coolTruck}</div>
-            <div className="address robotocondensed-bold-black-20px">{address9}</div>
-          </div>
-          <div className="overlap-group3">
-            <div className="address-1 robotocondensed-regular-normal-black-18px">{address10}</div>
-            <div className="address-1 robotocondensed-regular-normal-black-18px">{address11}</div>
-          </div>
+        <TruckCard/>
+        <TruckCard/>
+        <TruckCard/>
+        <TruckCard/>
+        {/* <img className="rectangle-9" src={rectangle9} />
+        <img className="ellipse-1" src={ellipse1} />
+        <div className="rectangle-12"></div>
+        <div className="rectangle-13"></div>
+        <div className="rectangle-14"></div>
+        <div className="address-2 robotocondensed-regular-normal-black-20px">{address}</div>
+        <div className="address-3 robotocondensed-bold-black-20px">{address2}</div>
+        <div className="address-8 robotocondensed-bold-black-20px">{address3}</div>
+        <div className="address-5 robotocondensed-bold-black-20px">{address4}</div>
+        <h1 className="title robotocondensed-regular-normal-black-36px">{fancyTruck3}</h1>
+        <div className="address-7 robotocondensed-regular-normal-black-20px">{address5}</div>
+        <div className="fancy-truck robotocondensed-regular-normal-black-36px">{fancyTruck22}</div>
+        <div className="address-6 robotocondensed-regular-normal-black-20px">{address6}</div>
+        <div className="james-truck robotocondensed-regular-normal-black-36px">{jamesTruck}</div>
+        <div className="rectangle-16"></div>
+        <div className="search-a-location">{searchALocation}</div>
+        <img className="untitled-design-03-03-t191256-2" src={untitledDesign20210303T1912562}  />
+        <img className="untitled-design-03-03-t191256-8" src={untitledDesign20210303T1912568} />
+        <img className="untitled-design-03-03-t191256-9" src={untitledDesign20210303T1912569} />
+        <img className="untitled-design-3-03-t191256-12" src={untitledDesign20210303T19125612} />
+        <img className="untitled-design-3-03-t191256-10" src={untitledDesign20210303T19125610} />
+        <img className="untitled-design-03-03-t191256-3" src={untitledDesign20210303T1912563} />
+        <img className="untitled-design-03-03-t191256-4" src={redTruck} />
+        <div className="rectangle-17"></div>
+        <div className="address-4 robotocondensed-regular-normal-black-20px">{address7}</div>
+        <div className="address-9 robotocondensed-bold-black-20px">{address8}</div>
+        <div className="fancy-truck-1 robotocondensed-regular-normal-black-36px">{fancyTruck32}</div>
+        <img className="untitled-design-3-03-t191256-11" src={untitledDesign20210303T19125611} />
+        <img className="untitled-design-03-10-t103255-2" src={untitledDesign20210310T1032552} />
+        <img className="truck1" src={untitledDesign20210310T1735541} />
+        <img className="untitled-design-03-10-t181146-3" src={untitledDesign20210310T1811463} /> */}
+      </div>
+      {/* <div className="overlap-group2">
+        <div className="text-1">
+          <span className="span0 ">{spanText}</span>
+          <span className="span1 ">{spanText2}</span>
         </div>
       </div>
+      <div className="overlap-group1">
+        <div className="flex-row">
+          <img className="untitled-design-03-03-t191256-1" src={untitledDesign20210303T1912561} />
+          <div className="cool-truck robotocondensed-regular-normal-black-36px">{coolTruck}</div>
+          <div className="address robotocondensed-bold-black-20px">{address9}</div>
+        </div>
+        <div className="overlap-group3">
+          <div className="address-1 robotocondensed-regular-normal-black-18px">{address10}</div>
+          <div className="address-1 robotocondensed-regular-normal-black-18px">{address11}</div>
+        </div>
+      </div> */}
     </div>
   );
 }

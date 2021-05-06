@@ -1,392 +1,56 @@
-.address {
-  align-self: center;
-  letter-spacing: 0;
-  margin-bottom: 4.0px;
-  margin-left: 168px;
-  min-height: 23px;
-  min-width: 42px;
-  mix-blend-mode: normal;
-}
-.address-1 {
-  left: -49px;
-  
-  letter-spacing: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: -222px;
-}
-.address-2 {
-  left: 180px;
-  letter-spacing: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 861px;
-  width: 480px;
-}
-.address-3 {
-  left: 507px;
-  letter-spacing: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 841px;
-}
-.address-4 {
-  left: 180px;
-  letter-spacing: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 1037px;
-  width: 480px;
-}
-.address-5 {
-  left: 507px;
-  letter-spacing: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 665px;
-}
-.address-6 {
-  left: 180px;
-  letter-spacing: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 519px;
-  width: 480px;
-}
-.address-7 {
-  left: 180px;
-  letter-spacing: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 690px;
-  width: 480px;
-}
-.address-8 {
-  left: 507px;
-  letter-spacing: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 494px;
-}
-.address-9 {
-  left: 507px;
-  letter-spacing: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 1017px;
-}
-.cool-truck {
-  letter-spacing: 0;
-  margin-left: 52px;
-  margin-top: 13px;
-  min-height: 42px;
-  min-width: 154px;
-  mix-blend-mode: normal;
-}
-.ellipse-1 {
-  height: 97px;
-  left: 1250px;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 927px;
-  width: 101px;
-}
-.fancy-truck {
-  left: 180px;
-  letter-spacing: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 634px;
-}
-.fancy-truck-1 {
-  left: 180px;
-  letter-spacing: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 981px;
-}
-.flex-row {
-  align-items: flex-start;
-  display: flex;
-  min-width: 526px;
-}
 .homepage {
-  background-position: 50% 50%;
-  background-size: cover;
-  height: 1024px;
-  mix-blend-mode: normal;
-  overflow: hidden;
-  position: relative;
-  width: 1440px;
-}
-.james-truck {
-  left: 180px;
-  letter-spacing: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 463px;
-}
-.overlap-group {
-  height: 1093px;
-  left: 48px;
-  position: absolute;
-  top: -56px;
-  width: 1429px;
-}
-.overlap-group1 {
-  align-items: flex-start;
-  background-color: #d6fff5;
-  border-radius: 20px;
-  box-shadow: 0px 4px 4px #00000040;
-  display: flex;
-  flex-direction: column;
-  left: 49px;
-  min-height: 125px;
-  padding: 0 17px;
-  position: absolute;
-  top: 222px;
-  width: 588px;
-}
-.overlap-group2 {
-  align-items: center;
-  background-color: var(--white);
-  border-radius: 50px;
-  box-shadow: 0px 4px 4px #00000040 , 0px 4px 4px #00000040;
-  display: flex;
-  height: 136px;
-  left: 33px;
-  min-width: 620px;
-  padding: 0 64px;
-  position: absolute;
-  top: 14px;
-}
-.overlap-group3 {
-  align-self: flex-end;
-  height: 21px;
-  margin-right: 30px;
-  margin-top: 181px;
-  position: relative;
-  width: 313px;
-}
-.rectangle-12 {
-  background-color: var(--frosted-mint);
-  border-radius: 20px;
-  box-shadow: 0px 4px 4px #00000040;
-  height: 125px;
-  left: 1px;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 443px;
-  width: 588px;
-}
-.rectangle-13 {
-  background-color: var(--frosted-mint);
-  border-radius: 20px;
-  box-shadow: 0px 4px 4px #00000040;
-  height: 125px;
-  left: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 616px;
-  width: 588px;
-}
-.rectangle-14 {
-  background-color: var(--frosted-mint);
-  border-radius: 20px;
-  box-shadow: 0px 4px 4px #00000040;
-  height: 125px;
-  left: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 790px;
-  width: 588px;
-}
-.rectangle-16 {
-  background-color: #fffcfc;
-  border-radius: 50px;
-  height: 95px;
-  left: 690px;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 80px;
-  width: 560px;
-}
-.rectangle-17 {
-  background-color: var(--frosted-mint);
-  border-radius: 20px;
-  box-shadow: 0px 4px 4px #00000040;
-  height: 125px;
-  left: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 966px;
-  width: 588px;
-}
-.rectangle-9 {
-  height: 1080px;
-  left: 657px;
-  mix-blend-mode: normal;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  width: 772px;
-}
-.search-a-location {
-  color: #00000042;
-  font-family: var(--font-family-roboto_condensed-regular);
-  font-size: var(--font-size-l);
-  left: 734px;
-  letter-spacing: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 105px;
-}
-.span0 {
-  color: var(--black);
-}
-.span1 {
-  color: var(--tropical-rain-forest);
-}
-.text-1 {
-  color: transparent;
-  font-family: var(--font-family-roboto-regular);
-  font-size: var(--font-size-l);
-  letter-spacing: 0;
-  min-height: 42px;
-  min-width: 481px;
-}
-.title {
-  left: 180px;
-  letter-spacing: 0;
-  mix-blend-mode: normal;
-  position: absolute;
-  top: 805px;
-}
-.untitled-design-03-03-t191256-1 {
-  height: 113px;
-  mix-blend-mode: normal;
-  object-fit: cover;
-  width: 110px;
-}
-.untitled-design-03-03-t191256-2 {
-  height: 113px;
-  left: 18px;
-  mix-blend-mode: normal;
-  object-fit: cover;
-  position: absolute;
-  top: 449px;
-  width: 110px;
-}
-.untitled-design-03-03-t191256-3 {
-  height: 113px;
-  left: 18px;
-  mix-blend-mode: normal;
-  object-fit: cover;
-  position: absolute;
-  top: 622px;
-  width: 110px;
-}
-.untitled-design-03-03-t191256-4 {
-  height: 121px;
-  left: 14px;
-  mix-blend-mode: normal;
-  object-fit: cover;
-  position: absolute;
-  top: 796px;
-  width: 118px;
-}
-.untitled-design-03-03-t191256-8 {
-  height: 61px;
-  left: 950px;
-  mix-blend-mode: normal;
-  object-fit: cover;
-  position: absolute;
-  top: 529px;
-  width: 41px;
-}
-.untitled-design-03-03-t191256-9 {
-  height: 61px;
-  left: 980px;
-  mix-blend-mode: normal;
-  object-fit: cover;
-  position: absolute;
-  top: 800px;
-  width: 41px;
-}
-.untitled-design-03-10-t103255-2 {
-  height: 37px;
-  left: 1165px;
-  mix-blend-mode: normal;
-  object-fit: cover;
-  position: absolute;
-  top: 110px;
-  width: 61px;
-}
-.truck1 {
-  height: 64px;
-  left: 1263px;
-  mix-blend-mode: normal;
-  object-fit: cover;
-  position: absolute;
-  top: 944px;
-  width: 76px;
-}
-.untitled-design-03-10-t181146-3 {
-  height: 106px;
-  left: 1266px;
-  mix-blend-mode: normal;
-  object-fit: cover;
-  position: absolute;
-  top: 73px;
-  width: 98px;
-}
-.untitled-design-3-03-t191256-10 {
-  height: 61px;
-  left: 1175px;
-  mix-blend-mode: normal;
-  object-fit: cover;
-  position: absolute;
-  top: 430px;
-  width: 41px;
-}
-.untitled-design-3-03-t191256-11 {
-  height: 121px;
-  left: 14px;
-  mix-blend-mode: normal;
-  object-fit: cover;
-  position: absolute;
-  top: 972px;
-  width: 118px;
-}
-.untitled-design-3-03-t191256-12 {
-  height: 61px;
-  left: 734px;
-  mix-blend-mode: normal;
-  object-fit: cover;
-  position: absolute;
-  top: 555px;
-  width: 41px;
+    background-image: url('./assets/homePageBackground.png');
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    mix-blend-mode: normal;
+    overflow-y: scroll;
+    position: relative;
 }
 
-@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-* {
-  box-sizing: border-box;
-}
-.container-center-horizontal {
-  pointer-events: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-}
-.container-center-horizontal > * {
-  pointer-events: auto;
-  flex-shrink: 0;
-}
-.screen a {
-  text-decoration: none;
-  display: contents;
+.logo {
+    background-color: white;
+    width: 70%;
+    height: 15%;
+    border-radius: 20%/80%;
+    margin: 5%;
+    padding: 3%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
 }
 
+.truck-card-base {
+    background-color: #D7FFF5;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px #00000040;
+    height: 15%;
+    width: 70%;
+    padding: 3%;
+    mix-blend-mode: normal;
+    margin: 5%;
+  }
 
 
+.truck-card-icon {
+    mix-blend-mode: normal;
+    object-fit: cover;
+    width: 20%;
+    height: auto;
+    float: left;
+}
+
+.truck-card-info-section {
+    width: 100%;
+}
+.truck-card-title {
+    letter-spacing: 0;
+    mix-blend-mode: normal;
+}
+.truck-card-distance-section {
+    float: right;
+}
+
+.truck-card-list {
+    width: 50%;
+    height: 100%;
+}
