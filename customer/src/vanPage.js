@@ -102,9 +102,9 @@ function VanPage(props) {
       <div className="row">
         <div className="order-items">
           {
-            order.map((orderItem) => {
+            order.map((orderItem, index) => {
               let item = items.find(i => i._id == orderItem.item);
-              return <OrderItemCard image={item.photoURL} quantity={orderItem.quantity}/>;
+              return <OrderItemCard key={`orderitem${index}`} image={item.photoURL} quantity={orderItem.quantity}/>;
             })
           }
           <button className="order-button" onClick={gotoCheckout}>Order</button>
