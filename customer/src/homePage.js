@@ -3,11 +3,7 @@ import axios from 'axios';
 import './homePage.css';
 import redTruck from './assets/redTruck.png';
 
-function App() {
-  return <HomePage {...homePageData} />;
-}
 
-export default App;
 
 function TruckCard(props) {
   return (
