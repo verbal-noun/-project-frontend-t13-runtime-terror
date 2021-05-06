@@ -31,14 +31,18 @@ function VanPage(props) {
   let [checkout, gotoCheckout] = useState(false);
   let [back, goBack] = useState(false);
   
+  let data = props.location.state;
   useEffect(() => {    
     // Invalid access, do not perform requests
-    if(!props.location.state) {
+    if(!data) {
       return;
     }
     axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/menu`)
       .then((res) => {
         loadItems(res.data);
+        if(data.orderItems) {
+          setOrder(data.orderItems);
+        }
       }
     );
     axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/vendor/${props.location.state.selectedID}`)
@@ -56,16 +60,22 @@ function VanPage(props) {
   }, []);
 
   // Invalid access
-  if(!props.location.state) {
+  if(!data) {
     return <Redirect to="/"/>
   }
 
   // Functions to update the order items
-  let addOrder = (itemID) => {
+  let addOrder = (itemObj) => {
     let newOrder = order.slice();
-    let found = newOrder.find(orderItem => orderItem.item == itemID);
+    let found = newOrder.find(orderItem => orderItem.item == itemObj._id);
     if(!found) {
-      newOrder.push({item: itemID, quantity: 1});
+      newOrder.push({
+        name: itemObj.name,
+        photoURL: itemObj.photoURL, 
+        item: itemObj._id, 
+        price: itemObj.unitPrice,
+        quantity: 1
+      });
     }
     else {
       found.quantity++;
@@ -83,7 +93,15 @@ function VanPage(props) {
   }
 
   if(checkout) { // TODO: Change pathname to approprate url path
-    return <Redirect to={{pathname: `/checkout`, state: {order}}}/>;
+    return <Redirect to={
+      {
+        pathname: `/checkout`, 
+        state: {
+          order, 
+          vendor: props.location.state.selectedID
+        }
+      }
+    }/>;
   }
   if(back) {
     return <Redirect to="/"/>
@@ -97,7 +115,7 @@ function VanPage(props) {
         <div className="menu-items">
           {
             items.map((item, index) => (
-              <ItemCard key={`item${index}`} item={item} onClick={() => addOrder(item._id)}/>
+              <ItemCard key={`item${index}`} item={item} onClick={() => addOrder(item)}/>
             ))
           }
         </div>
