@@ -1,5 +1,5 @@
 import React from 'react';
-import './homePage.css';
+import './app.css';
 
 
 
@@ -80,7 +80,7 @@ function HomePage(props) {
           <div className="fancy-truck-1 robotocondensed-regular-normal-black-36px">{fancyTruck32}</div>
           <img className="untitled-design-3-03-t191256-11" src={untitledDesign20210303T19125611} />
           <img className="untitled-design-03-10-t103255-2" src={untitledDesign20210310T1032552} />
-          <img className="untitled-design-03-10-t173554-1" src={untitledDesign20210310T1735541} />
+          <img className="truck1" src={untitledDesign20210310T1735541} />
           <img className="untitled-design-03-10-t181146-3" src={untitledDesign20210310T1811463} />
         </div>
         <div className="overlap-group2">
