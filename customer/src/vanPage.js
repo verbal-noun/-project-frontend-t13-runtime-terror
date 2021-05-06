@@ -1,83 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import './vanPage.css';
 
-function App() {
-  return <VanPage {...vanPageData} />;
-}
-
-export default App;
-
-function menuItem(props) {
+function ItemCard(props) {
   return(
-  <div className="item_base">
-    
-      <h1 className="item-name">{props.name}</h1>
-      <h1 className="item-price">{props.name}</h1>
-      <img className="item-image" alt="something to eat" src={bigCake}/>
-
-  </div>
+    <div className="item-card-base">
+      <h1 className="item-card-name">{props.item.name}</h1>
+      <h1 className="item-card-price">{props.item.unitPrice}$</h1>
+      <img className="item-card-image" alt="something to eat" src={props.item.photoURL}/>
+    </div>
   );
 }
 
 function VanPage(props) {
-  const {
-    vanpage,
-    overlapGroup4,
-    untitledDesign20210310T1710132,
-    bigCake,
-    price,
-    untitledDesign20210310T1646521,
-    fancyBsicuit,
-    price2,
-    untitledDesign20210310T1017312,
-    surname,
-    price3,
-    untitledDesign20210310T1714281,
-    flatWhite,
-    price4,
-    untitledDesign20210310T1713451,
-    untitledDesign20210310T1016461,
-    latte,
-    price5,
-    plainBiscuit,
-    price6,
-    vector2,
-    untitledDesign20210310T1657072,
-    untitledDesign20210310T1015271,
-    capuccino,
-    price7,
-    overlapGroup9,
-    surname2,
-    price8,
-    untitledDesign20210310T1647181,
-    signIn,
-    vector3,
-    vector4,
-    ellipse7,
-    x4Km,
-    untitledDesign20210303T19125612,
-    elonsTruck,
-    x2,
-    x22,
-    x1,
-    title,
-  } = props;
+  let [items, loadItems] = useState([]);
+  let truckID = props.match.params;
 
+  axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/menu`)
+    .then((res) => {
+      loadItems(res.data);
+    }
+  );
+  
   return (
     <div className="vanpage">
-      <div className="ellipse"></div>
-      <div className="menu-items">
-        <span><menuItem/>
-        <menuItem/>
-        <menuItem/>
-        <menuItem/></span>
-        <span><menuItem/>
-        <menuItem/>
-        <menuItem/>
-        <menuItem/></span>
-      <div className="order-items">
+      <div className="row">
       </div>
-
+      <div className="row">
+        <div className="menu-items">
+          {
+            items.map((item, index) => (
+              <ItemCard key={`item${index}`} item={item}/>
+            ))
+          }
+        </div>
       </div>
     </div>
     /*<div class="container-center-horizontal">
@@ -188,46 +144,4 @@ function VanPage(props) {
   );
 }
 
-const vanPageData = {
-      vanpage: "",
-    overlapGroup4: "",
-    untitledDesign20210310T1710132: "",
-    bigCake: "Big Cake",
-    price: "$ 8.00",
-    untitledDesign20210310T1646521: "",
-    fancyBsicuit: "Fancy Bsicuit",
-    price2: "$ 8.00",
-    untitledDesign20210310T1017312: "",
-    surname: "Long Black",
-    price3: "$ 4.50",
-    untitledDesign20210310T1714281: "",
-    flatWhite: "Flat White",
-    price4: "$ 4.00",
-    untitledDesign20210310T1713451: "",
-    untitledDesign20210310T1016461: "",
-    latte: "Latte",
-    price5: "$ 4.00",
-    plainBiscuit: "Plain Biscuit",
-    price6: "$ 6.00",
-    vector2: "",
-    untitledDesign20210310T1657072: "",
-    untitledDesign20210310T1015271: "",
-    capuccino: "Capuccino",
-    price7: "$ 4.00",
-    overlapGroup9: "",
-    surname2: "Small Cake",
-    price8: "$ 4.50",
-    untitledDesign20210310T1647181: "",
-    signIn: "Sign In",
-    vector3: "",
-    vector4: "",
-    ellipse7: "",
-    x4Km: "4km",
-    untitledDesign20210303T19125612: "",
-    elonsTruck: "Elon’s Truck",
-    x2: "x2",
-    x22: "x2",
-    x1: "x1",
-    title: "Order Here",
-};
-
+export default VanPage;

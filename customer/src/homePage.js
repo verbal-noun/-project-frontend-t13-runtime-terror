@@ -26,14 +26,13 @@ function TruckCard(props) {
 function HomePage(props) {
   let longitude = 3.0;
   let latitude = 1.0;
-  let [trucks, loadtrucks] = useState([]);
+  let [trucks, loadTrucks] = useState([]);
   
   axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/nearby/${longitude},${latitude}`)
-       .then((res) => {
-        loadtrucks(res.data);
-       })
-       .catch((err) => {
-       });
+    .then((res) => {
+      loadTrucks(res.data);
+    }
+  );
 
   return (
     <div className="homepage">

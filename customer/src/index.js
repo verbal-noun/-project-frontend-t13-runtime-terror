@@ -9,6 +9,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 import HomePage from './homePage';
+import VanPage from './vanPage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -21,9 +22,8 @@ export default function App() {
   return (
     <Router>
         <Switch>
-          <Route path="/">
-            <HomePage />
-          </Route>
+          <Route path="/home" component={HomePage}/>
+          <Route path="/van/:id" component={VanPage}/>
         </Switch>
     </Router>
   );

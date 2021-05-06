@@ -1,44 +1,53 @@
-.item_base {
-  background-color: var(--white);
-    border-radius: 20px;
-    box-shadow: 0px 4px 4px #00000040;
-    height: 183px;
-    left: -21px;
-    mix-blend-mode: normal;
-    position: absolute;
-    top: -194px;
-    width: 184px;
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
 
+.vanpage {
+  font-family: 'Roboto Condensed';
+  background-image: url('./assets/homePageBackground.png');
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  mix-blend-mode: normal;
+  overflow-y: scroll;
+  position: relative;
 }
 
-
-
-.item-price{
-    left: -48px;
-    letter-spacing: 0;
-    mix-blend-mode: normal;
-    position: absolute;
-    top: -667px;
-    width: 81px; 
-}
-.item-name{
-    letter-spacing: 0;
-    margin-top: -176px;
-    min-height: 14px;
-    mix-blend-mode: normal;
-    width: 124px;
-
-}
-.item_image{
-  height: 51px;
-    mix-blend-mode: normal;
-    object-fit: cover;
-    width: 48px;
+.item-card-base {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px #00000040;
+  height: 175px;
+  width: 175px;
+  text-align: center;
+  display: inline-block;
+  margin-left: 3%;
+  margin-top: 3%;
 }
 
+.item-card-name{
+  font-size: 20px;
+  margin-bottom: 3%;
+}
 
+.item-card-price{
+  font-size: 18px;
+  margin-bottom: 3%;  
+}
 
+.item-card-image {
+  mix-blend-mode: normal;
+  object-fit: cover;
+  width: 50%;
+  height: 50%;
+}
 
+.menu-items {
+  width: 60vw;
+  background-color: rgba(95, 255, 216, 0.4);
+  padding-bottom: 5%;
+  border-radius: 20px;
+}
+
+/* 
 
 .big-cake {
     align-self: center;
@@ -655,4 +664,4 @@
     text-decoration: none;
     display: contents;
   }
-  
+   */
