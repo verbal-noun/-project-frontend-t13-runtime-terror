@@ -83,7 +83,7 @@ function VanPage(props) {
   return (
     <div className="vanpage">
       <div className="row">
-        <button class="back-button" onClick={() => goBack(true)}>{"<"}</button>
+        <button className="back-button" onClick={() => goBack(true)}>{"<"}</button>
       </div>
       <div className="row">
         <div className="menu-items">
