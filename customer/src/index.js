@@ -22,8 +22,8 @@ export default function App() {
   return (
     <Router>
         <Switch>
-          <Route path="/home" component={HomePage}/>
           <Route path="/van/:id" component={VanPage}/>
+          <Route path="/" component={HomePage}/>
         </Switch>
     </Router>
   );
