@@ -8,12 +8,15 @@ import redTruck from './assets/redTruck.png';
 function TruckCard(props) {
   return (
     <div className="truck-card-base">
-      <img className="truck-card-icon" src={redTruck} />
-      <div className="truck-card-info-section">
-        <h1 className="robotocondensed-regular-normal-black-36px">{props.truck.name}</h1>
-        <span className="robotocondensed-bold-black-20px">{props.truck.address}</span>
+      <div className="truck-card-column">
+        <img className="truck-card-icon" src={redTruck}/>
       </div>
-      <div className="truck-card-distance-section">
+      <div className="truck-card-column truck-card-info-section">
+        <span className="truck-card-title">{props.truck.name}</span>
+        <br/><br/>
+        <span className="truck-card-address">{props.truck.address}</span>
+      </div>
+      <div className="truck-card-column truck-card-distance-section">
         <span className="truck-card-distance">{Math.round(props.truck.distance)} km</span>
       </div>
     </div>
