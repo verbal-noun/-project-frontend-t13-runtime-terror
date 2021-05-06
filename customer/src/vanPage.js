@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './vanPage.css';
+import redTruck from './assets/redTruck.png';
 
 function ItemCard(props) {
   return(
@@ -14,14 +15,19 @@ function ItemCard(props) {
 
 function VanPage(props) {
   let [items, loadItems] = useState([]);
-  let truckID = props.match.params;
+  let [vendor, loadVendor] = useState({});
 
   axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/menu`)
     .then((res) => {
       loadItems(res.data);
     }
   );
-  
+  axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/vendor/${props.match.params.id}`)
+    .then((res) => {
+      loadVendor(res.data);
+    }
+  );
+
   return (
     <div className="vanpage">
       <div className="row">
@@ -33,6 +39,10 @@ function VanPage(props) {
               <ItemCard key={`item${index}`} item={item}/>
             ))
           }
+        </div>
+        <div className="vendor-bubble">
+          <h1>{vendor.name}</h1>
+          <img src={redTruck}/>
         </div>
       </div>
     </div>
