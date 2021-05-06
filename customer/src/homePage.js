@@ -66,7 +66,7 @@ function HomePage(props) {
   let latitude = 1.0;
   let [trucks, loadtrucks] = useState([]);
   
-  axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/nearby/1.0,3.0`)
+  axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/nearby/${longitude},${latitude}`)
        .then((res) => {
         loadtrucks(res.data);
        })
