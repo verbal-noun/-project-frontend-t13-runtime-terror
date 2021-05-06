@@ -1,13 +1,103 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import './orderPage.css';
 
-function App() {
-  return <PlaceOrderCheckOut {...placeOrderCheckOutData} />;
+function OrderItem(props) {
+  return(
+    <div className="shopping-cart">
+      <span className="order-item-row">
+      <h1 className="item-card-name">{props.item.name}</h1>
+      <h1 className="item-card-price">{props.item.unitPrice}$</h1>
+      </span>
+    </div>
+  );
+}
+function backToMenu() {
+  function handleClick(e) {
+    e.preventDefault();
+    console.log('The back to menu button was clicked.');
+  }
+
+  return (
+    <a href="https://info30005-customer-backend.herokuapp.com/api/customer/menu" onClick={handleClick}>
+      Back to Menu
+    </a>
+  );
 }
 
-export default App;
+function cancelOrder() {
+  function handleClick(e) {
+    e.preventDefault();
+    console.log('User cancelled the order');
+  }
 
-function PlaceOrderCheckOut(props) {
+  return (
+    <a href="https://info30005-customer-backend.herokuapp.com/api/customer/cancelOrder" onClick={handleClick}>
+      Cancel 
+    </a>
+  );
+}
+
+
+function confirmorder() {
+  function handleClick(e) {
+    e.preventDefault();
+    console.log('User confirmed the order');
+  }
+
+  return (
+    <a href="https://info30005-customer-backend.herokuapp.com/api/customer/confirmOrder" onClick={handleClick}>
+      Confirm order 
+    </a>
+  );
+}
+
+function OrderPage(props) {
+  let [items, loadOrder] = useState([]);
+  let truckID = props.match.params;
+
+  axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/order`)
+    .then((res) => {
+      loadOrder(res.data);
+    }
+  );
+  
+  return (
+    <div className="orderpage">
+      <button className="back-to-menu-button" onclick="backToMenu()">
+        Back to Menu
+      </button>
+      <div className="order-rectangle">
+      
+        <div className="order-items-column">
+          {
+            items.map((item, index) => (
+              <ItemCard key={`item${index}`} item={item}/>
+            ))
+          }
+        </div>
+        
+        <div className="total-row">
+          <span><h1 class="total">Total</h1>
+          <h1 className="total-price"> add up the prices</h1>
+          </span>
+        </div>
+
+      </div>
+      <span>
+      <button className="cancel-button" onclick="cancelOrder()">
+        Cancel Order
+      </button>
+      <button className="confirm-button" onclick="confirmOrder()">
+        Confirm & Pay
+      </button>
+      </span>
+
+    </div>
+  )
+        }
+
+/*function PlaceOrderCheckOut(props) {
   const {
     placeorderCheckout,
     backToMenu,
@@ -170,4 +260,4 @@ const placeOrderCheckOutData = {
     x4Km: "4km",
     untitledDesign20210303T19125612: "untitled-design-2021-03-03t191256-12-1.png",
     elonsTruck: "Elon’s Truck",
-};
+}; */
