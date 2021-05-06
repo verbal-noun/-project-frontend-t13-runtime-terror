@@ -31,7 +31,11 @@ function VanPage(props) {
   let [checkout, gotoCheckout] = useState(false);
   let [back, goBack] = useState(false);
   
-  useEffect(() => {
+  useEffect(() => {    
+    // Invalid access, do not perform requests
+    if(!props.location.state) {
+      return;
+    }
     axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/menu`)
       .then((res) => {
         loadItems(res.data);
