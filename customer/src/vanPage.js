@@ -16,7 +16,7 @@ function ItemCard(props) {
 
 function OrderItemCard(props) {
   return(
-    <div className="order-item-card-base">
+    <div className="order-item-card-base" onClick={props.onClick}>
       <span className="order-item-card-quantity">x{props.quantity}</span><br/>
       <img className="order-item-card-image" src={props.image}/>
     </div>
@@ -29,6 +29,7 @@ function VanPage(props) {
   let [vendorDistance, setVendorDistance] = useState(null);
   let [order, setOrder] = useState([]);
   let [checkout, gotoCheckout] = useState(false);
+  let [back, goBack] = useState(false);
   
   // Invalid access
   if(!props.location.state) {
@@ -64,24 +65,25 @@ function VanPage(props) {
     }
     setOrder(order);
   }
-  let removeOrder = (itemID) => {
-    let found = order.find(orderItem => orderItem.item == itemID);
-    if(found) {
-      found.quantity--;
-      if(found.quantity == 0) {
-        let index = order.indexOf(found);
-        order.splice(index, 1);
-      }
-      setOrder(order);
+  let removeOrder = (orderItem) => {
+    orderItem.quantity--;
+    if(orderItem.quantity == 0) {
+      let index = order.indexOf(orderItem);
+      order.splice(index, 1);
     }
+    setOrder(order);
   }
 
   if(checkout) { // TODO: Change pathname to approprate url path
     return <Redirect to={{pathname: `/checkout`, state: {order}}}/>;
   }
+  if(back) {
+    return <Redirect to="/"/>
+  }
   return (
     <div className="vanpage">
       <div className="row">
+        <button class="back-button" onClick={() => goBack(true)}>{"<"}</button>
       </div>
       <div className="row">
         <div className="menu-items">
@@ -104,10 +106,13 @@ function VanPage(props) {
           {
             order.map((orderItem, index) => {
               let item = items.find(i => i._id == orderItem.item);
-              return <OrderItemCard key={`orderitem${index}`} image={item.photoURL} quantity={orderItem.quantity}/>;
+              return <OrderItemCard key={`orderitem${index}`} 
+                                    image={item.photoURL} 
+                                    quantity={orderItem.quantity} 
+                                    onClick={() => removeOrder(orderItem)}/>;
             })
           }
-          <button className="order-button" onClick={gotoCheckout}>Order</button>
+          <button className="order-button" onClick={() => gotoCheckout(true)}>Order</button>
         </div>
       </div>
     </div>
