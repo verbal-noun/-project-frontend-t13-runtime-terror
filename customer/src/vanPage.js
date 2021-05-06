@@ -7,6 +7,18 @@ function App() {
 
 export default App;
 
+function menuItem(props) {
+  return(
+  <div className="item_base">
+    
+      <h1 className="item-name">{props.name}</h1>
+      <h1 className="item-price">{props.name}</h1>
+      <img className="item-image" alt="something to eat" src={bigCake}/>
+
+  </div>
+  );
+}
+
 function VanPage(props) {
   const {
     vanpage,
@@ -52,7 +64,23 @@ function VanPage(props) {
   } = props;
 
   return (
-    <div class="container-center-horizontal">
+    <div className="vanpage">
+      <div className="ellipse"></div>
+      <div className="menu-items">
+        <span><menuItem/>
+        <menuItem/>
+        <menuItem/>
+        <menuItem/></span>
+        <span><menuItem/>
+        <menuItem/>
+        <menuItem/>
+        <menuItem/></span>
+      <div className="order-items">
+      </div>
+
+      </div>
+    </div>
+    /*<div class="container-center-horizontal">
       <div className="vanpage screen" style={{ backgroundImage: `url(${vanpage})` }}>
         <div className="flex-row">
           <div className="flex-col-2">
@@ -156,7 +184,7 @@ function VanPage(props) {
           </div>
         </div>
       </div>
-    </div>
+  </div>*/
   );
 }
 
