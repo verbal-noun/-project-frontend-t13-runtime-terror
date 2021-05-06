@@ -1,5 +1,6 @@
 import React from 'react';
 import './homePage.css';
+import redTruck from './assets/redTruck.png';
 
 
 
@@ -8,6 +9,10 @@ function App() {
 }
 
 export default App;
+
+function TruckCard(props) {
+
+}
 
 function HomePage(props) {
   const {
@@ -73,7 +78,7 @@ function HomePage(props) {
           <img className="untitled-design-3-03-t191256-12" src={untitledDesign20210303T19125612} />
           <img className="untitled-design-3-03-t191256-10" src={untitledDesign20210303T19125610} />
           <img className="untitled-design-03-03-t191256-3" src={untitledDesign20210303T1912563} />
-          <img className="untitled-design-03-03-t191256-4" src={untitledDesign20210303T1912564} />
+          <img className="untitled-design-03-03-t191256-4" src={redTruck} />
           <div className="rectangle-17"></div>
           <div className="address-4 robotocondensed-regular-normal-black-20px">{address7}</div>
           <div className="address-9 robotocondensed-bold-black-20px">{address8}</div>
