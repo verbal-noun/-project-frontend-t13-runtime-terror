@@ -10,7 +10,7 @@ import reportWebVitals from './reportWebVitals';
 
 import HomePage from './homePage';
 import VanPage from './vanPage';
-import CheckOut from './checkout';
+import OrderPage from './orderPage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,7 +24,7 @@ export default function App() {
     <Router>
         <Switch>
           <Route path="/van" render={(props) => <VanPage {...props}/>}/>
-          <Route path="/checkout" render={(props) => <CheckOut {...props}/>}/>
+          <Route path="/checkout" render={(props) => <OrderPage {...props}/>}/>
           <Route path="/" component={HomePage}/>
         </Switch>
     </Router>
