@@ -24,43 +24,6 @@ function TruckCard(props) {
 }
 
 function HomePage(props) {
-  const {
-    homepage,
-    rectangle9,
-    ellipse1,
-    address,
-    address2,
-    address3,
-    address4,
-    fancyTruck3,
-    address5,
-    fancyTruck22,
-    address6,
-    jamesTruck,
-    searchALocation,
-    untitledDesign20210303T1912562,
-    untitledDesign20210303T1912568,
-    untitledDesign20210303T1912569,
-    untitledDesign20210303T19125612,
-    untitledDesign20210303T19125610,
-    untitledDesign20210303T1912563,
-    untitledDesign20210303T1912564,
-    address7,
-    address8,
-    fancyTruck32,
-    untitledDesign20210303T19125611,
-    untitledDesign20210310T1032552,
-    untitledDesign20210310T1735541,
-    untitledDesign20210310T1811463,
-    spanText,
-    spanText2,
-    untitledDesign20210303T1912561,
-    coolTruck,
-    address9,
-    address10,
-    address11,
-  } = props;
-
   let longitude = 3.0;
   let latitude = 1.0;
   let [trucks, loadtrucks] = useState([]);
