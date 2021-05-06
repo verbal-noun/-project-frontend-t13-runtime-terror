@@ -18,22 +18,10 @@ function TruckCard(props) {
         <span className="robotocondensed-bold-black-20px">{props.truck.address}</span>
       </div>
       <div className="truck-card-distance-section">
-        <span className="truck-card-distance">{props.truck.distance}</span>
+        <span className="truck-card-distance">{Math.round(props.truck.distance)} km</span>
       </div>
     </div>
   );
-}
-
-function TruckCardList(props) {
-  return (
-    <div>
-      {
-        props.trucks.map((truck, index) => (
-          <TruckCard truck={truck}/>
-        ))
-      }
-    </div>
-  )
 }
 
 function HomePage(props) {
@@ -81,10 +69,8 @@ function HomePage(props) {
   axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/nearby/1.0,3.0`)
        .then((res) => {
         loadtrucks(res.data);
-        console.log(res.data);
        })
        .catch((err) => {
-        console.log(err.message);
        });
 
   return (
@@ -93,38 +79,11 @@ function HomePage(props) {
         <div className="logo">
           <h1>Find A Van</h1>
         </div>
-        <TruckCardList trucks={trucks}/>
-        {/* <img className="rectangle-9" src={rectangle9} />
-        <img className="ellipse-1" src={ellipse1} />
-        <div className="rectangle-12"></div>
-        <div className="rectangle-13"></div>
-        <div className="rectangle-14"></div>
-        <div className="address-2 robotocondensed-regular-normal-black-20px">{address}</div>
-        <div className="address-3 robotocondensed-bold-black-20px">{address2}</div>
-        <div className="address-8 robotocondensed-bold-black-20px">{address3}</div>
-        <div className="address-5 robotocondensed-bold-black-20px">{address4}</div>
-        <h1 className="title robotocondensed-regular-normal-black-36px">{fancyTruck3}</h1>
-        <div className="address-7 robotocondensed-regular-normal-black-20px">{address5}</div>
-        <div className="fancy-truck robotocondensed-regular-normal-black-36px">{fancyTruck22}</div>
-        <div className="address-6 robotocondensed-regular-normal-black-20px">{address6}</div>
-        <div className="james-truck robotocondensed-regular-normal-black-36px">{jamesTruck}</div>
-        <div className="rectangle-16"></div>
-        <div className="search-a-location">{searchALocation}</div>
-        <img className="untitled-design-03-03-t191256-2" src={untitledDesign20210303T1912562}  />
-        <img className="untitled-design-03-03-t191256-8" src={untitledDesign20210303T1912568} />
-        <img className="untitled-design-03-03-t191256-9" src={untitledDesign20210303T1912569} />
-        <img className="untitled-design-3-03-t191256-12" src={untitledDesign20210303T19125612} />
-        <img className="untitled-design-3-03-t191256-10" src={untitledDesign20210303T19125610} />
-        <img className="untitled-design-03-03-t191256-3" src={untitledDesign20210303T1912563} />
-        <img className="untitled-design-03-03-t191256-4" src={redTruck} />
-        <div className="rectangle-17"></div>
-        <div className="address-4 robotocondensed-regular-normal-black-20px">{address7}</div>
-        <div className="address-9 robotocondensed-bold-black-20px">{address8}</div>
-        <div className="fancy-truck-1 robotocondensed-regular-normal-black-36px">{fancyTruck32}</div>
-        <img className="untitled-design-3-03-t191256-11" src={untitledDesign20210303T19125611} />
-        <img className="untitled-design-03-10-t103255-2" src={untitledDesign20210310T1032552} />
-        <img className="truck1" src={untitledDesign20210310T1735541} />
-        <img className="untitled-design-03-10-t181146-3" src={untitledDesign20210310T1811463} /> */}
+        {
+          trucks.map((truck, index) => {
+            if(truck.open) return <TruckCard key={`truck${index}`} truck={truck}/>
+          })
+        }
       </div>
       {/* <div className="overlap-group2">
         <div className="text-1">
