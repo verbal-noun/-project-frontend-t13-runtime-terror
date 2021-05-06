@@ -14,14 +14,26 @@ function TruckCard(props) {
     <div className="truck-card-base">
       <img className="truck-card-icon" src={redTruck} />
       <div className="truck-card-info-section">
-        <h1 className="robotocondensed-regular-normal-black-36px">{props.name}</h1>
-        <span className="robotocondensed-bold-black-20px">{props.address}</span>
+        <h1 className="robotocondensed-regular-normal-black-36px">{props.truck.name}</h1>
+        <span className="robotocondensed-bold-black-20px">{props.truck.address}</span>
       </div>
       <div className="truck-card-distance-section">
-        <span className="truck-card-distance">{props.distance}</span>
+        <span className="truck-card-distance">{props.truck.distance}</span>
       </div>
     </div>
   );
+}
+
+function TruckCardList(props) {
+  return (
+    <div>
+      {
+        props.trucks.map((truck, index) => (
+          <TruckCard truck={truck}/>
+        ))
+      }
+    </div>
+  )
 }
 
 function HomePage(props) {
@@ -62,9 +74,18 @@ function HomePage(props) {
     address11,
   } = props;
 
-  let [cards, loadCards] = useState([]);
-
-
+  let longitude = 3.0;
+  let latitude = 1.0;
+  let [trucks, loadtrucks] = useState([]);
+  
+  axios.get(`localhost:4040/api/customer/nearby/1.0,3.0`)
+       .then((res) => {
+        loadtrucks(res.data);
+        console.log(res.data);
+       })
+       .catch((err) => {
+        console.log(err.message);
+       });
 
   return (
     <div className="homepage">
@@ -72,10 +93,7 @@ function HomePage(props) {
         <div className="logo">
           <h1>Find A Van</h1>
         </div>
-        <TruckCard/>
-        <TruckCard/>
-        <TruckCard/>
-        <TruckCard/>
+        <TruckCardList trucks={trucks}/>
         {/* <img className="rectangle-9" src={rectangle9} />
         <img className="ellipse-1" src={ellipse1} />
         <div className="rectangle-12"></div>
