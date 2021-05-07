@@ -48,12 +48,21 @@ Link: https://info30005-customer-frontend.herokuapp.com/
 
 ### Example Screenshots of various pages
 
-**Home Page**: Lists nearest 5 vans and displays those on Google map. If the customer doesn't share location then Homepage will show the default page overlooking Melbourne CBD.
-    <img src="resources/homepage.png" alt="Find a van page. Nearest 5 vans listed and displayed on the map">
-
+**Home Page**: Lists nearest 5 vans and displays those on Google map. If the customer doesn't share location then Homepage will show the default page overlooking Melbourne CBD. Logged-in view will display the button to view orders.
+* Home Page (Default/not logged in)
+    <img src="resources/homepagedefault.png" alt="Find a van page. Nearest 5 vans listed and displayed on the map">
+* Home Page (Logged in)
+    <img src="resources/hopmepageloggedin.png" alt="Find a van page. Nearest 5 vans listed and displayed on the map">
 
 **Login Page**: Clicking the login button on home page will redirect to the login page. Example login credentials can be used form above or registered in the customer back-end from [this link](https://info30005-customer-backend.herokuapp.com/api/customer/register)
-     <img src="resources/homepage.png" alt="Find a van page. Nearest 5 vans listed and displayed on the map">
+- <img src="resources/dummy.png" alt="Login Page">
+
+**Van Page**: Clicking a van from the home page will redirect to Van page where a customer can see the menu and add to to order.
+-   <img src="resources/dummy.png" alt="Van Page">
+
+**Order Status Page**: Order status page shows the items ordered and the total payable amount.
+-    <img src="resources/dummy.png" alt="Order Status Page">
+
 
 
 
