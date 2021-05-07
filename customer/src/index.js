@@ -11,6 +11,7 @@ import reportWebVitals from './reportWebVitals';
 import HomePage from './homePage';
 import VanPage from './vanPage';
 import OrderPage from './orderPage';
+import LoginPage from './login';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,6 +26,7 @@ export default function App() {
         <Switch>
           <Route path="/van" render={(props) => <VanPage {...props}/>}/>
           <Route path="/checkout" render={(props) => <OrderPage {...props}/>}/>
+          <Route path="/login" component={LoginPage}/>
           <Route path="/" component={HomePage}/>
         </Switch>
     </Router>

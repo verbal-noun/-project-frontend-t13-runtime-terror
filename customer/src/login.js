@@ -1,14 +1,15 @@
 
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
+import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import "./login.css";
 
-export default function Login() {
+function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [redirectHome, setRedirectHome] = useState(false);
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -16,8 +17,23 @@ export default function Login() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    let postData = {email, password};
+    console.log(postData);
+    axios.post(`https://info30005-customer-backend.herokuapp.com/api/customer/login`, postData)
+      .then((res) => {
+        // Set global auth token for whenever an axios request is sent
+        axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+        setRedirectHome(true);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        
+      });
   }
-
+  
+  if(redirectHome) {
+    return <Redirect to="/"/>;
+  }
   return (
     <div className="Login">
       <Form onSubmit={handleSubmit}>
@@ -41,12 +57,9 @@ export default function Login() {
         <Button className="button" block size="lg" type="submit" disabled={!validateForm()}>
           Login
         </Button>
-        <link to="/signup"> 
-        <Button className="button" block size="lg" type="submit">
-          Sign Up
-        </Button>
-        </link>
       </Form>
     </div>
   );
 }
+
+export default LoginPage;
