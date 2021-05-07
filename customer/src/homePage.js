@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 import axios from "axios";
 import "./homePage.css";
 import redTruck from "./assets/redTruck.png";
@@ -30,6 +31,7 @@ function HomePage(props) {
   let [coords, setCoords] = useState({longitude: 144.9605765, latitude: -37.8102361});
   let [trucks, loadTrucks] = useState([]);
   let [selectedID, setSelectedID] = useState(null);
+  let [buttonRedirect, setButtonRedirect] = useState(null);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -53,9 +55,22 @@ function HomePage(props) {
     }
   }, []);
 
+  let isLoggedIn = localStorage.getItem('token');
+  let handleButtonClick = () => {
+    if(isLoggedIn) {
+      setButtonRedirect("/orders");
+    }
+    else {
+      setButtonRedirect("/login");
+    }
+  }
+  
   // Visit a vendor page
   if (selectedID) {
     return <Redirect to={{ pathname: `/van`, state: { selectedID } }} />;
+  }
+  if (buttonRedirect) {
+    return <Redirect to={buttonRedirect} />;
   }
   return (
     <div className="homepage">
@@ -75,8 +90,13 @@ function HomePage(props) {
           }
         })}
       </div>
-      <div className="map-container">
-        <CustomGoogleMap latitude={coords.latitude} longitude={coords.longitude}/>
+      <div className="map-container-container">
+        <div className="map-container">
+          <CustomGoogleMap className="map" latitude={coords.latitude} longitude={coords.longitude}/>
+          <Button className="home-page-button" onClick={handleButtonClick}>
+            {isLoggedIn ? "View Orders" : "Login"}
+          </Button>
+        </div>
       </div>
     </div>
   );

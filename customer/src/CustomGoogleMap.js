@@ -6,7 +6,7 @@ import axios from 'axios'
 import Marker from './components/marker';
 import style from './mapStyles/purple.json'
 
-function CustomGoogleMap({longitude, latitude}) {
+function CustomGoogleMap({longitude, latitude, className}) {
   const [trucks, loadTrucks] = useState([])
 
   const fetchPlaces = async () => {
@@ -26,7 +26,7 @@ function CustomGoogleMap({longitude, latitude}) {
   }
 
   return (
-    <div style={{width: '100%', height: '100%'}}>
+    <div className={className}>
       <GoogleMapReact
         options={{styles: style, scrollwheel: false, fullscreenControl: false, zoomControl: false}}
         defaultZoom={14}
