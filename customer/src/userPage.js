@@ -7,8 +7,8 @@ import "./userPage.css";
 function OrderCard(props) {
   return (
     <div className="order">
-        <span className="order-name">{props.order.createdWhen}</span>
-        <span>{props.order.status}</span>
+        <span className="order-name">{props.order.createdWhen+ " "}</span>
+        <span className="order-name">{props.order.status+ " "}</span>
         <span className="order-name">{props.order.vendorName}</span>
     </div>
   );
@@ -90,6 +90,7 @@ function UserPage(props) {
         <div className="logo">
           <h1>Order History</h1>
         </div>
+        <Button className="logout-button" onClick={logout}>Logout</Button>
         {orders.map((order, index) => {
           return (
             <OrderCard
@@ -100,7 +101,6 @@ function UserPage(props) {
           );
         })}
       </div>
-      <Button onClick={logout}>Logout</Button>
     </div>
   );
 }

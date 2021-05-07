@@ -8,18 +8,16 @@
   overflow-y: scroll;
   position: relative;
 }
+
 .order-card-list {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    text-align: center;
 }
 
-.order-item-row {
-  background-color: #d7fff5;
-  border-radius: 20px;
-  box-shadow: 0px 4px 4px #00000040;
-  height: 125px;
-  width: 70%;
-  mix-blend-mode: normal;
-  margin: 5%;
-  cursor: pointer;
+.order {
+    background-color: white;
 }
 
 .order-name {
@@ -51,3 +49,26 @@
   border-radius: 20%/80%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
+.logout-button {
+    margin-bottom: 3%;
+    width: 25%;
+    height: 60px;
+    font-size: 32px;
+    background-color: rgb(163, 73, 73);
+    color: white;
+    border: 0;
+    cursor: pointer;
+
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+  }
+  
+  .logout-button:hover {
+    background-color:rgb(236, 121, 121);
+    box-shadow: 0px 16px 32px -3px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3px);
+  }
