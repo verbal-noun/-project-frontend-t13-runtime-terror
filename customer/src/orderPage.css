@@ -23,6 +23,12 @@
   padding: 1.5rem;
 }
 
+.shopping-cart .item-card-image {
+  margin-top: 0px;
+  width: 90%;
+  height: 65%;
+}
+
 .item-card-name {
   font-size: 20px;
   margin-bottom: 3%;
@@ -30,8 +36,9 @@
 
 .item-card-price {
   font-size: 18px;
-  margin-bottom: 3%;
-  color: white;
+  font-weight: bold;
+  margin-top: -0px;
+  color: black;
 }
 
 .back-to-menu-button {
