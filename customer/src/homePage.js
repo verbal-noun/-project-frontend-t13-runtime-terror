@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import "./homePage.css";
 import redTruck from "./assets/redTruck.png";
+import CustomGoogleMap from './CustomGoogleMap';
 
 function TruckCard(props) {
   return (
@@ -63,23 +64,9 @@ function HomePage(props) {
           }
         })}
       </div>
-      {/* <div className="overlap-group2">
-        <div className="text-1">
-          <span className="span0 ">{spanText}</span>
-          <span className="span1 ">{spanText2}</span>
-        </div>
+      <div className="map-container">
+        <CustomGoogleMap latitude="-37.8136" longitude="144.9631"/>
       </div>
-      <div className="overlap-group1">
-        <div className="flex-row">
-          <img className="untitled-design-03-03-t191256-1" src={untitledDesign20210303T1912561} />
-          <div className="cool-truck robotocondensed-regular-normal-black-36px">{coolTruck}</div>
-          <div className="address robotocondensed-bold-black-20px">{address9}</div>
-        </div>
-        <div className="overlap-group3">
-          <div className="address-1 robotocondensed-regular-normal-black-18px">{address10}</div>
-          <div className="address-1 robotocondensed-regular-normal-black-18px">{address11}</div>
-        </div>
-      </div> */}
     </div>
   );
 }
