@@ -19,7 +19,7 @@ function TruckCard(props) {
       </div>
       <div className="truck-card-column truck-card-distance-section">
         <span className="truck-card-distance">
-          {Math.round(props.truck.distance)} km
+          {Math.round(props.truck.distance * 100) / 100} km
         </span>
       </div>
     </div>
@@ -27,19 +27,30 @@ function TruckCard(props) {
 }
 
 function HomePage(props) {
-  let longitude = 3.0;
-  let latitude = 1.0;
+  let [coords, setCoords] = useState({longitude: 144.9605765, latitude: -37.8102361});
   let [trucks, loadTrucks] = useState([]);
   let [selectedID, setSelectedID] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(
-        `https://info30005-customer-backend.herokuapp.com/api/customer/nearby/${longitude},${latitude}`
-      )
-      .then((res) => {
-        loadTrucks(res.data);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/nearby/${position.coords.longitude},${position.coords.latitude}`)
+          .then((res) => {
+            setCoords({
+              longitude: position.coords.longitude,
+              latitude: position.coords.latitude
+            });
+            loadTrucks(res.data);
+          });
       });
+    }
+    else {
+      // Melbourne Central Default
+      axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/nearby/${coords.longitude},${coords.latitude}`)
+        .then((res) => {
+          loadTrucks(res.data);
+        });
+    }
   }, []);
 
   // Visit a vendor page
@@ -65,7 +76,7 @@ function HomePage(props) {
         })}
       </div>
       <div className="map-container">
-        <CustomGoogleMap latitude="-37.8136" longitude="144.9631"/>
+        <CustomGoogleMap latitude={coords.latitude} longitude={coords.longitude}/>
       </div>
     </div>
   );
