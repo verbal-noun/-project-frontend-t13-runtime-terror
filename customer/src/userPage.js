@@ -4,16 +4,38 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import "./userPage.css";
 
+function elapsed(since) {
+  let now = new Date();
+  let diff = now - since;
+  diff /= 1000;
+  var seconds = Math.round(diff);
+  if(seconds >= 60 * 60) {
+    let hours = Math.round(seconds / (60 * 60));
+    if(hours == 1) return `${hours} hours ago`;
+    else return `${hours} hour ago`;
+  }
+  else if(seconds >= 60) {
+    let minutes = Math.round(seconds / 60); 
+    if(minutes == 1) return `${minutes} minute ago`;
+    else return `${minutes} minutes ago`;
+  }
+  else {
+    return `${seconds} seconds ago`; 
+  }
+}
+
 function OrderCard(props) {
   return (
     <div className="order">
-      <span className="order-item-row">
-        <h1 className="order-name">{props.order.id}</h1>
-        <h1 className="order-name">{props.order.vendorName}</h1>
-      </span>
+        <div class="order-header">
+          <span className="order-header">{props.order.vendorName} is creating your order!</span>
+          <div className="order-status">{props.order.status}</div>
+        </div><br/>
+        <div className="order-time">{elapsed(props.order.createdWhen)+" "}</div>
     </div>
   );
 }
+
 
 function UserPage(props) {
   let [orders, loadOrders] = useState([]);
@@ -30,16 +52,27 @@ function UserPage(props) {
       .get(
         `https://info30005-customer-backend.herokuapp.com/api/customer/fetchOrders`
       )
-      .then((res) => {
-        for (let order of res.data) {
-          let vendorID = order.vendor;
-          let newOrders = orders.slice();
-          newOrders.push({
-            id: order._id,
-            vendorName: vendorID,
-          });
-          loadOrders(newOrders);
+      .then(async (res) => {
+        let newOrders = [];
+        for(let order of res.data) {
+          try {
+            let res = await axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/vendor/${order.vendor}`);
+            let vendor = res.data;  
+            newOrders.push({
+              createdWhen: new Date(order.createdAt),
+              status: order.status,
+              vendorName: vendor.name
+            });
+          }
+          catch(err) {
+            console.log(err);
+          }
         }
+        // Latest order goes up
+        newOrders.sort((a, b) => {
+          return b.createdWhen - a.createdWhen;
+        });
+        loadOrders(newOrders);
       })
       .catch((err) => {
         console.log(err.message);
@@ -67,6 +100,7 @@ function UserPage(props) {
         <div className="logo">
           <h1>Order History</h1>
         </div>
+        <Button className="logout-button" onClick={logout}>Logout</Button>
         {orders.map((order, index) => {
           return (
             <OrderCard
@@ -77,7 +111,6 @@ function UserPage(props) {
           );
         })}
       </div>
-      <Button onClick={logout}>Logout</Button>
     </div>
   );
 }

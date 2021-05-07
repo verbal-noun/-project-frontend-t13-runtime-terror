@@ -7,8 +7,9 @@
   height: 100vh;
   background-size: cover;
   mix-blend-mode: normal;
-  overflow-y: scroll;
+  overflow-x: hidden;
   position: absolute;
+  overflow-x: hidden;
 }
 
 /** Item list **/
@@ -58,8 +59,9 @@
 }
 
 .item-card-image {
-  width: 50%;
-  height: 50%;
+  margin-top: -25px;
+  width: 75%;
+  height: 75%;
 }
 
 /** Right vendor bubble **/
@@ -71,7 +73,7 @@
   border-radius: 50%;
   height: 400px;
   width: 400px;
-  left: 88vw;
+  left: 86vw;
   top: 20vh;
   float: left;
   position: absolute;
@@ -98,6 +100,9 @@
   position: absolute;
 }
 
+.vendor-bubble-distance {
+  font-size: 10;
+}
 /** Ordering items **/
 
 .order-items {
@@ -138,8 +143,8 @@
 }
 
 .order-item-card-image {
-  width: 50%;
-  height: 50%;
+  width: 80%;
+  height: 80%;
 }
 
 /** Buttons **/
