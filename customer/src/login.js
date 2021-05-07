@@ -22,7 +22,17 @@ function LoginPage(props) {
     axios.post(`https://info30005-customer-backend.herokuapp.com/api/customer/login`, postData)
       .then((res) => {
         // Set global auth token for whenever an axios request is sent
-        axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+        localStorage.setItem('token', res.data.token);
+        axios.interceptors.request.use(
+          (config) => {
+            const token = localStorage.getItem('token');
+            config.headers.Authorization = `Bearer ${token}`;
+            return config;
+          },
+          (err) => {
+            return Promise.reject(err);
+          }
+        );
         setRedirectHome(true);
       })
       .catch((err) => {
