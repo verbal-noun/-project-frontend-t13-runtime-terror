@@ -83,15 +83,7 @@ function OrderPage(props) {
   }
   if (successfulOrder) {
     // TODO: Redirect to order watch page
-    return <Redirect to={{
-      pathname: '/status',
-      state: {
-        order: {
-          status: successfulOrder.status,
-          vendor: successfulOrder.vendor,
-        }
-      }
-    }} />;
+    return <Redirect to="/orders"/>;
   }
   return (
     <div className="orderpage">

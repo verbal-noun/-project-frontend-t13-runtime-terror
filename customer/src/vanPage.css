@@ -9,6 +9,7 @@
   mix-blend-mode: normal;
   overflow-x: hidden;
   position: absolute;
+  overflow-x: hidden;
 }
 
 /** Item list **/
