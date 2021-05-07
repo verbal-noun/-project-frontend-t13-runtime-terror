@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-//import { useHistory } from "react-router-dom";
-import LoaderButton from "../components/LoaderButton";
+import { useHistory } from "react-router-dom";
 import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 //import { onError } from "../libs/errorLib";
-import "./Signup.css";
+import "./signUp.css";
 
-export default function Signup() {
+function SignupPage() {
   const [fields, handleFieldChange] = useFormFields({
     fullName: "",
     email: "",
@@ -17,6 +16,7 @@ export default function Signup() {
     confirmPassword: "",
     confirmationCode: "",
   });
+  
   const history = useHistory();
   const [newUser, setNewUser] = useState(null);
   const { userHasAuthenticated } = useAppContext();
@@ -126,3 +126,5 @@ export default function Signup() {
     </div>
   );
 }
+
+export default SignupPage;
