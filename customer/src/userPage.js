@@ -7,12 +7,31 @@ import "./userPage.css";
 function OrderCard(props) {
   return (
     <div className="order">
-      <span className="order-item-row">
-        <h1 className="order-name">{props.order.id}</h1>
-        <h1 className="order-name">{props.order.vendorName}</h1>
-      </span>
+        <span className="order-name">{props.order.createdWhen}</span>
+        <span>{props.order.status}</span>
+        <span className="order-name">{props.order.vendorName}</span>
     </div>
   );
+}
+
+function elapsed(since) {
+  let now = new Date();
+  let diff = now - since;
+  diff /= 1000;
+  var seconds = Math.round(diff);
+  if(seconds >= 60 * 60) {
+    let hours = Math.round(seconds / (60 * 60));
+    if(hours == 1) return `${hours} hours ago`;
+    else return `${hours} hour ago`;
+  }
+  else if(seconds >= 60) {
+    let minutes = Math.round(seconds / 60); 
+    if(minutes == 1) return `${minutes} minute ago`;
+    else return `${minutes} minutes ago`;
+  }
+  else {
+    return `${seconds} seconds ago`; 
+  }
 }
 
 function UserPage(props) {
@@ -29,13 +48,17 @@ function UserPage(props) {
     axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/fetchOrders`)
       .then((res) => {
         for(let order of res.data) {
-          let vendorID = order.vendor;
-          let newOrders = orders.slice();
-          newOrders.push({
-            id: order._id,
-            vendorName: vendorID
-          });
-          loadOrders(newOrders);
+          axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/vendor/${order.vendor}`)
+            .then((res) => {
+              let vendor = res.data;
+              let newOrders = orders.slice();
+              newOrders.push({
+                createdWhen: elapsed(new Date(order.createdAt)),
+                status: order.status,
+                vendorName: vendor.name
+              });
+              loadOrders(newOrders);
+            });
         }
       })
       .catch((err) => {
