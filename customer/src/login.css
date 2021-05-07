@@ -1,0 +1,27 @@
+
+@media all and (min-width: 480px) {
+  .Login {
+    background: linear-gradient(#86EFC3, #f3f3f3);
+    padding: 60px 0;
+  }
+
+  .Login form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+
+  .button{
+    width: 396px;
+    height: 97px;
+    left: 288px;
+    top: 836px;
+    
+    background: #047E61;
+    border-radius: 40px;
+
+  }
+
+
+
+}
+  

@@ -1,0 +1,11 @@
+@media all and (min-width: 480px) {
+  .Signup {
+    background: linear-gradient(#86EFC3, #f3f3f3);  
+    padding: 60px 0;
+  }
+
+  .Signup form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}
