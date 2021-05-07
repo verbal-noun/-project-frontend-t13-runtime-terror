@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ReactDOM from "react-dom";
+import axios from 'axios';
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
@@ -15,6 +16,21 @@ ReactDOM.render(
     <App />
   </React.StrictMode>,
   document.getElementById("root")
+);
+
+// If user is logged in add token to request header
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if(token) {
+      config.headers.common.Authorization = `Bearer ${token}`;
+      return config;  
+    }
+    console.log(config.headers);
+  },
+  (err) => {
+    return Promise.reject(err);
+  }
 );
 
 export default function App() {
