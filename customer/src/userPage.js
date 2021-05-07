@@ -18,10 +18,10 @@ function OrderCard(props) {
 function UserPage(props) {
   let [orders, loadOrders] = useState([]);
   let [selectedID, setSelectedID] = useState(null);
-  
-  let isLoggedIn = localStorage.getItem('token');
+
+  let isLoggedIn = localStorage.getItem("token");
   useEffect(() => {
-    if(!isLoggedIn) {
+    if (!isLoggedIn) {
       return;
     }
     // Fetch the user's outstanding orders
@@ -32,17 +32,16 @@ function UserPage(props) {
       .then((res) => {
         console.log(res);
         loadOrders(res.data);
-      }
-    );
+      });
   }, []);
 
   // Go back to homepage if user is not logged in
-  if(!isLoggedIn) {
-    return <Redirect to="/"/>
+  if (!isLoggedIn) {
+    return <Redirect to="/" />;
   }
-  
+
   // TODO: Visit the order status page
-  if(selectedID) {
+  if (selectedID) {
     console.log("GOTO ORDER STATUS PAGE");
     // return <Redirect to={{pathname: `/van`, state: {selectedID}}}/>;
   }

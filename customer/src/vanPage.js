@@ -121,7 +121,7 @@ function VanPage(props) {
       <button className="back-button" onClick={() => goBack(true)}>
         <span className="left-arrow"></span>
       </button>
-      <div className="row">
+      <div className="menu-row">
         <div className="menu-items">
           {items.map((item, index) => (
             <ItemCard

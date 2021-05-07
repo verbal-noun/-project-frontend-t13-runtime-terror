@@ -8,11 +8,14 @@
   background-size: cover;
   mix-blend-mode: normal;
   overflow-y: scroll;
-  position: relative;
+  position: absolute;
 }
 
 /** Item list **/
 
+.menu-row {
+  margin-left: 2rem;
+}
 .menu-items {
   width: 60vw;
   background-color: rgba(95, 255, 216, 0.4);
@@ -62,21 +65,31 @@
 /** Right vendor bubble **/
 
 .vendor-bubble {
-  width: 30%;
-  height: 40vh;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(236, 16, 16, 0.8);
   color: black;
-  border-radius: 70% / 100%;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  left: 200px;
+  /* border-radius: 70% / 100%; */
+  /*   */
+  border-radius: 100px;
+  height: 350px;
+  width: 00px;
+  left: 80vw;
+  top: 30vh;
+  float: right;
+  position: absolute;
+  /* float: left;
+  width: 40px;
+  height: 80px;
+  line-height: 80px;
+  color: white;
+  text-align: center;
+  margin: 0 1px;
+  background: black; */
 }
-
-.vendor-bubble-left {
+/* .vendor-bubble-left {
   padding-top: 10%;
   text-align: center;
   position: relative;
-}
+} */
 
 .vendor-bubble-name {
 }
@@ -84,11 +97,8 @@
 .vendor-bubble-image {
   width: 150px;
   height: auto;
-  position: absolute;
-  top: 50px;
-}
-
-.vendor-bubble-distance {
+  /* position: relative; */
+  top: 10;
 }
 
 /** Ordering items **/
@@ -165,6 +175,9 @@
 }
 
 .back-button {
+  margin-left: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
   width: 100px;
   height: 100px;
   border-radius: 50%/50%;
@@ -191,4 +204,7 @@
 
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
+}
+.row {
+  padding-top: 5rem;
 }
