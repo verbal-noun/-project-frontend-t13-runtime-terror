@@ -4,16 +4,6 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import "./userPage.css";
 
-function OrderCard(props) {
-  return (
-    <div className="order">
-        <span className="order-name">{props.order.createdWhen+ " "}</span>
-        <span className="order-name">{props.order.status+ " "}</span>
-        <span className="order-name">{props.order.vendorName}</span>
-    </div>
-  );
-}
-
 function elapsed(since) {
   let now = new Date();
   let diff = now - since;
@@ -34,6 +24,19 @@ function elapsed(since) {
   }
 }
 
+function OrderCard(props) {
+  return (
+    <div className="order">
+        <div class="order-header">
+          <span className="order-header">{props.order.vendorName} is creating your order!</span>
+          <span className="order-status">Status: {props.order.status}</span>
+        </div><br/>
+        <div className="order-time">{elapsed(props.order.createdWhen)+" "}</div>
+    </div>
+  );
+}
+
+
 function UserPage(props) {
   let [orders, loadOrders] = useState([]);
   let [selectedID, setSelectedID] = useState(null);
@@ -49,20 +52,27 @@ function UserPage(props) {
       .get(
         `https://info30005-customer-backend.herokuapp.com/api/customer/fetchOrders`
       )
-      .then((res) => {
+      .then(async (res) => {
+        let newOrders = [];
         for(let order of res.data) {
-          axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/vendor/${order.vendor}`)
-            .then((res) => {
-              let vendor = res.data;
-              let newOrders = orders.slice();
-              newOrders.push({
-                createdWhen: elapsed(new Date(order.createdAt)),
-                status: order.status,
-                vendorName: vendor.name
-              });
-              loadOrders(newOrders);
+          try {
+            let res = await axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/vendor/${order.vendor}`);
+            let vendor = res.data;  
+            newOrders.push({
+              createdWhen: new Date(order.createdAt),
+              status: order.status,
+              vendorName: vendor.name
             });
+          }
+          catch(err) {
+            console.log(err);
+          }
         }
+        // Latest order goes up
+        newOrders.sort((a, b) => {
+          return b.createdWhen - a.createdWhen;
+        });
+        loadOrders(newOrders);
       })
       .catch((err) => {
         console.log(err.message);
