@@ -1,25 +1,50 @@
 @media all and (min-width: 480px) {
   .Login {
     background: linear-gradient(#86efc3, #f3f3f3);
-    padding: 60px 0;
-    height: 100px;
+    padding: 240px 0;
+    height: 200px;
   }
 
 
   .Login form {
-    margin: 0 auto;
-    max-width: 320px;
+    margin: auto;
+    max-width: 300px;
   }
 
   .button {
     width: 196px;
     height: 40px;
-    left: 288px;
+    left: 290px;
     margin-top: 50px;
     color: azure;
 
     background: #047e61;
     border-radius: 40px;
+  }
+
+  .form-name{
+    margin-right: 20px;
+    margin-top: 50px;
+    
+  }
+
+  .logo-image{
+    margin-left:42%;
+    width: 150px;
+    margin-top:1%;
+
+    
+  }
+
+  .password-input{
+    
+    margin-top: 50px;
+    border-color: blueviolet;
+  }
+  .email-input{
+    margin-left: 30px;
+    margin-top: 50px;
+    border-color: blueviolet;
   }
 
 }
