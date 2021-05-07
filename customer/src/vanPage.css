@@ -65,32 +65,37 @@
 /** Right vendor bubble **/
 
 .vendor-bubble {
-  background-color: white;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   color: black;
-  /* border-radius: 70% / 100%; */
-  /*   */
   border-radius: 50%;
-  height: 500px;
-  width: 500px;
-  left: 80vw;
-  top: 30vh;
-  float: right;
+  height: 400px;
+  width: 400px;
+  left: 88vw;
+  top: 20vh;
+  float: left;
   position: absolute;
+  /* position: absolute;
+  top: 27%;
+  left: 90%;
+  height: 400px;
+  width: 400px;
+  border-radius: 150px 0 0 150px;
+  background-color: white;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
 }
-/* .vendor-bubble-left {
-  padding-top: 10%;
-  text-align: center;
-  position: relative;
-} */
 
 .vendor-bubble-name {
+  padding-left: 3rem;
+  padding-top: 4rem;
 }
 
 .vendor-bubble-image {
   width: 150px;
   height: auto;
-  /* position: relative; */
-  top: 10;
+  right: 10vw;
+  position: absolute;
 }
 
 /** Ordering items **/
@@ -108,12 +113,6 @@
 .order-items-left {
   width: 80%;
   display: inline-block;
-}
-
-.order-items-right {
-  width: 20%;
-  display: inline-block;
-  vertical-align: middle;
 }
 
 .order-item-card-base {
@@ -146,6 +145,7 @@
 /** Buttons **/
 
 .order-button {
+  margin-top: 4rem;
   width: 200px;
   height: 60px;
   border-radius: 25%/75%;
@@ -154,7 +154,6 @@
   border: 0;
   font-weight: bold;
   font-size: 32px;
-
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -ms-transition: all 0.2s linear;
