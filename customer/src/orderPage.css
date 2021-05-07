@@ -41,37 +41,37 @@
   color: black;
 }
 
+.back-to-menu-button, .cancel-button, .confirm-button {
+  font-size: 32px;
+  width: auto;
+  height: auto;
+  padding: 20px;
+  color: white;
+  border: 0;
+  border-radius: 40px;
+  background: #047e61;
+}
+
+.back-to-menu-button:hover, .cancel-button:hover, .confirm-button:hover {
+  background: #22c7a0;
+}
+
 .back-to-menu-button {
-  font-size: 18px;
-  width: 396px;
-  height: 97px;
   margin-left: 21px;
   margin-top: 20px;
   top: 100px;
-  background: #047e61;
-  border-radius: 40px;
 }
 
 .cancel-button {
-  font-size: 18px;
-  width: 396px;
-  height: 97px;
   margin-left: 64px;
   margin-right: 64px;
   margin-top: 136px;
-  background: #047e61;
-  border-radius: 40px;
   margin-bottom: 20px;
 }
 
 .confirm-button {
-  font-size: 18px;
-  width: 396px;
-  height: 97px;
   left: 494px;
   top: 836px;
-  background: #047e61;
-  border-radius: 40px;
 }
 
 .total-row {
@@ -86,6 +86,10 @@
   line-height: 29px;
 
   color: #000000;
+}
+
+.total {
+  color: white;
 }
 
 .total-price {
