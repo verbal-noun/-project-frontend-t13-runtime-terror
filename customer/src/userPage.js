@@ -16,23 +16,35 @@ function OrderCard(props) {
 }
 
 function UserPage(props) {
-  var [orders, setLoadOrders] = useState([]);
-  var [selectedID, setSelectedID] = useState(null);
-
+  let [orders, loadOrders] = useState([]);
+  let [selectedID, setSelectedID] = useState(null);
+  
+  let isLoggedIn = localStorage.getItem('token');
   useEffect(() => {
+    if(!isLoggedIn) {
+      return;
+    }
     // Fetch the user's outstanding orders
     axios
       .get(
         `https://info30005-customer-backend.herokuapp.com/api/customer/fetchOrders`
       )
       .then((res) => {
-        loadTrucks(res.data);
-      });
+        console.log(res);
+        loadOrders(res.data);
+      }
+    );
   }, []);
 
+  // Go back to homepage if user is not logged in
+  if(!isLoggedIn) {
+    return <Redirect to="/"/>
+  }
+  
   // TODO: Visit the order status page
-  if (selectedID) {
-    return <Redirect to={{ pathname: `/van`, state: { selectedID } }} />;
+  if(selectedID) {
+    console.log("GOTO ORDER STATUS PAGE");
+    // return <Redirect to={{pathname: `/van`, state: {selectedID}}}/>;
   }
   return (
     <div className="userpage">
