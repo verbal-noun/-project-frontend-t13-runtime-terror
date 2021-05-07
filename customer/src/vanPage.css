@@ -98,6 +98,9 @@
   position: absolute;
 }
 
+.vendor-bubble-distance {
+  font-size: 10px;
+}
 /** Ordering items **/
 
 .order-items {

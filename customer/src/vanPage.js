@@ -134,9 +134,6 @@ function VanPage(props) {
         <div className="vendor-bubble">
           <h1 className="vendor-bubble-name">{vendor.name}</h1>
           <img className="vendor-bubble-image" src={redTruck} />
-          {vendorDistance == null ? null : (
-            <h3 className="vendor-bubble-distance">{vendorDistance} km</h3>
-          )}
         </div>
       </div>
       <div className="row">
