@@ -29,7 +29,7 @@ function OrderCard(props) {
     <div className="order">
         <div class="order-header">
           <span className="order-header">{props.order.vendorName} is creating your order!</span>
-          <span className="order-status">Status: {props.order.status}</span>
+          <div className="order-status">{props.order.status}</div>
         </div><br/>
         <div className="order-time">{elapsed(props.order.createdWhen)+" "}</div>
     </div>
