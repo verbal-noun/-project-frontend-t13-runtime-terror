@@ -38,10 +38,11 @@ function LoginPage(props) {
   }
   return (
     <div className="Login">
+      <img className="logo-image" src="https://i.imgur.com/kiMFyeA.png" />
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
+          <Form.Label className="form-name">Email</Form.Label>
+          <Form.Control className="email-input"
             autoFocus
             type="email"
             value={email}
@@ -49,8 +50,8 @@ function LoginPage(props) {
           />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+          <Form.Label className="form-name">Password</Form.Label>
+          <Form.Control className="password-input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
