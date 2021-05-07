@@ -20,6 +20,7 @@
   display: inline-block;
   margin-left: 3%;
   margin-top: 3%;
+  padding: 1.5rem;
 }
 
 .item-card-name {
@@ -30,29 +31,30 @@
 .item-card-price {
   font-size: 18px;
   margin-bottom: 3%;
+  color: white;
 }
 
 .back-to-menu-button {
-    font-size: 18px;
-    width: 396px;
-    height: 97px;
-    margin-left: 21px;
-    margin-top: 20px;
-    top: 100px;
-    background: #047e61;
-    border-radius: 40px;
+  font-size: 18px;
+  width: 396px;
+  height: 97px;
+  margin-left: 21px;
+  margin-top: 20px;
+  top: 100px;
+  background: #047e61;
+  border-radius: 40px;
 }
 
 .cancel-button {
   font-size: 18px;
-    width: 396px;
-    height: 97px;
-    margin-left: 64px;
-    margin-right: 64px;
-    margin-top: 136px;
-    background: #047e61;
-    border-radius: 40px;
-    margin-bottom: 20px;
+  width: 396px;
+  height: 97px;
+  margin-left: 64px;
+  margin-right: 64px;
+  margin-top: 136px;
+  background: #047e61;
+  border-radius: 40px;
+  margin-bottom: 20px;
 }
 
 .confirm-button {
@@ -79,12 +81,9 @@
   color: #000000;
 }
 
-.total-price{
+.total-price {
   margin-left: 1px;
   color: #ffffff;
-  
-
-
 }
 
 /*.cancel {
