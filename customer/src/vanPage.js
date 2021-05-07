@@ -121,7 +121,7 @@ function VanPage(props) {
       <button className="back-button" onClick={() => goBack(true)}>
         <span className="left-arrow"></span>
       </button>
-      <div className="row">
+      <div className="menu-row">
         <div className="menu-items">
           {items.map((item, index) => (
             <ItemCard
@@ -132,13 +132,11 @@ function VanPage(props) {
           ))}
         </div>
         <div className="vendor-bubble">
-          <div className="vendor-bubble-left">
-            <h1 className="vendor-bubble-name">{vendor.name}</h1>
-            <img className="vendor-bubble-image" src={redTruck} />
-            {vendorDistance == null ? null : (
-              <h3 className="vendor-bubble-distance">{vendorDistance} km</h3>
-            )}
-          </div>
+          <h1 className="vendor-bubble-name">{vendor.name}</h1>
+          <img className="vendor-bubble-image" src={redTruck} />
+          {vendorDistance == null ? null : (
+            <h3 className="vendor-bubble-distance">{vendorDistance} km</h3>
+          )}
         </div>
       </div>
       <div className="row">
@@ -156,11 +154,9 @@ function VanPage(props) {
               );
             })}
           </div>
-          <div className="order-items-right">
-            <button className="order-button" onClick={() => gotoCheckout(true)}>
-              Order
-            </button>
-          </div>
+          <button className="order-button" onClick={() => gotoCheckout(true)}>
+            Order
+          </button>
         </div>
       </div>
     </div>

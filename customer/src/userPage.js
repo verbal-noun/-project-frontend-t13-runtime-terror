@@ -38,14 +38,17 @@ function UserPage(props) {
   let [orders, loadOrders] = useState([]);
   let [selectedID, setSelectedID] = useState(null);
   let [gotoHome, setGotoHome] = useState(false);
-  
-  let isLoggedIn = localStorage.getItem('token');
+
+  let isLoggedIn = localStorage.getItem("token");
   useEffect(() => {
-    if(!isLoggedIn) {
+    if (!isLoggedIn) {
       return;
     }
     // Fetch the user's outstanding orders
-    axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/fetchOrders`)
+    axios
+      .get(
+        `https://info30005-customer-backend.herokuapp.com/api/customer/fetchOrders`
+      )
       .then((res) => {
         for(let order of res.data) {
           axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/vendor/${order.vendor}`)
@@ -67,17 +70,17 @@ function UserPage(props) {
   }, []);
 
   let logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setGotoHome(true);
-  }
+  };
 
   // Go back to homepage if user is not logged in
-  if(!isLoggedIn || gotoHome) {
-    return <Redirect to="/"/>
+  if (!isLoggedIn || gotoHome) {
+    return <Redirect to="/" />;
   }
-  
+
   // TODO: Visit the order status page
-  if(selectedID) {
+  if (selectedID) {
     console.log("GOTO ORDER STATUS PAGE");
     // return <Redirect to={{pathname: `/van`, state: {selectedID}}}/>;
   }
@@ -97,9 +100,7 @@ function UserPage(props) {
           );
         })}
       </div>
-      <Button onClick={logout}>
-        Logout
-      </Button>
+      <Button onClick={logout}>Logout</Button>
     </div>
   );
 }

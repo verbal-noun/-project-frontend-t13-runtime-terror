@@ -1,155 +1,156 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap");
 
 .homepage {
-    font-family: 'Roboto Condensed';
-    background-image: url('./assets/homePageBackground.png');
-    width: 100vw;
-    height: 100vh;
-    background-size: cover;
-    mix-blend-mode: normal;
-    overflow-y: scroll;
-    position: relative;
+  font-family: "Roboto Condensed";
+  background-image: url("./assets/homePageBackground.png");
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  mix-blend-mode: normal;
+  overflow-y: scroll;
+  position: relative;
 }
 
 .logo {
-    background-color: white;
-    font-size: 32px;
-    width: 70%;
-    height: 125px;
-    line-height: 125px;
-    margin-top: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    border-radius: 20%/80%;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  font-size: 32px;
+  width: 70%;
+  height: 125px;
+  line-height: 125px;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-radius: 20%/80%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .truck-card-base {
-    background-color: #D7FFF5;
-    border-radius: 20px;
-    box-shadow: 0px 4px 4px #00000040;
-    height: 125px;
-    width: 80%;
-    mix-blend-mode: normal;
-    margin-top: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    cursor: pointer;
+  background-color: #d7fff5;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px #00000040;
+  height: 125px;
+  width: 80%;
+  mix-blend-mode: normal;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
 
-    -webkit-transition: all .2s linear;
-    -moz-transition: all .2s linear;
-    -ms-transition: all .2s linear;
-    -o-transition: all .2s linear;
-    transition: all .2s linear;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
 
 .truck-card-base:hover {
-    box-shadow: 0px 16px 32px -3px rgba(0, 0, 0, 0.4);
-    transform: translateY(-3px);
+  box-shadow: 0px 16px 32px -3px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
 }
 
 .truck-card-base:after {
-    content: "";
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .truck-card-column {
-    float: left;
-    height: 125px;
+  float: left;
+  height: 125px;
 }
 
 .truck-card-icon {
-    width: 25%;
+  width: 25%;
 }
 
 .truck-card-icon > img {
-    mix-blend-mode: normal;
-    object-fit: cover;
-    width: 100%;
-    height: auto;
+  mix-blend-mode: normal;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
 }
 
 .truck-card-info-section {
-    padding-top: 3%;
-    width: 60%;
+  padding-top: 3%;
+  width: 60%;
 }
 
 .truck-card-title {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 36px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
 }
 
 .truck-card-address {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
 }
 
 .truck-card-distance-section {
-    width: 15%;
-    line-height: 125px;
-    font-size: 20px;
-    font-weight: bold;
+  width: 15%;
+  line-height: 125px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .truck-card-list {
-    width: 50%;
-    height: 100%;
-    display: inline-block;
+  width: 50%;
+  height: 100%;
+  display: inline-block;
 }
 
-.logout-button{
-    width: 210px;
-    height: 70px;
-    left: 1186px;
-    top: 852px;
-    background: #FFFFFF;
-    border-radius: 25px;    
+.logout-button {
+  width: 210px;
+  height: 70px;
+  left: 1186px;
+  top: 852px;
+  background: #ffffff;
+  border-radius: 25px;
 }
 
 .map-container-container {
-    width: 50vw;
-    height: 100vh;
-    position: fixed;
-    display: inline-block;
+  width: 50vw;
+  height: 100vh;
+  position: fixed;
+  display: inline-block;
 }
 
 .map-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    border-radius: 100px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 100px;
 }
 
-.map, .home-page-button {
-    position: absolute;
+.map,
+.home-page-button {
+  position: absolute;
 }
 .map {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 
 .home-page-button {
-    top: 50px;
-    right: 50px;
-    z-index: 100;
-    color: black;
-    background-color:#D7FFF5;
-    width: auto;
-    height: 50px;
-    padding-left: 50px;
-    padding-right: 50px;
-    font-size: 32px;
-    border-radius: 50px;
-    cursor: pointer;
-    border: 0;
+  top: 50px;
+  right: 50px;
+  z-index: 100;
+  color: black;
+  background-color: #d7fff5;
+  width: auto;
+  height: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  font-size: 32px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 0;
 }
 
 .home-page-button:hover {
-    background-color:#58d8b8;
+  background-color: #58d8b8;
 }
