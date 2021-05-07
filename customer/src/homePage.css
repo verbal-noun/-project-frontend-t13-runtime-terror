@@ -95,3 +95,12 @@
     width: 50%;
     height: 100%;
 }
+
+.logout-button{
+    width: 210px;
+    height: 70px;
+    left: 1186px;
+    top: 852px;
+    background: #FFFFFF;
+    border-radius: 25px;    
+}
