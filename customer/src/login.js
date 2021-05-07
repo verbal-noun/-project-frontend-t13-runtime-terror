@@ -26,16 +26,6 @@ function LoginPage(props) {
       .then((res) => {
         // Set global auth token for whenever an axios request is sent
         localStorage.setItem('token', res.data.token);
-        axios.interceptors.request.use(
-          (config) => {
-            const token = localStorage.getItem('token');
-            config.headers.Authorization = `Bearer ${token}`;
-            return config;
-          },
-          (err) => {
-            return Promise.reject(err);
-          }
-        );
         setRedirectHome(true);
       })
       .catch((err) => {

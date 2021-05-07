@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 import axios from "axios";
 import "./homePage.css";
 import redTruck from "./assets/redTruck.png";
+import CustomGoogleMap from './CustomGoogleMap';
 
 function TruckCard(props) {
   return (
@@ -18,7 +20,7 @@ function TruckCard(props) {
       </div>
       <div className="truck-card-column truck-card-distance-section">
         <span className="truck-card-distance">
-          {Math.round(props.truck.distance)} km
+          {Math.round(props.truck.distance * 100) / 100} km
         </span>
       </div>
     </div>
@@ -26,24 +28,49 @@ function TruckCard(props) {
 }
 
 function HomePage(props) {
-  let longitude = 3.0;
-  let latitude = 1.0;
+  let [coords, setCoords] = useState({longitude: 144.9605765, latitude: -37.8102361});
   let [trucks, loadTrucks] = useState([]);
   let [selectedID, setSelectedID] = useState(null);
+  let [buttonRedirect, setButtonRedirect] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(
-        `https://info30005-customer-backend.herokuapp.com/api/customer/nearby/${longitude},${latitude}`
-      )
-      .then((res) => {
-        loadTrucks(res.data);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/nearby/${position.coords.longitude},${position.coords.latitude}`)
+          .then((res) => {
+            setCoords({
+              longitude: position.coords.longitude,
+              latitude: position.coords.latitude
+            });
+            loadTrucks(res.data);
+          });
       });
+    }
+    else {
+      // Melbourne Central Default
+      axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/nearby/${coords.longitude},${coords.latitude}`)
+        .then((res) => {
+          loadTrucks(res.data);
+        });
+    }
   }, []);
 
+  let isLoggedIn = localStorage.getItem('token');
+  let handleButtonClick = () => {
+    if(isLoggedIn) {
+      setButtonRedirect("/orders");
+    }
+    else {
+      setButtonRedirect("/login");
+    }
+  }
+  
   // Visit a vendor page
   if (selectedID) {
     return <Redirect to={{ pathname: `/van`, state: { selectedID } }} />;
+  }
+  if (buttonRedirect) {
+    return <Redirect to={buttonRedirect} />;
   }
   return (
     <div className="homepage">
@@ -63,23 +90,14 @@ function HomePage(props) {
           }
         })}
       </div>
-      {/* <div className="overlap-group2">
-        <div className="text-1">
-          <span className="span0 ">{spanText}</span>
-          <span className="span1 ">{spanText2}</span>
+      <div className="map-container-container">
+        <div className="map-container">
+          <CustomGoogleMap className="map" latitude={coords.latitude} longitude={coords.longitude}/>
+          <Button className="home-page-button" onClick={handleButtonClick}>
+            {isLoggedIn ? "View Orders" : "Login"}
+          </Button>
         </div>
       </div>
-      <div className="overlap-group1">
-        <div className="flex-row">
-          <img className="untitled-design-03-03-t191256-1" src={untitledDesign20210303T1912561} />
-          <div className="cool-truck robotocondensed-regular-normal-black-36px">{coolTruck}</div>
-          <div className="address robotocondensed-bold-black-20px">{address9}</div>
-        </div>
-        <div className="overlap-group3">
-          <div className="address-1 robotocondensed-regular-normal-black-18px">{address10}</div>
-          <div className="address-1 robotocondensed-regular-normal-black-18px">{address11}</div>
-        </div>
-      </div> */}
     </div>
   );
 }

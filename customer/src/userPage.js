@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 import axios from "axios";
 import "./userPage.css";
 
@@ -7,9 +8,8 @@ function OrderCard(props) {
   return (
     <div className="order">
       <span className="order-item-row">
-        <h1 className="order-name">{props.order.number}</h1>
-        <h1 className="order-price">x{props.order.totalPrice}</h1>
-        <h1 className="order-truck-name">{props.order.truckName}$</h1>
+        <h1 className="order-name">{props.order.id}</h1>
+        <h1 className="order-name">{props.order.vendorName}</h1>
       </span>
     </div>
   );
@@ -18,6 +18,7 @@ function OrderCard(props) {
 function UserPage(props) {
   let [orders, loadOrders] = useState([]);
   let [selectedID, setSelectedID] = useState(null);
+  let [gotoHome, setGotoHome] = useState(false);
 
   let isLoggedIn = localStorage.getItem("token");
   useEffect(() => {
@@ -30,13 +31,28 @@ function UserPage(props) {
         `https://info30005-customer-backend.herokuapp.com/api/customer/fetchOrders`
       )
       .then((res) => {
-        console.log(res);
-        loadOrders(res.data);
+        for (let order of res.data) {
+          let vendorID = order.vendor;
+          let newOrders = orders.slice();
+          newOrders.push({
+            id: order._id,
+            vendorName: vendorID,
+          });
+          loadOrders(newOrders);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
       });
   }, []);
 
+  let logout = () => {
+    localStorage.removeItem("token");
+    setGotoHome(true);
+  };
+
   // Go back to homepage if user is not logged in
-  if (!isLoggedIn) {
+  if (!isLoggedIn || gotoHome) {
     return <Redirect to="/" />;
   }
 
@@ -61,6 +77,7 @@ function UserPage(props) {
           );
         })}
       </div>
+      <Button onClick={logout}>Logout</Button>
     </div>
   );
 }

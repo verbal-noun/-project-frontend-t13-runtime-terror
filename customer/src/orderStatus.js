@@ -1,47 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import axios from "axios";
+import Button from "react-bootstrap/Button";
 import "./orderStatus.css";
+import greenTick from "./assets/greenTick.png";
+import superManCoffee from "./assets/superManCoffee.png";
 
-function userPage(props) {
-  useEffect(() => {
-    axios
-      .get(
-        `https://info30005-customer-backend.herokuapp.com/api/customer/confirmation`
-      )
-      .then((res) => {
-        loadTrucks(res.data);
-      });
-  }, []);
+function OrderStatus(props) {
+  let [redirect, setRedirect] = useState(null);
 
+  if(redirect) {
+    console.log(redirect);
+    return <Redirect to={redirect} />;
+  }
   // Visit a vendor page
-
   return (
     <div className="confirm-card">
       <img
         className="green-tick"
-        src="./assets/greenTick"
+        src={greenTick}
         alt="green tick illustration"
       />
       <h1 className="confirm-text">Thanks For Your Order!</h1>
       print order status here
       <img
         className="confirm-vector"
-        src="./assets/superMamCoffee"
+        src={superManCoffee}
         alt="confirmation illustration"
       />
       <Button
-        onPress={onPressHome}
+        onClick={() => setRedirect("/")}
         title="Home"
         color="#047E61"
-        accessibilityLabel="go back to home"
-      />
+      >Home</Button>
       <Button
-        onPress={onPressOrderPage}
-        title="User Page"
+        onClick={() => setRedirect("/orders")}
         color="#047E61"
-        accessibilityLabel="go back to user dashboard"
-      />
+      >User Page</Button>
     </div>
   );
 }
+
+export default OrderStatus;

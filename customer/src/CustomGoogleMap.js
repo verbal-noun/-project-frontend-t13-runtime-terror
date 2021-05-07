@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 
 import GoogleMapReact from 'google-map-react'
 import axios from 'axios'
 
 import Marker from './components/marker';
-import style from './map_styles/purple.json'
+import style from './mapStyles/purple.json'
 
-const Wrapper = styled.main`
-  width: 100%;
-  height: 100%;
-`;
-
-const CustomGoogleMap = ({ latitude, longitude }) => {
+function CustomGoogleMap({longitude, latitude, className}) {
   const [trucks, loadTrucks] = useState([])
 
   const fetchPlaces = async () => {
@@ -32,7 +26,7 @@ const CustomGoogleMap = ({ latitude, longitude }) => {
   }
 
   return (
-    <Wrapper>
+    <div className={className}>
       <GoogleMapReact
         options={{styles: style, scrollwheel: false, fullscreenControl: false, zoomControl: false}}
         defaultZoom={14}
@@ -51,7 +45,7 @@ const CustomGoogleMap = ({ latitude, longitude }) => {
             />
         ))}
       </GoogleMapReact>
-    </Wrapper>
+    </div>
   )
 }
 
