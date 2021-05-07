@@ -3,8 +3,8 @@ import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
 import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
-import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import { Redirect } from "react-router-dom";
+import axios from "axios";
 //import { onError } from "../libs/errorLib";
 import "./signUp.css";
 
@@ -16,7 +16,7 @@ function SignupPage() {
     confirmPassword: "",
     confirmationCode: "",
   });
-  
+
   const history = useHistory();
   const [newUser, setNewUser] = useState(null);
   const { userHasAuthenticated } = useAppContext();
@@ -62,7 +62,9 @@ function SignupPage() {
             onChange={handleFieldChange}
             value={fields.confirmationCode}
           />
-          <Form.Text muted>Please check your email for the confirmation code.</Form.Text>
+          <Form.Text muted>
+            Please check your email for the confirmation code.
+          </Form.Text>
         </Form.Group>
         <LoaderButton
           block

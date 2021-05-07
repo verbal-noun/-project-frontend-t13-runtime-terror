@@ -1,0 +1,36 @@
+.marker-container {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    margin-left: -50px;
+    margin-top: -50px;
+}
+
+.marker-basic {
+    position: absolute;
+    width: 100px;
+    height: auto;
+    left: 60px;
+    top: 60px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.icon-name {
+    margin-top: 0px;
+    font-size: 18px;
+    margin-bottom: 0px;
+}
+
+#red-truck {
+    width: 80px;
+    position: absolute;
+    left: 80px;
+    top: 0px;
+    z-index: 99;
+}
+
+
+
+

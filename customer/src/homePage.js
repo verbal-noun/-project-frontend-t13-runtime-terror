@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import axios from 'axios';
-import './homePage.css';
-import redTruck from './assets/redTruck.png';
-
-
+import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
+import axios from "axios";
+import "./homePage.css";
+import redTruck from "./assets/redTruck.png";
 
 function TruckCard(props) {
   return (
     <div className="truck-card-base" onClick={props.onClick}>
       <div className="truck-card-column truck-card-icon">
-        <img src={redTruck}/>
+        <img src={redTruck} />
       </div>
       <div className="truck-card-column truck-card-info-section">
         <span className="truck-card-title">{props.truck.name}</span>
-        <br/><br/>
+        <br />
+        <br />
         <span className="truck-card-address">{props.truck.address}</span>
       </div>
       <div className="truck-card-column truck-card-distance-section">
-        <span className="truck-card-distance">{Math.round(props.truck.distance)} km</span>
+        <span className="truck-card-distance">
+          {Math.round(props.truck.distance)} km
+        </span>
       </div>
     </div>
   );
@@ -29,18 +30,20 @@ function HomePage(props) {
   let latitude = 1.0;
   let [trucks, loadTrucks] = useState([]);
   let [selectedID, setSelectedID] = useState(null);
-  
+
   useEffect(() => {
-    axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/nearby/${longitude},${latitude}`)
+    axios
+      .get(
+        `https://info30005-customer-backend.herokuapp.com/api/customer/nearby/${longitude},${latitude}`
+      )
       .then((res) => {
         loadTrucks(res.data);
-      }
-    );
+      });
   }, []);
-  
+
   // Visit a vendor page
-  if(selectedID) {
-    return <Redirect to={{pathname: `/van`, state: {selectedID}}}/>;
+  if (selectedID) {
+    return <Redirect to={{ pathname: `/van`, state: { selectedID } }} />;
   }
   return (
     <div className="homepage">
@@ -48,13 +51,17 @@ function HomePage(props) {
         <div className="logo">
           <h1>Find A Van</h1>
         </div>
-        {
-          trucks.map((truck, index) => {
-            if(truck.open) {
-              return <TruckCard key={`truck${index}`} truck={truck} onClick={() => setSelectedID(truck._id)}/>
-            }
-          })
-        }
+        {trucks.map((truck, index) => {
+          if (truck.open) {
+            return (
+              <TruckCard
+                key={`truck${index}`}
+                truck={truck}
+                onClick={() => setSelectedID(truck._id)}
+              />
+            );
+          }
+        })}
       </div>
       {/* <div className="overlap-group2">
         <div className="text-1">

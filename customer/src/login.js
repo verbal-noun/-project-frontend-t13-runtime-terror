@@ -1,9 +1,8 @@
-
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import { Link, Redirect } from 'react-router-dom';
-import axios from 'axios';
+import { Link, Redirect } from "react-router-dom";
+import axios from "axios";
 import "./login.css";
 
 function LoginPage(props) {
@@ -17,22 +16,27 @@ function LoginPage(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    let postData = {email, password};
+    let postData = { email, password };
     console.log(postData);
-    axios.post(`https://info30005-customer-backend.herokuapp.com/api/customer/login`, postData)
+    axios
+      .post(
+        `https://info30005-customer-backend.herokuapp.com/api/customer/login`,
+        postData
+      )
       .then((res) => {
         // Set global auth token for whenever an axios request is sent
-        axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${res.data.token}`;
         setRedirectHome(true);
       })
       .catch((err) => {
         console.log(err.message);
-        
       });
   }
-  
-  if(redirectHome) {
-    return <Redirect to="/"/>;
+
+  if (redirectHome) {
+    return <Redirect to="/" />;
   }
   return (
     <div className="Login">
@@ -54,7 +58,13 @@ function LoginPage(props) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button className="button" block size="lg" type="submit" disabled={!validateForm()}>
+        <Button
+          className="button"
+          block
+          size="lg"
+          type="submit"
+          disabled={!validateForm()}
+        >
           Login
         </Button>
       </Form>

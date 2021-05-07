@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import axios from 'axios';
-import './orderPage.css';
+import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
+import axios from "axios";
+import "./orderPage.css";
 
 function OrderItem(props) {
-  return(
+  return (
     <div className="shopping-cart">
       <span className="order-item-row">
-      <h1 className="item-card-name">{props.item.name}</h1>
-      <img className="item-card-image" src={props.item.photoURL}/>
-      <h1 className="item-card-price">x{props.item.quantity}</h1>
-      <h1 className="item-card-price">{props.item.price * props.item.quantity}$</h1>
+        <h1 className="item-card-name">{props.item.name}</h1>
+        <img className="item-card-image" src={props.item.photoURL} />
+        <h1 className="item-card-price">x{props.item.quantity}</h1>
+        <h1 className="item-card-price">
+          {props.item.price * props.item.quantity}$
+        </h1>
       </span>
     </div>
   );
 }
 
 function OrderPage(props) {
-  let orderData = props.location.state
+  let orderData = props.location.state;
   let [total, setTotal] = useState(0);
   let [loginRedirect, setLoginRedirect] = useState(false);
   let [menuRedirect, setMenuRedirect] = useState(false);
@@ -25,26 +27,30 @@ function OrderPage(props) {
   let [successfulOrder, setSuccess] = useState(null);
 
   useEffect(() => {
-    if(!orderData) {
+    if (!orderData) {
       return;
     }
     let sum = 0;
-    for(let orderItem of orderData.order) {
+    for (let orderItem of orderData.order) {
       sum += orderItem.price * orderItem.quantity;
     }
-    setTotal(sum);  
+    setTotal(sum);
   }, []);
 
   let submitOrder = () => {
-    let postData = {orderItems: [], vendor: orderData.vendor};
-    for(let orderItem of orderData.order) {
+    let postData = { orderItems: [], vendor: orderData.vendor };
+    for (let orderItem of orderData.order) {
       postData.orderItems.push({
         item: orderItem.item,
-        quantity: orderItem.quantity
+        quantity: orderItem.quantity,
       });
     }
     // Post the order
-    axios.post("https://info30005-customer-backend.herokuapp.com/api/customer/order", postData)
+    axios
+      .post(
+        "https://info30005-customer-backend.herokuapp.com/api/customer/order",
+        postData
+      )
       .then((order) => {
         setSuccess(order);
         console.log(order);
@@ -53,61 +59,67 @@ function OrderPage(props) {
         setLoginRedirect(true);
         console.log(err.message);
       });
-  }
-  
-  // Redirect if invalid
-  if(!orderData || cancelRedirect) {
-    return <Redirect to="/"/>;
   };
-  if(menuRedirect) {
-    return <Redirect to={
-      {
-        pathname: `/van`, 
-        state: {
-          selectedID: orderData.vendor, 
-          orderItems: orderData.order
-        }
-      }
-    }/>;
+
+  // Redirect if invalid
+  if (!orderData || cancelRedirect) {
+    return <Redirect to="/" />;
   }
-  if(loginRedirect) {
+  if (menuRedirect) {
+    return (
+      <Redirect
+        to={{
+          pathname: `/van`,
+          state: {
+            selectedID: orderData.vendor,
+            orderItems: orderData.order,
+          },
+        }}
+      />
+    );
+  }
+  if (loginRedirect) {
     // TODO: Redirect to login page and pass the generated order ID
     console.log("GOTO LOGIN PAGE!");
   }
-  if(successfulOrder) {
+  if (successfulOrder) {
     // TODO: Redirect to order watch page
     console.log("SUCCESS! GOTO ORDER WATCH");
   }
   return (
     <div className="orderpage">
-      <button className="back-to-menu-button" onClick={() => setMenuRedirect(true)}>
+      <button
+        className="back-to-menu-button"
+        onClick={() => setMenuRedirect(true)}
+      >
         Back to Menu
       </button>
       <div className="order-rectangle">
         <div className="order-items-column">
-          {
-            orderData.order.map((item, index) => (
-              <OrderItem key={`item${index}`} item={item}/>
-            ))
-          }
+          {orderData.order.map((item, index) => (
+            <OrderItem key={`item${index}`} item={item} />
+          ))}
         </div>
         <div className="total-row">
-          <span><h1 className="total">Total</h1>
-          <h1 className="total-price">${total}</h1>
+          <span>
+            <h1 className="total">Total</h1>
+            <h1 className="total-price">${total}</h1>
           </span>
         </div>
       </div>
       <span>
-      <button className="cancel-button" onClick={() => setCancelRedirect(true)}>
-        Cancel Order
-      </button>
-      <button className="confirm-button" onClick={submitOrder}>
-        {"Confirm & Pay"}
-      </button>
+        <button
+          className="cancel-button"
+          onClick={() => setCancelRedirect(true)}
+        >
+          Cancel Order
+        </button>
+        <button className="confirm-button" onClick={submitOrder}>
+          {"Confirm & Pay"}
+        </button>
       </span>
-
     </div>
-  )
+  );
 }
 
 export default OrderPage;
