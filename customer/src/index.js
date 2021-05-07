@@ -12,6 +12,7 @@ import HomePage from './homePage';
 import VanPage from './vanPage';
 import OrderPage from './orderPage';
 import LoginPage from './login';
+import UserPage from './userPage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/van" render={(props) => <VanPage {...props}/>}/>
           <Route path="/checkout" render={(props) => <OrderPage {...props}/>}/>
           <Route path="/login" component={LoginPage}/>
+          <Route path="/orders" component={UserPage}/>
           <Route path="/" component={HomePage}/>
         </Switch>
     </Router>
