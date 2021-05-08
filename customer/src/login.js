@@ -37,12 +37,18 @@ function LoginPage(props) {
     return <Redirect to="/" />;
   }
   return (
+
     <div className="Login">
+      <div className="left">
       <img className="logo-image" src="https://i.imgur.com/kiMFyeA.png" />
-      <Form onSubmit={handleSubmit}>
+      <div className="header">
+        <h2 className="animation a1">Welcome Back</h2>
+        <h4 className="animation a2"> Log in to your account using email and password</h4>
+      </div>
+      <Form className="form" onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
-          <Form.Label className="form-name">Email</Form.Label>
-          <Form.Control className="email-input"
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a3" placeholder="Email Address"
             autoFocus
             type="email"
             value={email}
@@ -50,13 +56,14 @@ function LoginPage(props) {
           />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
-          <Form.Label className="form-name">Password</Form.Label>
-          <Form.Control className="password-input"
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a4" placeholder="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+        <p className="animation a5"><a href="#">Forgot Password</a></p>
         <Button
           className="button"
           block
@@ -67,7 +74,10 @@ function LoginPage(props) {
           Login
         </Button>
       </Form>
+      </div>
+      <div className="right"></div>
     </div>
+
   );
 }
 
