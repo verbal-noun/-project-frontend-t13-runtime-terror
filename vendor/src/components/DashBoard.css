@@ -1,0 +1,33 @@
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 30px;
+    grid-template-areas: 
+        "order-graph heat-map pie-chart"
+        "orders orders orders";
+}
+
+.grid-item {
+    min-height: 50px;
+    box-shadow: 0px 5px 5px #ddd;
+    border-radius: 15px;
+    background-color: #fff;
+}
+
+.item-order-graph {
+    grid-area: order-graph;
+}
+
+.item-heat-map {
+    grid-area: heat-map
+}
+
+.item-pie-chart {
+    grid-area: pie-chart;
+}
+
+.item-order-list {
+    grid-area: orders;
+    height: 90vh;
+}
