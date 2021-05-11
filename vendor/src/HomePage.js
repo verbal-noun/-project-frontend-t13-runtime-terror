@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import './HomePage.css';
 import foodLogo from './assets/food_logo.png'
 import profileImage from './assets/profile_image.png'
+import calendarIcon from './assets/calendar_icon.png'
 
 import DashBoard from './components/DashBoard'
 import MenuList from './components/MenuList'
@@ -18,6 +19,7 @@ function HomePage(props) {
       <div className="header-main">
         <img id="logo-main" src = {foodLogo} />
         <div className="header-date">
+          <img id="calendar-icon" src = {calendarIcon} />
           <p>
             {date_formatter.format(new Date())}
           </p>

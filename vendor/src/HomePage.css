@@ -55,9 +55,23 @@ li {
   position: absolute;
   right: 200px;
   top: 10px;
-  padding: 13px;
+  padding: 10px;
   box-shadow: inset 0px 3px 5px #aaa;
   border-radius: 25px;
+}
+
+.header-date p {
+  display: inline;
+  vertical-align: center;
+  font-size: 18px;
+  margin-left: 5px;
+  font-weight: 600;
+}
+
+#calendar-icon {
+  display: inline;
+  height: 18px;
+  image-rendering: pixelated;
 }
 
 #header-profile-image {
@@ -76,6 +90,7 @@ li {
   border-radius: 20%;
 }
 
+
 /* NAV BAR STYLING */
 .nav-bar {
   position: fixed;
@@ -83,6 +98,7 @@ li {
   margin-top: 80px;
   height: calc(95vh - 70px);
   width: 15%;
+  min-width: 200px;
   background-color: #fff;
   margin-left: 0.5%;
   box-shadow: 0px 5px 5px #ddd;
@@ -100,7 +116,7 @@ li {
 
 #nav-list li:hover {
   cursor: grab;
-  background-color: #ccc;
+  background-color: #eee;
 }
 
 #nav-list li {
@@ -122,6 +138,7 @@ li {
   top: 90px;
   right: 0.5%;
   width: 83%;
+  max-width: calc(100vw - 200px - 2%);
   padding-bottom: 40px;
 }
 

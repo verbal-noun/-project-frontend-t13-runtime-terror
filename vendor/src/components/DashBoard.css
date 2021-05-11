@@ -9,7 +9,7 @@
 }
 
 .grid-item {
-    min-height: 50px;
+    min-height: 200px;
     box-shadow: 0px 5px 5px #ddd;
     border-radius: 15px;
     background-color: #fff;
@@ -29,5 +29,5 @@
 
 .item-order-list {
     grid-area: orders;
-    height: 90vh;
+    height: 500px;
 }
