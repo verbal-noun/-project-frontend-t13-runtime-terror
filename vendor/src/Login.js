@@ -20,7 +20,7 @@ function LoginPage(props) {
     console.log(postData);
     axios
       .post(
-        `https://info30005-customer-backend.herokuapp.com/api/vendor/login`,
+        `https://info30005-vendor-backend.herokuapp.com/api/vendor/login`,
         postData
       )
       .then((res) => {
