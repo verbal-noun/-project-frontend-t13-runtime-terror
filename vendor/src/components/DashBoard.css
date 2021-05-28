@@ -38,3 +38,66 @@
     padding: 20px;
 }
 
+
+
+/******************** ORDER GRID CSS ************************/
+.grid-orders {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+    grid-template-areas: 
+        "cust-name time-created time-rem order-status action";
+}
+
+.grid-header-cust-name {
+    grid-area: cust-name;
+}
+
+.grid-header-time-created {
+    grid-area: time-created;
+}
+
+.grid-header-time-rem {
+    grid-area: time-rem;
+}
+    
+.grid-header-order-status {
+    grid-area: order-status;
+}
+
+.grid-header-action {
+    grid-area: action;
+}
+
+.item-order {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+    grid-template-areas: 
+        "cust-name time-created time-rem order-status action";
+}
+
+.cust-name {
+    grid-area: cust-name;
+} 
+
+.order-id {
+    grid-area: time-created;
+} 
+
+.order-time {
+    grid-area: time-rem;
+}
+
+.order-status {
+    grid-area: order-status;
+}
+
+.button-expand {
+    grid-area: action;
+}
+
+.item-order {
+    grid-area: order-item;
+}
+

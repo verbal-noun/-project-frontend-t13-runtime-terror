@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import dateFormat from 'dateformat';
 
 import './DashBoard.css'
+
+const TIME_BEFORE_DISCOUNT = 10;
 
 function DashBoard(props) {
     return (
@@ -27,6 +30,10 @@ function DashBoard(props) {
 
 function OpenCloseItem() {
     const vendorData = JSON.parse(sessionStorage.getItem('vendor-data'));
+
+    if (!vendorData) {
+        return
+    }
 
     if (vendorData.open == false) {
         return (
@@ -69,9 +76,15 @@ function DisplayOrders() {
         )
     }
 
-
     return (
         <div>
+            <div className="grid-orders">
+                <div className="grid-header-cust-name">Customer Name</div>
+                <div className="grid-header-time-created">Time Created</div>
+                <div className="grid-header-time-rem">Estimated Time Remaining</div>
+                <div className="grid-header-order-status">Order Status</div>
+                <div className="grid-header-action">Expand</div>
+            </div>
             {orders.map((order) => (
                 <OrderCard 
                 key={order._id}
@@ -86,12 +99,21 @@ function DisplayOrders() {
 }
 
 function OrderCard( {orderID, orderTime, orderStatus, customerDetails} ) {
+    var timeRemaining = parseInt((new Date(orderTime).getTime() - new Date().getTime())/(1000*60)) + TIME_BEFORE_DISCOUNT;
+    if (timeRemaining < 0 && orderStatus === "Preparing") {
+        timeRemaining = "Apply discount";
+    } else {
+        timeRemaining = timeRemaining + " minutes";
+    }
+
     return (
         <div className="item-order">
-            <span className="order-id">{orderID}</span>
-            <span className="customer-details">{customerDetails.given} {customerDetails.family}</span>
-            <span className="order-time">{orderTime}</span>
-            <span className="order-status">{orderStatus}</span>
+            {console.log(dateFormat(orderTime, "HH:MM"))}
+            <div className="cust-name">Cool Guy</div>
+            <div className="time-created">{dateFormat(orderTime, "HH:MM")}</div>
+            <div className="time-rem">{timeRemaining}</div>
+            <div className="order-status">{orderStatus}</div>
+            <div className="button-expand">Expand</div>
         </div>
 
     )
