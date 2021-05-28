@@ -16,7 +16,7 @@ function LoginPage(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    let postData = { vendor_id, password };
+    let postData = { name: vendor_id, password };
     console.log(postData);
     axios
       .post(
