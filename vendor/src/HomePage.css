@@ -115,7 +115,7 @@ li {
 }
 
 #nav-list li:hover {
-  cursor: grab;
+  cursor: pointer;
   background-color: #eee;
 }
 
@@ -127,6 +127,8 @@ li {
 
 #nav-log-out {
   position: absolute;
+  text-decoration: none;
+  color: #555;
   bottom: 20px;
   left: 0px;
   width: 100%;

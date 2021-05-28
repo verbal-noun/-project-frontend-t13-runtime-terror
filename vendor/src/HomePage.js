@@ -13,10 +13,15 @@ import TruckGrid from './components/TruckGrid'
 const date_formatter = new Intl.DateTimeFormat('en-au', { month: 'long', day: 'numeric', year: 'numeric'})
 
 function HomePage(props) {
+  let [vendorData, setVendorData] = useState([])
+  console.log(req.user.id);
+
+
   const token = sessionStorage.getItem('token');
+  console.log(token)
   if (!token) {
     return (
-      <Redirect push to="/login" />
+      <Redirect to="/login" />
     )
   }
   return (
@@ -40,18 +45,18 @@ function HomePage(props) {
             <span id='dashboard-list-item'>Dashboard</span>
           </li>
           <li onClick={() => ChangeTab('order-list')}>
-          <span id='order-list-list-item'>Orders</span>
+            <span id='order-list-list-item'>Orders</span>
           </li>
           <li onClick={() => ChangeTab('menu')}>
-          <span id='menu-list-item'>Menu</span>
+            <span id='menu-list-item'>Menu</span>
           </li>
           <li onClick={() => ChangeTab('truck-grid')}>
-          <span id='truck-grid-list-item'>Trucks</span>
+            <span id='truck-grid-list-item'>Trucks</span>
           </li>
         </ul>
-        <span id='nav-log-out'>
+        <a href="/login" onClick={() => LogOut()} id='nav-log-out'>
           Log Out
-        </span>
+        </a>
       </div>
 
       <div id='content-container'>
@@ -81,6 +86,9 @@ function ChangeTab(tabName) {
   }
 
   document.getElementById(tabName).style.display = 'block'
-  console.log(tabName+'-list-item')
   document.getElementById(tabName+'-list-item').style['font-weight'] = '700'
+}
+
+function LogOut() {
+  sessionStorage.clear()
 }

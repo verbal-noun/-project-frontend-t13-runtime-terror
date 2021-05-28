@@ -13,7 +13,7 @@ function LoginPage(props) {
   const token = sessionStorage.getItem('token');
   if (token) {
     return (
-      <Redirect push to="/" />
+      <Redirect to="/" />
     )
   }
 
