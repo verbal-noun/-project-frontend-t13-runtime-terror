@@ -9,16 +9,23 @@ import DashBoard from './components/DashBoard'
 import MenuList from './components/MenuList'
 import OrderList from './components/OrderList'
 import TruckGrid from './components/TruckGrid'
+import axios from "axios";
 
 const date_formatter = new Intl.DateTimeFormat('en-au', { month: 'long', day: 'numeric', year: 'numeric'})
 
 function HomePage(props) {
-  let [vendorData, setVendorData] = useState([])
-  console.log(req.user.id);
+  let [vendorData, setVendorData] = useState([]);
 
+  useEffect(() => {
+    axios.get('https://info30005-vendor-backend.herokuapp.com/api/vendor/vendorData')
+    .then((res) => {
+      setVendorData(res.data);
+      console.log(res.data);
+      sessionStorage.setItem('vendor-data', JSON.stringify(res.data));
+    })
+  })
 
   const token = sessionStorage.getItem('token');
-  console.log(token)
   if (!token) {
     return (
       <Redirect to="/login" />
@@ -28,6 +35,9 @@ function HomePage(props) {
     <div className='container'>
       <div className="header-main">
         <img id="logo-main" src = {foodLogo} />
+        <div className="header-vendor-name">
+          <h3>Hello, {vendorData.name}!</h3>
+        </div>
         <div className="header-date">
           <img id="calendar-icon" src = {calendarIcon} />
           <p>

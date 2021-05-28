@@ -5,6 +5,7 @@
     grid-gap: 30px;
     grid-template-areas: 
         "order-graph heat-map pie-chart"
+        "open-close open-close open-close"
         "orders orders orders";
 }
 
@@ -31,3 +32,9 @@
     grid-area: orders;
     height: 500px;
 }
+
+.item-open-close {
+    grid-area: open-close;
+    padding: 20px;
+}
+
