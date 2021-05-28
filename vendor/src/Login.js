@@ -10,6 +10,13 @@ function LoginPage(props) {
   const [password, setPassword] = useState("");
   const [redirectHome, setRedirectHome] = useState(false);
 
+  const token = sessionStorage.getItem('token');
+  if (token) {
+    return (
+      <Redirect push to="/" />
+    )
+  }
+
   function validateForm() {
     return vendor_id.length > 0 && password.length > 0;
   }
@@ -25,7 +32,7 @@ function LoginPage(props) {
       )
       .then((res) => {
         // Set global auth token for whenever an axios request is sent
-        localStorage.setItem('token', res.data.token);
+        sessionStorage.setItem('token', res.data.token);
         setRedirectHome(true);
       })
       .catch((err) => {
@@ -34,7 +41,7 @@ function LoginPage(props) {
   }
 
   if (redirectHome) {
-    return <Redirect to="/" />;
+    return <Redirect push to="/" />;
   }
   return (
 

@@ -18,7 +18,7 @@ ReactDOM.render(
 // If user is logged in add token to request header
 axios.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     if(token) {
       config.headers.common.Authorization = `Bearer ${token}`;  
     }
@@ -33,8 +33,8 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={LoginPage} />
-        <Route path="/account" component={HomePage} />
+        <Route path="/login"><LoginPage /></Route>
+        <Route path="/"><HomePage /></Route>
       </Switch>
     </Router>
   );
