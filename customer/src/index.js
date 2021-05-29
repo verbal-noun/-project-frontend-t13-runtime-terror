@@ -12,6 +12,7 @@ import LoginPage from "./login";
 import UserPage from "./userPage";
 import OrderStatus from './orderStatus';
 import OrderConfirm from "./orderConfirm";
+import EditUser from "./editUser";
 
 
 ReactDOM.render(
@@ -45,6 +46,7 @@ export default function App() {
         <Route path="/orders" component={UserPage} />
         <Route path="/status" render={(props) => <OrderStatus {...props} />} />
         <Route path="/confirm" render={(props) => <OrderConfirm {...props} />} />
+        <Route path="/edit" component={EditUser}/>
         <Route path="/" component={HomePage} />
         
       </Switch>
