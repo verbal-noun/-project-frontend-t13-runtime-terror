@@ -7,22 +7,23 @@ import axios from "axios";
 import "./editUser.css";
 
 function EditUser(props) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
   const [redirectHome, setRedirectHome] = useState(false);
 
   function validateForm() {
-    return firstName.length > 0 && lastName.length > 0 &&  password.length > 0;
+    return (newEmail.length > 0 || (newPassword.length > 0 && newPassword == newPasswordConfirm)) && password.length > 0;
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    let postData = { firstName, lastName, password};
+    let postData = { password, new_email : newEmail, new_password: newPassword };
     console.log(postData);
     axios
       .post(
-        `https://info30005-customer-backend.herokuapp.com/api/customer/login`,
+        `https://info30005-customer-backend.herokuapp.com/api/customer/update`,
         postData
       )
       .then((res) => {
@@ -39,31 +40,21 @@ function EditUser(props) {
     return <Redirect to="/" />;
   }
   return (
-
     <div className="Login">
       <div className="left">
       <img className="logo-image" src="https://i.imgur.com/kiMFyeA.png" />
       <div className="header">
         
-        <h4 className="animation a2"> You can change your name and password here</h4>
+        <h4 className="animation a2"> You can change your account email and password here</h4>
       </div>
       <Form className="form" onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="text">
           <Form.Label className="form-name" ></Form.Label>
-          <Form.Control className="form-field animation a3" placeholder="New First Name"
+          <Form.Control className="form-field animation a3" placeholder="New Email"
             autoFocus
             type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group size="lg" controlId="text">
-          <Form.Label className="form-name" ></Form.Label>
-          <Form.Control className="form-field animation a3" placeholder="New Last Name"
-            autoFocus
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            value={newEmail}
+            onChange={(e) => setNewEmail(e.target.value)}
           />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
@@ -79,7 +70,7 @@ function EditUser(props) {
           <Form.Control className="form-field animation a4" placeholder="New Password"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setNewPassword(e.target.value)}
           />
         </Form.Group>
         <Form.Group size="lg" controlId="confirmPassword">
@@ -87,7 +78,7 @@ function EditUser(props) {
           <Form.Control className="form-field animation a4" placeholder="Confirm Password"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setNewPasswordConfirm(e.target.value)}
           />
         </Form.Group>
         <p className="animation a5"><a href="#">Forgot Password</a></p>
