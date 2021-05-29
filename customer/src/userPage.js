@@ -29,10 +29,12 @@ function elapsed(since) {
 function OrderCard(props) {
   return (
     <div className="order">
-        <div class="order-header">
+        <div className="order-header">
           <span className="order-header">{props.order.vendorName} is creating your order!</span>
           <div className="order-status">{props.order.status}</div>
         </div><br/>
+        <Button className="button" onClick={props.setSelected}>View Details</Button>
+
         <div className="order-time">{elapsed(props.order.createdWhen)+" "}</div>
     </div>
   );
@@ -61,6 +63,7 @@ function UserPage(props) {
             let res = await axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/vendor/${order.vendor}`);
             let vendor = res.data;  
             newOrders.push({
+              id: order._id,
               createdWhen: new Date(order.createdAt),
               status: order.status,
               vendorName: vendor.name
@@ -91,10 +94,8 @@ function UserPage(props) {
     return <Redirect to="/" />;
   }
 
-  // TODO: Visit the order status page
   if (selectedID) {
-    console.log("GOTO ORDER STATUS PAGE");
-    // return <Redirect to={{pathname: `/van`, state: {selectedID}}}/>;
+    return <Redirect to={{pathname: `/status`, state: {selectedID}}}/>;
   }
   return (
     <div className="userpage">
@@ -108,7 +109,7 @@ function UserPage(props) {
             <OrderCard
               key={`order${index}`}
               order={order}
-              onClick={() => setSelectedID(order._id)}
+              setSelected={() => setSelectedID(order.id)}
             />
           );
         })}
