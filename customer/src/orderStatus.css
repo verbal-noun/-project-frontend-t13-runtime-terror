@@ -44,8 +44,18 @@
 
 .remaining-time{
   font-style: normal;
-  margin-left: 38%;
+  margin-left: 35%;
   color: rgb(245, 245, 94);
+  font-weight: normal;
+  font-size: 25px;
+  align-self: center;
+
+}
+
+.discount-time{
+  font-style: normal;
+  margin-left: 36%;
+  color: rgb(255, 115, 0);
   font-weight: normal;
   font-size: 25px;
   align-self: center;
@@ -78,8 +88,14 @@
 
   
 
+  .discount-time{
+    margin-left:22%;
+    font-size: 20px;
+  }
+
   .remaining-time{
     margin-left:20%;
+    font-size: 20px;
   }
   
 }
