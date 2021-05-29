@@ -1,64 +1,101 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import "./editUser.css";
-import {Field, reduxForm} from 'redux-form';
 
+function EditUser(props) {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [redirectHome, setRedirectHome] = useState(false);
 
-const ChangePasswordForm = (props) => {
+  function validateForm() {
+    return userName.length > 0 && password.length > 0;
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    let postData = { userName, password };
+    console.log(postData);
+    axios
+      .post(
+        `https://info30005-customer-backend.herokuapp.com/api/customer/login`,
+        postData
+      )
+      .then((res) => {
+        // Set global auth token for whenever an axios request is sent
+        localStorage.setItem('token', res.data.token);
+        setRedirectHome(true);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  if (redirectHome) {
+    return <Redirect to="/" />;
+  }
   return (
-    <form  className="form-change-details">
 
-      
-        <Field component="input"
-             name="userName"
-             type="text"
-             placeholder="Current Username"
-             className="form-control"
-      />
-      
-      
-      
-      <Field component="input"
-             name="currentPassword"
-             type="password"
-             placeholder="Current Password"
-             required="required"
-             className="form-control"
-      />
+    <div className="Login">
+      <div className="left">
+      <img className="logo-image" src="https://i.imgur.com/kiMFyeA.png" />
+      <div className="header">
+        
+        <h4 className="animation a2"> You can change your username and password here</h4>
+      </div>
+      <Form className="form" onSubmit={handleSubmit}>
+        <Form.Group size="lg" controlId="email">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a3" placeholder="New User Name"
+            autoFocus
+            type="email"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group size="lg" controlId="password">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a4" placeholder="Current Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group size="lg" controlId="password">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a4" placeholder="New Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group size="lg" controlId="confirmPassword">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a4" placeholder="Confirm Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <p className="animation a5"><a href="#">Forgot Password</a></p>
+        <Button
+          className="button"
+          block
+          size="lg"
+          type="submit"
+          disabled={!validateForm()}
+        >
+          Save
+        </Button>
+      </Form>
+      </div>
+      <div className="right"></div>
+    </div>
 
-      <Field component="input"
-             name="newPassword"
-             type="password"
-             placeholder="New Password"
-             required="required"
-             className="form-control"
-      />
-
-      <Field component="input"
-             name="newPasswordRepeated"
-             type="password"
-             placeholder="New Password Repeated"
-             required="required"
-             className="form-control"
-      />
-
-      <Button type="submit"
-              size="lg"
-              block
-              color="success"
-      >
-        Change Password
-      </Button>
-    </form>
   );
+}
 
-};
-
-ChangePasswordForm.propTypes = {
-};
-
-export default reduxForm({
-  form: 'change-password'
-})(ChangePasswordForm);
+export default EditUser;
