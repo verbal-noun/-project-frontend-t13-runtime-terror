@@ -11,9 +11,9 @@
   position: relative;
 }
 
-.green-tick{
+.super-man{
   width: 30%;
-  margin-left: 35%;
+  margin-left: 31%;
 
 
 
@@ -30,6 +30,7 @@
 .confirm-vector {
   align-self: center;
 }
+
 
 .confirm-text {
   font-style: normal;
@@ -51,9 +52,12 @@
 
 }
 .button-div{
-  left: 20%;
-  margin-left: 36%;
+  margin-right:2%;
+  
+  
+
 }
+
 
 
 
@@ -62,11 +66,13 @@
 
   .confirm-text{
     margin-left:20%;
+    
   }
 
-  .button{
+  .button-div{
     width:25%;
     font-size: 12px;
+    margin-left:24%;
     
   }
 

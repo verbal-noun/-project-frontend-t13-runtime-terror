@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import "./orderStatus.css";
-import greenTick from "./assets/greenTick.png";
+import superManCoffee from "./assets/superManCoffee.png";
 
 
 function OrderStatus(props) {
@@ -16,8 +16,8 @@ function OrderStatus(props) {
   return (
     <div className="confirm-card">
       <img
-        className="green-tick"
-        src={greenTick}
+        className="super-man"
+        src={superManCoffee}
         alt="green tick illustration"
       />
       <h1 className="confirm-text">Thanks For Your Order!</h1>
