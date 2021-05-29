@@ -11,6 +11,8 @@ import OrderPage from "./orderPage";
 import LoginPage from "./login";
 import UserPage from "./userPage";
 import OrderStatus from './orderStatus';
+import OrderConfirm from "./orderConfirm";
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -43,6 +45,7 @@ export default function App() {
         <Route path="/orders" component={UserPage} />
         <Route path="/status" render={(props) => <OrderStatus {...props} />} />
         <Route path="/" component={HomePage} />
+        <Route path="/confirm" render={(props) => <OrderConfirm {...props} />} />
       </Switch>
     </Router>
   );

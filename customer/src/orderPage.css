@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap");
 
 .orderpage {
-  background-image: url("./assets/homePageBackground.png");
+  background: linear-gradient(135deg, #022c18 60%, #00b68b);
   width: 100vw;
   height: 100vh;
   background-size: cover;
@@ -42,12 +42,13 @@
 }
 
 .back-to-menu-button, .cancel-button, .confirm-button {
-  font-size: 32px;
+  font-size: 28px;
   width: auto;
   height: auto;
   padding: 20px;
   color: white;
   border: 0;
+  margin-left: 10%;
   border-radius: 40px;
   background: #047e61;
 }
@@ -67,11 +68,27 @@
   margin-right: 64px;
   margin-top: 136px;
   margin-bottom: 20px;
+  background-color: #fffefe;
+  color: #047e61;
 }
 
 .confirm-button {
   left: 494px;
   top: 836px;
+  background-color: #fffefe;
+  color: #047e61;
+}
+
+@media (min-width: 840px) 
+{
+  .confirm-button {
+    margin-left: 74px;
+    margin-right: 64px;
+    margin-top: 136px;
+    margin-bottom: 20px;
+    background-color: #fffefe;
+    color: #047e61;
+  }
 }
 
 .total-row {

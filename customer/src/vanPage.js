@@ -151,11 +151,13 @@ function VanPage(props) {
               );
             })}
           </div>
-          <button className="order-button" onClick={() => gotoCheckout(true)}>
-            Order
-          </button>
+          
         </div>
+        
       </div>
+      <button className="order-button" onClick={() => gotoCheckout(true)}>
+            Order
+      </button>
     </div>
   );
 }
