@@ -59,9 +59,12 @@ function UserPage(props) {
       .then(async (res) => {
         let newOrders = [];
         for(let order of res.data) {
+          if(order.status == "Cancelled") {
+            continue;
+          }
           try {
             let res = await axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/vendor/${order.vendor}`);
-            let vendor = res.data;  
+            let vendor = res.data;
             newOrders.push({
               id: order._id,
               createdWhen: new Date(order.createdAt),
