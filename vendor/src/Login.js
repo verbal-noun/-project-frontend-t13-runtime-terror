@@ -9,6 +9,7 @@ function LoginPage(props) {
   const [vendor_id, setVendorID] = useState("");
   const [password, setPassword] = useState("");
   const [redirectHome, setRedirectHome] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   function validateForm() {
     return vendor_id.length > 0 && password.length > 0;
@@ -17,7 +18,6 @@ function LoginPage(props) {
   function handleSubmit(event) {
     event.preventDefault();
     let postData = { name: vendor_id, password };
-    console.log(postData);
     axios
       .post(
         `https://info30005-vendor-backend.herokuapp.com/api/vendor/login`,
@@ -29,7 +29,7 @@ function LoginPage(props) {
         setRedirectHome(true);
       })
       .catch((err) => {
-        console.log(err.message);
+        setFailed(true);
       });
   }
 
@@ -63,6 +63,7 @@ function LoginPage(props) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+        {failed ? <p class="login-error">Incorrect name or password</p> : null}
         <p className="animation a5"><a href="#">Forgot Password</a></p>
         <Button
           className="button"
