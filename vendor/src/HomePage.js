@@ -8,7 +8,6 @@ import calendarIcon from './assets/calendar_icon.png'
 import DashBoard from './components/DashBoard'
 import MenuList from './components/MenuList'
 import OrderList from './components/OrderList'
-import TruckGrid from './components/TruckGrid'
 
 const date_formatter = new Intl.DateTimeFormat('en-au', { month: 'long', day: 'numeric', year: 'numeric'})
 
