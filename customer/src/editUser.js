@@ -7,17 +7,18 @@ import axios from "axios";
 import "./editUser.css";
 
 function EditUser(props) {
-  const [userName, setUserName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [redirectHome, setRedirectHome] = useState(false);
 
   function validateForm() {
-    return userName.length > 0 && password.length > 0;
+    return firstName.length > 0 && lastName.length > 0 &&  password.length > 0;
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    let postData = { userName, password };
+    let postData = { firstName, lastName, password};
     console.log(postData);
     axios
       .post(
@@ -44,16 +45,25 @@ function EditUser(props) {
       <img className="logo-image" src="https://i.imgur.com/kiMFyeA.png" />
       <div className="header">
         
-        <h4 className="animation a2"> You can change your username and password here</h4>
+        <h4 className="animation a2"> You can change your name and password here</h4>
       </div>
       <Form className="form" onSubmit={handleSubmit}>
-        <Form.Group size="lg" controlId="email">
+        <Form.Group size="lg" controlId="text">
           <Form.Label className="form-name" ></Form.Label>
-          <Form.Control className="form-field animation a3" placeholder="New User Name"
+          <Form.Control className="form-field animation a3" placeholder="New First Name"
             autoFocus
-            type="email"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group size="lg" controlId="text">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a3" placeholder="New Last Name"
+            autoFocus
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
           />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
