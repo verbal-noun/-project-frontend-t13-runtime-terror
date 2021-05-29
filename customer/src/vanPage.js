@@ -47,7 +47,27 @@ function VanPage(props) {
       .then((res) => {
         loadItems(res.data);
         if (data.orderItems) {
+          // Going back from checkout pages
           setOrder(data.orderItems);
+        }
+        else if(data.order) {
+          // Editing an existing order
+          let itemDict = {};
+          for(let item of res.data) {
+            itemDict[item._id] = item;
+          }
+          let formattedItemList = [];
+          for(let orderItem of data.order.items) {
+            let itemObj = itemDict[orderItem.item];
+            formattedItemList.push({
+              name: itemObj.name,
+              photoURL: itemObj.photoURL,
+              item: itemObj._id,
+              price: itemObj.unitPrice,
+              quantity: orderItem.quantity,
+            });
+          }
+          setOrder(formattedItemList);
         }
       });
     axios
@@ -100,15 +120,19 @@ function VanPage(props) {
   };
 
   if (checkout) {
-    // TODO: Change pathname to approprate url path
+    let state = {
+      order,
+      vendor: props.location.state.selectedID
+    };
+    if(data.order) {
+      // Editing an existing order
+      state.orderID = data.order._id;
+    }
     return (
       <Redirect
         to={{
           pathname: `/checkout`,
-          state: {
-            order,
-            vendor: props.location.state.selectedID,
-          },
+          state
         }}
       />
     );

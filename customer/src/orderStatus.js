@@ -30,7 +30,8 @@ function OrderStatus(props) {
   let [time, setTime] = useState(0);
   let [modifyTime, setModifyTime] = useState(0);
   let [discountTime, setDiscountTime] = useState(0);  
-  let [redirect, setRedirect] = useState(null);
+  let [gotoHome, setGotoHome] = useState(false);  
+  let [gotoEditOrder, setGotoEditOrder] = useState(false);
   
   useEffect(() => {
     let data = props.location.state;
@@ -62,16 +63,27 @@ function OrderStatus(props) {
     let data = props.location.state;
     axios.post(`https://info30005-customer-backend.herokuapp.com/api/customer/cancelOrder/`, {orderID: data.selectedID})
       .then(() => {
-        setRedirect("/");
+        setGotoHome(true);
       })
       .catch((err) => {
         console.log(err.message);
     });
   }
 
-  if(redirect) {
-    console.log(redirect);
-    return <Redirect to={redirect} />;
+  if(gotoEditOrder) {
+    console.log("Hi");
+    return <Redirect 
+      to={{
+        pathname: `/van`,
+        state: {
+          selectedID: order.vendor,
+          order: order,
+        },
+      }}
+    />;
+  }
+  if(gotoHome) {
+    return <Redirect to="/"/>;
   }
 
   // Edit order and cancel order buttons are disabled after respective times has elapsed
@@ -88,15 +100,15 @@ function OrderStatus(props) {
       
       <div className="button-div">
         <Button className="button"
-          onClick={() => setRedirect("/")}
+          onClick={() => setGotoHome(true)}
           title="Home"
           color="#047E61"
         >Home</Button>
 
         <Button className="button"
-          onClick={() => setRedirect("/checkout")}
+          onClick={() => setGotoEditOrder(true)}
           color="#047E61"
-          disabled={() => modifyTime - time >= 0}
+          // disabled={() => modifyTime - time >= 0}
         >Edit Order</Button>
         
         <Button className="button"

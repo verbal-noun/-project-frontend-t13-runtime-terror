@@ -45,20 +45,39 @@ function OrderPage(props) {
         quantity: orderItem.quantity,
       });
     }
-    // Post the order
-    axios
-      .post(
-        "https://info30005-customer-backend.herokuapp.com/api/customer/order",
-        postData
-      )
-      .then((order) => {
-        setSuccess(order);
-        console.log(order);
-      })
-      .catch((err) => {
-        setLoginRedirect(true);
-        console.log(err.message);
-      });
+    if(orderData.orderID) {
+      // Update the existing order
+      postData.orderID = orderData.orderID;
+      axios
+        .put(
+          "https://info30005-customer-backend.herokuapp.com/api/customer/changeOrder",
+          postData
+        )
+        .then((order) => {
+          setSuccess(order);
+          console.log(order);
+        })
+        .catch((err) => {
+          setLoginRedirect(true);
+          console.log(err.message);
+        });
+    }
+    else {
+      // Post the new order
+      axios
+        .post(
+          "https://info30005-customer-backend.herokuapp.com/api/customer/order",
+          postData
+        )
+        .then((order) => {
+          setSuccess(order);
+          console.log(order);
+        })
+        .catch((err) => {
+          setLoginRedirect(true);
+          console.log(err.message);
+        });
+    }
   };
 
   // Redirect if invalid
