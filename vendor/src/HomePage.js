@@ -15,11 +15,17 @@ const date_formatter = new Intl.DateTimeFormat('en-au', { month: 'long', day: 'n
 
 
 function HomePage(props) {
+  let [redirectHome, setRedirectHome] = useState(false);
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setRedirectHome(true);
+  };
+
   let isLoggedIn = localStorage.getItem('token');
-  if(!isLoggedIn) {
-    return <Redirect to="/"/>;
+  if(!isLoggedIn || redirectHome) {
+    return <Redirect to="/login"/>;
   }
-  
   return (
     <div className='container'>
       <div className="header-main">
@@ -50,7 +56,7 @@ function HomePage(props) {
           <span id='truck-grid-list-item'>Trucks</span>
           </li>
         </ul>
-        <span id='nav-log-out'>
+        <span id='nav-log-out' onClick={logout}>
           Log Out
         </span>
       </div>
