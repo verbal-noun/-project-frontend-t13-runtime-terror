@@ -19,16 +19,19 @@ function EditUser(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    let postData = { password, new_email : newEmail, new_password: newPassword };
-    console.log(postData);
+    let postData = { old_password: password };
+    if(newEmail.length) {
+      postData.new_email = newEmail;
+    }
+    if(newPassword.length) {
+      postData.new_password = newPassword;
+    }
     axios
       .post(
         `https://info30005-customer-backend.herokuapp.com/api/customer/update`,
         postData
       )
       .then((res) => {
-        // Set global auth token for whenever an axios request is sent
-        localStorage.setItem('token', res.data.token);
         setRedirectHome(true);
       })
       .catch((err) => {
@@ -37,7 +40,7 @@ function EditUser(props) {
   }
 
   if (redirectHome) {
-    return <Redirect to="/" />;
+    return <Redirect to="/login" />;
   }
   return (
     <div className="Login">
@@ -59,17 +62,9 @@ function EditUser(props) {
         </Form.Group>
         <Form.Group size="lg" controlId="password">
           <Form.Label className="form-name" ></Form.Label>
-          <Form.Control className="form-field animation a4" placeholder="Current Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group size="lg" controlId="password">
-          <Form.Label className="form-name" ></Form.Label>
           <Form.Control className="form-field animation a4" placeholder="New Password"
             type="password"
-            value={password}
+            value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
           />
         </Form.Group>
@@ -77,8 +72,16 @@ function EditUser(props) {
           <Form.Label className="form-name" ></Form.Label>
           <Form.Control className="form-field animation a4" placeholder="Confirm Password"
             type="password"
-            value={password}
+            value={newPasswordConfirm}
             onChange={(e) => setNewPasswordConfirm(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group size="lg" controlId="password">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a4" placeholder="Current Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
         <p className="animation a5"><a href="#">Forgot Password</a></p>
