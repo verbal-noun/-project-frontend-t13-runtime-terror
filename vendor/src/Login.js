@@ -10,6 +10,7 @@ function LoginPage(props) {
   const [password, setPassword] = useState("");
   const [redirectHome, setRedirectHome] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   function validateForm() {
     return vendor_id.length > 0 && password.length > 0;
@@ -17,6 +18,7 @@ function LoginPage(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    setDisabled(true);
     let postData = { name: vendor_id, password };
     axios
       .post(
@@ -30,6 +32,7 @@ function LoginPage(props) {
       })
       .catch((err) => {
         setFailed(true);
+        setDisabled(false);
       });
   }
 
@@ -70,7 +73,7 @@ function LoginPage(props) {
           block
           size="lg"
           type="submit"
-          disabled={!validateForm()}
+          disabled={!validateForm() || disabled}
         >
           Login
         </Button>
