@@ -44,8 +44,9 @@ export default function App() {
         <Route path="/login" component={LoginPage} />
         <Route path="/orders" component={UserPage} />
         <Route path="/status" render={(props) => <OrderStatus {...props} />} />
-        <Route path="/" component={HomePage} />
         <Route path="/confirm" render={(props) => <OrderConfirm {...props} />} />
+        <Route path="/" component={HomePage} />
+        
       </Switch>
     </Router>
   );

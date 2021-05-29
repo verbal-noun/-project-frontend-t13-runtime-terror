@@ -21,8 +21,10 @@ function OrderStatus(props) {
         alt="green tick illustration"
       />
       <h1 className="confirm-text">Thanks For Your Order!</h1>
-      <h2 className="remaining-time">Rate your experience with vendorName</h2>
+      <h2 className="rating-text">Rate your experience with vendorName</h2>
       
+      
+        
       <div class="rate">
         <input type="radio" id="star5" name="rate" value="5" />
         <label for="star5" title="text">5 stars</label>
@@ -35,14 +37,14 @@ function OrderStatus(props) {
         <input type="radio" id="star1" name="rate" value="1" />
         <label for="star1" title="text">1 star</label>
       </div>
-      <div className="button-div">
-        <Button className="button"
+      <Button className="button"
           onClick={() => setRedirect("/")}
           title="Home"
           color="#047E61"
-        >Home</Button>
+        >Submit</Button>
         
-      </div>  
+        
+       
     </div>
   );
 }

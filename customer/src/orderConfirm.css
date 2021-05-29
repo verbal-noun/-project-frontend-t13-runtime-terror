@@ -15,8 +15,10 @@
   width: 30%;
   margin-left: 35%;
 
+}
 
-
+.button{
+    margin-left:43%;
 }
 
 
@@ -33,7 +35,7 @@
 
 .confirm-text {
   font-style: normal;
-  margin-left: 37%;
+  margin-left: 38%;
   color: beige;
   font-weight: normal;
   font-size: 36px;
@@ -41,24 +43,23 @@
   
 }
 
-.remaining-time{
+.rating-text{
   font-style: normal;
-  margin-left: 37%;
+  margin-left: 35%;
   color: rgb(245, 245, 94);
   font-weight: normal;
   font-size: 25px;
   align-self: center;
 
 }
-.button-div{
-  left: 20%;
-}
+
+
 
 .rate {
   float: left;
   height: 46px;
   padding: 0 10px;
-  margin-left:42%;
+  margin-left:40%;
 }
 .rate:not(:checked) > input {
   position:absolute;
@@ -70,7 +71,7 @@
   overflow:hidden;
   white-space:nowrap;
   cursor:pointer;
-  font-size:30px;
+  font-size:50px;
   color:#ccc;
 }
 .rate:not(:checked) > label:before {
@@ -99,18 +100,30 @@
     margin-left:20%;
   }
 
+
+  .rating-text{
+    margin-left:23%;
+    font-size: 20px;
+  }
+
+  .rate{
+      margin-right: 40%;
+  }
+
+  .rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:15px;
+    color:#ccc;
+    width: 100%;
+    margin-top: 20%;
+  }
+
   .button{
-    width:20%;
-    font-size: 10px;
-    
+      margin-top:30%;
+      margin-left:37%;
   }
-
-  .button-div{
-    left:0%;
-  }
-
-  .remaining-time{
-    margin-left:20%;
-  }
-  
 }
