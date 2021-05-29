@@ -52,9 +52,6 @@ function HomePage(props) {
           <li onClick={() => ChangeTab('menu')}>
           <span id='menu-list-item'>Menu</span>
           </li>
-          <li onClick={() => ChangeTab('truck-grid')}>
-          <span id='truck-grid-list-item'>Trucks</span>
-          </li>
         </ul>
         <span id='nav-log-out' onClick={logout}>
           Log Out
@@ -65,7 +62,6 @@ function HomePage(props) {
         <div id ='dashboard'><DashBoard /></div>
         <div id ='order-list'><OrderList /></div>
         <div id ='menu'><MenuList /></div>
-        <div id ='truck-grid'><TruckGrid /></div>
       </div>
     </div>
   );
