@@ -5,6 +5,8 @@ import axios from "axios";
 import "./userPage.css";
 
 function elapsed(since) {
+
+  // order time calculation
   let now = new Date();
   let diff = now - since;
   diff /= 1000;
@@ -100,7 +102,7 @@ function UserPage(props) {
         <div className="logo">
           <h1>Order History</h1>
         </div>
-        <Button className="logout-button" onClick={logout}>Logout</Button>
+        <Button className="button" onClick={logout}>Logout</Button>
         {orders.map((order, index) => {
           return (
             <OrderCard

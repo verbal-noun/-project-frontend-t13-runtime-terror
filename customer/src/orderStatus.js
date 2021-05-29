@@ -6,14 +6,10 @@ import superManCoffee from "./assets/superManCoffee.png";
 
 
 
-
-
-
-
 function OrderStatus(props) {
   
   
-  
+  // calculate the reamining time for order modification and discount application
   let [redirect, setRedirect] = useState(null);
   let time = new Date().toLocaleString();
   let d = time.split(' ')[1];

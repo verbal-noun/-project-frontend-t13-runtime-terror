@@ -79,6 +79,8 @@
   color: #047e61;
 }
 
+
+/*for large screen size*/
 @media (min-width: 840px) 
 {
   .confirm-button {
