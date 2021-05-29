@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 import './HomePage.css';
 import foodLogo from './assets/food_logo.png'
 import profileImage from './assets/profile_image.png'
@@ -14,6 +15,11 @@ const date_formatter = new Intl.DateTimeFormat('en-au', { month: 'long', day: 'n
 
 
 function HomePage(props) {
+  let isLoggedIn = localStorage.getItem('token');
+  if(!isLoggedIn) {
+    return <Redirect to="/"/>;
+  }
+  
   return (
     <div className='container'>
       <div className="header-main">
