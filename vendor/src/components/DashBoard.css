@@ -4,13 +4,11 @@
     grid-template-rows: auto;
     grid-gap: 30px;
     grid-template-areas: 
-        "order-graph heat-map pie-chart"
         "open-close open-close open-close"
         "orders orders orders";
 }
 
 .grid-item {
-    min-height: 200px;
     box-shadow: 0px 5px 5px #ddd;
     border-radius: 15px;
     background-color: #fff;
@@ -30,7 +28,6 @@
 
 .item-order-list {
     grid-area: orders;
-    height: 500px;
 }
 
 .item-open-close {
@@ -38,15 +35,80 @@
     padding: 20px;
 }
 
+/******************** OPEN/CLOSE SECTION ********************/
+
+.is-open-info {
+    float: left;
+    width: 60%;
+    border-right: 4px solid #eee;
+}
+
+.is-open-info p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.button-toggle-operations {
+    float: right;
+    width: calc(40% - 20px);
+    background-color: rgb(207, 250, 226);
+    margin: 8px;
+    border-radius: 100px;
+    padding: 20px;
+    text-align: center;
+}
+
+.button-toggle-operations:hover {
+    background-color: rgb(243, 127, 114);
+    color: #fff;
+}
+
+.is-open-info textarea {
+    width: 60%;
+    display: inline-block;
+    height: 40px;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 100px;
+    resize: none;
+    padding: 6px;
+}
+
+.is-open-info .submit-button {
+    float: right;
+    width: 35%;
+    margin-right: 3%;
+    background-color: #eee;
+    padding: 10px;
+    text-align: center;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.is-open-info .submit-button:hover {
+    background-color: rgb(224, 223, 223);
+}
 
 
-/******************** ORDER GRID CSS ************************/
+/******************** ORDER GRID CSS ********************/
+
+.order-list {
+    padding: 10px;
+}
+
 .grid-orders {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
     grid-template-areas: 
         "cust-name time-created time-rem order-status action";
+}
+
+.grid-orders > div {
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    font-weight: bold;
 }
 
 .grid-header-cust-name {
@@ -74,30 +136,240 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
     grid-template-areas: 
-        "cust-name time-created time-rem order-status action";
+        "cust-name time-created time-rem order-status action"
+        "expanded-order expanded-order expanded-order expanded-order expanded-order";
+    margin-top: 15px;
+}
+
+.item-order > div {
+    width: 100%;
+    margin: auto;
+    text-align: center;
 }
 
 .cust-name {
     grid-area: cust-name;
 } 
 
-.order-id {
-    grid-area: time-created;
-} 
-
-.order-time {
-    grid-area: time-rem;
-}
-
 .order-status {
     grid-area: order-status;
+} 
+
+.time-created {
+    grid-area: time-created;
+}
+
+.time-rem {
+    grid-area: time-rem;
 }
 
 .button-expand {
     grid-area: action;
+    background-color: rgb(243, 127, 127);
+    padding: 15px;
+    width: 80%;
+    text-align: center;
+    border-radius: 30px;
+    margin: 0 auto 0;
+    color: #fff;
+}
+
+.button-expand:hover {
+    background-color: rgb(209, 57, 57);
 }
 
 .item-order {
     grid-area: order-item;
 }
+
+
+.expanded-order {
+    width: 100%;
+    background-color: rgb(238, 255, 243);
+    grid-area: expanded-order;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    overflow: hidden;
+    height: 0%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.order-details-left {
+    width: 70%;
+    float: left;
+}
+
+.order-details-header {
+    font-size: 24px;
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+
+.order-details-right {
+    width: 30%;
+    float: right;
+}
+
+.order-details-total {
+    font-size: 24px;
+    font-weight: 700;
+    width: 73%;
+    margin: 0 auto 0;
+    height: 50px;
+}
+
+.order-details-total :nth-child(1) {
+    float: left;    
+}
+
+.order-details-total :nth-child(2) {
+    float: right;
+}
+
+.order-details-ready {
+    display: inline-block;
+    background-color: rgb(87, 189, 112);
+    padding: 20px;
+    border-radius: 100px;
+    width: 40%;
+    margin-right: 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    box-shadow: 0px 5px 5px #ddd;
+    margin-bottom: 20px;
+    z-index: 3;
+}
+
+.order-details-cancel {
+    display: inline-block;
+    background-color: rgb(207, 93, 80);
+    padding: 20px;
+    border-radius: 100px;
+    width: 40%;
+    margin-left: 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    box-shadow: 0px 5px 5px #ddd;
+    margin-bottom: 20px;
+    z-index: 3;
+}
+
+.order-details-complete {
+    display: inline-block;
+    background-color: rgb(80, 99, 207);
+    padding: 20px;
+    border-radius: 100px;
+    width: 50%;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    box-shadow: 0px 5px 5px #ddd;
+    margin-bottom: 20px;
+    z-index: 3;
+}
+
+.order-details-info p {
+    margin-bottom: 10px;
+    font-size: 20px;
+    text-align: left;
+    margin-left: 5%;
+}
+
+.order-item-card {
+    background-color: #fff;
+    margin: 0px 30px 10px 30px;
+    border-radius: 20px;
+    box-shadow: 0px 5px 5px #ddd;
+}
+
+.order-item-card > div {
+    width: 18%;
+    display: inline-block;
+    height: 70px;
+    vertical-align: middle;
+    font-size: 20px;
+    padding-top: 20px;
+}
+
+.order-item-card-name {
+    width: 40% !important;
+}
+
+.order-item-card-img img {
+    height: 100%;
+}
+
+.order-item-card-img {
+    padding-top: 0 !important;
+}
+
+
+/***************** MESSAGE BOX *****************/
+#message-box {
+    position: fixed;
+    width: 50vw;
+    height: 50vh;
+    background-color: #fff;
+    border-radius: 50px;
+    box-shadow: 0px 5px 5px #ddd;
+    top: calc(50% - 25vh);
+    left: calc(50% - 25vw);
+    z-index: 15;
+    text-align: center;
+    padding: 2%;
+    display: none;
+}
+
+#message-box h3 {
+    font-size: 30px;
+}
+
+#message-box-textarea {
+    width: 80%;
+    margin: 0 auto 0;
+    height: 25%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    border-radius: 20px;
+    padding: 5px;
+    border-color: #ccc;
+}
+
+#message-box-confirm {
+    position: absolute;
+    bottom: 20%;
+    left: 55%;
+    width: 30%;
+    background-color: rgb(202, 255, 224);
+    text-align: center;
+    padding: 3%;
+    border-radius: max(20vw, 20%);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#message-box-confirm:hover {
+    background-color: rgb(155, 218, 181);
+}
+
+#message-box-cancel {
+    position: absolute;
+    bottom: 20%;
+    right: 55%;
+    width: 30%;
+    background-color: rgb(226, 226, 226);
+    text-align: center;
+    padding: 3%;
+    border-radius: max(20vw, 20%);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#message-box-cancel:hover {
+    background-color: rgb(189, 189, 189);
+}
+
 

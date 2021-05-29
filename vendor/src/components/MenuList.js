@@ -12,7 +12,7 @@ function MenuList(props) {
         .then((res) => {
             loadItems(res.data);
         });
-    })
+    }, [])
     return (
         <div className='menu-container'>
             

@@ -20,10 +20,9 @@ function HomePage(props) {
     axios.get('https://info30005-vendor-backend.herokuapp.com/api/vendor/vendorData')
     .then((res) => {
       setVendorData(res.data);
-      console.log(res.data);
       sessionStorage.setItem('vendor-data', JSON.stringify(res.data));
     })
-  })
+  }, []);
 
   const token = sessionStorage.getItem('token');
   if (!token) {
@@ -75,6 +74,8 @@ function HomePage(props) {
         <div id ='menu'><MenuList /></div>
         <div id ='truck-grid'><TruckGrid /></div>
       </div>
+
+      <div id="screen-darken"></div>
     </div>
   );
 }
