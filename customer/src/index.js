@@ -11,6 +11,10 @@ import OrderPage from "./orderPage";
 import LoginPage from "./login";
 import UserPage from "./userPage";
 import OrderStatus from './orderStatus';
+import OrderConfirm from "./orderConfirm";
+import EditUser from "./editUser";
+import SignUp from "./signUp";
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -32,7 +36,7 @@ axios.interceptors.request.use(
     return Promise.reject(err);
   }
 );
-
+//web page routing has been implemented here
 export default function App() {
   return (
     <Router>
@@ -40,9 +44,13 @@ export default function App() {
         <Route path="/van" render={(props) => <VanPage {...props} />} />
         <Route path="/checkout" render={(props) => <OrderPage {...props} />} />
         <Route path="/login" component={LoginPage} />
+        <Route path="/signup" component={SignUp} />
         <Route path="/orders" component={UserPage} />
         <Route path="/status" render={(props) => <OrderStatus {...props} />} />
+        <Route path="/confirm" render={(props) => <OrderConfirm {...props} />} />
+        <Route path="/edit" component={EditUser}/>
         <Route path="/" component={HomePage} />
+        
       </Switch>
     </Router>
   );

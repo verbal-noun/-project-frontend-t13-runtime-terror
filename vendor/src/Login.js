@@ -9,6 +9,8 @@ function LoginPage(props) {
   const [vendor_id, setVendorID] = useState("");
   const [password, setPassword] = useState("");
   const [redirectHome, setRedirectHome] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   const token = sessionStorage.getItem('token');
   if (token) {
@@ -23,8 +25,8 @@ function LoginPage(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    setDisabled(true);
     let postData = { name: vendor_id, password };
-    console.log(postData);
     axios
       .post(
         `https://info30005-vendor-backend.herokuapp.com/api/vendor/login`,
@@ -36,7 +38,8 @@ function LoginPage(props) {
         setRedirectHome(true);
       })
       .catch((err) => {
-        console.log(err.message);
+        setFailed(true);
+        setDisabled(false);
       });
   }
 
@@ -49,7 +52,7 @@ function LoginPage(props) {
       <div className="left">
       <img className="logo-image" src="https://i.imgur.com/kiMFyeA.png" />
       <div className="header">
-        <h2 className="animation a1">Welcome!</h2>
+        <h2 className="animation a1"> Welcome!</h2>
         <h4 className="animation a2"> Log in to your account with your vendor ID and password.</h4>
       </div>
       <Form className="form" onSubmit={handleSubmit}>
@@ -70,13 +73,14 @@ function LoginPage(props) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+        {failed ? <p class="login-error">Incorrect name or password</p> : null}
         <p className="animation a5"><a href="#">Forgot Password</a></p>
         <Button
           className="button"
           block
           size="lg"
           type="submit"
-          disabled={!validateForm()}
+          disabled={!validateForm() || disabled}
         >
           Login
         </Button>

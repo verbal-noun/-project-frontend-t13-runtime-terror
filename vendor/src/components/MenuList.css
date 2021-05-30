@@ -5,3 +5,25 @@
     box-shadow: 0px 5px 5px #ddd;
     border-radius: 15px;
 }
+
+.item-card {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2.5%;
+    box-shadow: 3px 3px 8px #888888;
+}
+
+.item-card-image {
+    width: 10%;
+    height: auto;
+    display: inline-block;
+}
+
+.item-card-name, .item-card-price {
+    display: inline-block;
+} 
+
+.item-card-price {
+    float: right;
+}

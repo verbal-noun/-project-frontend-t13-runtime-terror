@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap");
 
+@media (min-width: 840px) 
+{
 .homepage {
   font-family: "Roboto Condensed";
-  background-image: url("./assets/homePageBackground.png");
+  background: linear-gradient(135deg, #022c18 60%, #00b68b);
   width: 100vw;
   height: 100vh;
   background-size: cover;
@@ -12,7 +14,7 @@
 }
 
 .logo {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   font-size: 32px;
   width: 70%;
   height: 125px;
@@ -25,6 +27,16 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+
+.truck-card-list{
+  
+  background-size: cover;
+  margin-bottom:0px;
+  height: max-content;
+
+
+
+}
 .truck-card-base {
   background-color: #d7fff5;
   border-radius: 20px;
@@ -91,7 +103,7 @@
 .truck-card-distance-section {
   width: 15%;
   line-height: 125px;
-  font-size: 20px;
+  font-size: 12px;
   font-weight: bold;
 }
 
@@ -128,12 +140,14 @@
 .home-page-button {
   position: absolute;
 }
-.map {
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
+
+  .map {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
 
 .home-page-button {
   top: 50px;
@@ -153,4 +167,152 @@
 
 .home-page-button:hover {
   background-color: #58d8b8;
+}
+}
+
+@media (max-width: 840px) 
+{
+  .homepage {
+    font-family: "Roboto Condensed";
+    background: linear-gradient(135deg, #022c18 60%, #00b68b);
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    mix-blend-mode: normal;
+    overflow-y: scroll;
+    position: relative;
+  }
+  
+  
+  
+  
+  .logo {
+    background-color: rgb(255, 255, 255);
+    font-size: 35px;
+    width: 70%;
+    height: 50px;
+    line-height: 1px;
+    margin-top: 5%;
+    margin-left: 50%;
+    
+    text-align: center;
+    border-radius: 20%/80%;
+    padding-bottom: 40%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  
+  .truck-card-base {
+    background-color: #d7fff5;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px #00000040;
+    height: 120px;
+    width: 120%;
+    mix-blend-mode: normal;
+    margin-top: 5%;
+    margin-left: 40%;
+    margin-right: auto;
+    cursor: pointer;
+  
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+  }
+  
+  .truck-card-base:hover {
+    box-shadow: 0px 16px 32px -3px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3px);
+  }
+  
+  .truck-card-base:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  .truck-card-column {
+    float: left;
+    height: 125px;
+  }
+  
+  .truck-card-icon {
+    width: 25%;
+  }
+  
+  .truck-card-icon > img {
+    mix-blend-mode: normal;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    
+  }
+  
+  .truck-card-info-section {
+    padding-top: 3%;
+    width: 60%;
+  }
+  
+  .truck-card-title {
+    font-style: normal;
+    font-weight: normal;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .truck-card-address {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+  }
+  
+  .truck-card-distance-section {
+    width: 15%;
+    line-height: 125px;
+    font-size: 6px;
+    
+    font-weight: bold;
+    
+  }
+  
+  
+
+  .truck-card-list {
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+  }
+  
+  .logout-button {
+    width: 50px;
+    height: 20px;
+    left: 1186px;
+    top: 852px;
+    background: #ffffff;
+    border-radius: 25px;
+  }
+  
+  
+  
+  .home-page-button {
+    top: 50px;
+    position: absolute;
+    right: 50px;
+    z-index: 100;
+    color: black;
+    background-color: #d7fff5;
+    width: 20px;
+    height: 30px;
+    padding-left: 30px;
+    padding-right: 60px;
+    font-size: 12px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+  }
+  
+  .home-page-button:hover {
+    background-color: #58d8b8;
+  }
 }

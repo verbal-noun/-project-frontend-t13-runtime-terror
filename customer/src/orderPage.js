@@ -25,40 +25,63 @@ function OrderPage(props) {
   let [menuRedirect, setMenuRedirect] = useState(false);
   let [cancelRedirect, setCancelRedirect] = useState(false);
   let [successfulOrder, setSuccess] = useState(null);
+  let [orderSum, setOrderSum] = useState(0);
 
   useEffect(() => {
     if (!orderData) {
       return;
     }
-    let sum = 0;
     for (let orderItem of orderData.order) {
-      sum += orderItem.price * orderItem.quantity;
+      setOrderSum((orderSum += orderItem.price * orderItem.quantity));
     }
-    setTotal(sum);
+    setTotal(orderSum);
   }, []);
 
   let submitOrder = () => {
-    let postData = { orderItems: [], vendor: orderData.vendor };
+    let postData = {
+      orderItems: [],
+      vendor: orderData.vendor,
+      totalPrice: orderSum,
+    };
     for (let orderItem of orderData.order) {
       postData.orderItems.push({
         item: orderItem.item,
         quantity: orderItem.quantity,
       });
     }
-    // Post the order
-    axios
-      .post(
-        "https://info30005-customer-backend.herokuapp.com/api/customer/order",
-        postData
-      )
-      .then((order) => {
-        setSuccess(order);
-        console.log(order);
-      })
-      .catch((err) => {
-        setLoginRedirect(true);
-        console.log(err.message);
-      });
+    if (orderData.orderID) {
+      // Update the existing order
+      postData.orderID = orderData.orderID;
+      axios
+        .put(
+          "https://info30005-customer-backend.herokuapp.com/api/customer/changeOrder",
+          postData
+        )
+        .then((order) => {
+          setSuccess(order);
+          console.log(order);
+        })
+        .catch((err) => {
+          setLoginRedirect(true);
+          console.log(err.message);
+        });
+    } else {
+      // Post the new order
+      console.log(postData);
+      axios
+        .post(
+          "https://info30005-customer-backend.herokuapp.com/api/customer/order",
+          postData
+        )
+        .then((order) => {
+          setSuccess(order);
+          console.log(order);
+        })
+        .catch((err) => {
+          setLoginRedirect(true);
+          console.log(err.message);
+        });
+    }
   };
 
   // Redirect if invalid
@@ -83,7 +106,7 @@ function OrderPage(props) {
   }
   if (successfulOrder) {
     // TODO: Redirect to order watch page
-    return <Redirect to="/orders"/>;
+    return <Redirect to="/orders" />;
   }
   return (
     <div className="orderpage">

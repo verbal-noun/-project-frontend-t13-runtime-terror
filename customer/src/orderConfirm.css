@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap");
+
+.confirm-card {
+  font-family: "Roboto Condensed";
+  background: linear-gradient(135deg, #022c18 60%, #00b68b);
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  mix-blend-mode: normal;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.green-tick{
+  width: 30%;
+  margin-left: 35%;
+
+}
+
+#submit-btn{
+  margin-left:42.5%;
+}
+
+
+
+.confirm-card {
+  top: -20;
+  align-self: center;
+  
+}
+
+.confirm-vector {
+  align-self: center;
+}
+
+.confirm-text {
+  font-style: normal;
+  margin-left: 38%;
+  color: beige;
+  font-weight: normal;
+  font-size: 36px;
+  align-self: center;
+  
+}
+
+.rating-text{
+  font-style: normal;
+  margin-left: 35%;
+  color: rgb(245, 245, 94);
+  font-weight: normal;
+  font-size: 25px;
+  align-self: center;
+
+}
+
+
+
+.rate {
+  float: left;
+  height: 46px;
+  padding: 0 10px;
+  margin-left:40%;
+}
+.rate:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+}
+.rate:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:50px;
+  color:#ccc;
+}
+.rate:not(:checked) > label:before {
+  content: '★ ';
+}
+.rate > input:checked ~ label {
+  color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+
+@media (max-width: 640px) 
+{
+
+  .confirm-text{
+    margin-left:20%;
+  }
+
+
+  .rating-text{
+    margin-left:23%;
+    font-size: 20px;
+  }
+
+  .rate{
+      margin-right: 40%;
+  }
+
+  .rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:15px;
+    color:#ccc;
+    width: 100%;
+    margin-top: 20%;
+  }
+
+  #submit-btn{
+      margin-top:32%;
+      margin-left:30%;
+  }
+}

@@ -3,6 +3,9 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import "./vanPage.css";
 import redTruck from "./assets/redTruck.png";
+import EditUser from "./editUser";
+
+import dashboard from "./assets/dashboard-button.png";
 
 function ItemCard(props) {
   return (
@@ -35,6 +38,8 @@ function VanPage(props) {
   let [order, setOrder] = useState([]);
   let [checkout, gotoCheckout] = useState(false);
   let [back, goBack] = useState(false);
+  let [goToEditUser, setGoToEditUser] = useState(false);
+  let [goToLogin, setGoToLogin] = useState(false);
 
   let data = props.location.state;
   useEffect(() => {
@@ -47,7 +52,27 @@ function VanPage(props) {
       .then((res) => {
         loadItems(res.data);
         if (data.orderItems) {
+          // Going back from checkout pages
           setOrder(data.orderItems);
+        }
+        else if(data.order) {
+          // Editing an existing order
+          let itemDict = {};
+          for(let item of res.data) {
+            itemDict[item._id] = item;
+          }
+          let formattedItemList = [];
+          for(let orderItem of data.order.items) {
+            let itemObj = itemDict[orderItem.item];
+            formattedItemList.push({
+              name: itemObj.name,
+              photoURL: itemObj.photoURL,
+              item: itemObj._id,
+              price: itemObj.unitPrice,
+              quantity: orderItem.quantity,
+            });
+          }
+          setOrder(formattedItemList);
         }
       });
     axios
@@ -67,13 +92,12 @@ function VanPage(props) {
       });
   }, []);
 
-  // Invalid access
-  if (!data) {
-    return <Redirect to="/" />;
-  }
-
   // Functions to update the order items
   let addOrder = (itemObj) => {
+    if(!localStorage.getItem('token')) {
+      setGoToLogin(true);
+      return;
+    }
     let newOrder = order.slice();
     let found = newOrder.find((orderItem) => orderItem.item == itemObj._id);
     if (!found) {
@@ -90,6 +114,10 @@ function VanPage(props) {
     setOrder(newOrder);
   };
   let removeOrder = (orderItem) => {
+    if(!localStorage.getItem('token')) {
+      setGoToLogin(true);
+      return;
+    }
     let newOrder = order.slice();
     orderItem.quantity--;
     if (orderItem.quantity == 0) {
@@ -100,15 +128,19 @@ function VanPage(props) {
   };
 
   if (checkout) {
-    // TODO: Change pathname to approprate url path
+    let state = {
+      order,
+      vendor: props.location.state.selectedID
+    };
+    if(data.order) {
+      // Editing an existing order
+      state.orderID = data.order._id;
+    }
     return (
       <Redirect
         to={{
           pathname: `/checkout`,
-          state: {
-            order,
-            vendor: props.location.state.selectedID,
-          },
+          state
         }}
       />
     );
@@ -116,11 +148,28 @@ function VanPage(props) {
   if (back) {
     return <Redirect to="/" />;
   }
+
+  if (goToEditUser) {
+    return <Redirect to="/edit"/>;
+  }
+
+  // Invalid access
+  if (!data) {
+    return <Redirect to="/" />;
+  }
+  if (goToLogin) {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <div className="vanpage">
+      
       <button className="back-button" onClick={() => goBack(true)}>
         <span className="left-arrow"></span>
       </button>
+      <img  id="dashboard" src={dashboard} onClick={() => setGoToEditUser(true)}/>
+            
+      
       <div className="menu-row">
         <div className="menu-items">
           {items.map((item, index) => (
@@ -151,11 +200,14 @@ function VanPage(props) {
               );
             })}
           </div>
-          <button className="order-button" onClick={() => gotoCheckout(true)}>
-            Order
-          </button>
+          
         </div>
+        
       </div>
+      <button className="order-button" onClick={() => gotoCheckout(true)}>
+            Order
+      </button>
+      
     </div>
   );
 }

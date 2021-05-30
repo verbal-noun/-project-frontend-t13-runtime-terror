@@ -1,6 +1,6 @@
 * { box-sizing: border-box; }
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap');
-@media all and (min-width: 480px) {
+
   
   .Login {
     /*background: linear-gradient(#86efc3, #f3f3f3);*/
@@ -150,6 +150,10 @@
     }
   }
 
+  .error {
+    color: red;
+  }
+
   .button {
     width: 196px;
     height: 40px;
@@ -159,6 +163,11 @@
 
     background: #047e61;
     border-radius: 40px;
+  }
+
+  .button:disabled {
+    color: rgb(194, 194, 194);
+    background: #4e4e4e;
   }
 
   .form-name{
@@ -174,7 +183,11 @@
 
     
   }
+  .button-b{
+    margin-left: 20px;
+    top:20px;
+  }
 
   
 
-}
+

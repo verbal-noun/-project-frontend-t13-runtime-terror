@@ -8,7 +8,10 @@ import "./login.css";
 function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [redirectSignup, setRedirectSignup] = useState(false);
   const [redirectHome, setRedirectHome] = useState(false);
+  const [error, setError] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -17,7 +20,7 @@ function LoginPage(props) {
   function handleSubmit(event) {
     event.preventDefault();
     let postData = { email, password };
-    console.log(postData);
+    setDisabled(true);
     axios
       .post(
         `https://info30005-customer-backend.herokuapp.com/api/customer/login`,
@@ -27,15 +30,22 @@ function LoginPage(props) {
         // Set global auth token for whenever an axios request is sent
         localStorage.setItem('token', res.data.token);
         setRedirectHome(true);
+        setDisabled(false);
       })
       .catch((err) => {
-        console.log(err.message);
+        setError("Incorrect email or password.");
+        setDisabled(false);
       });
   }
 
   if (redirectHome) {
     return <Redirect to="/" />;
   }
+  if (redirectSignup) {
+    return <Redirect to="/signup" />;
+  }
+  
+  //login page display jsx part to display components
   return (
 
     <div className="Login">
@@ -63,13 +73,15 @@ function LoginPage(props) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <p className="animation a5"><a href="#">Forgot Password</a></p>
+
+        {error.length ? <p className="error">{error}</p> : null}
+        <p className="animation a5">Don't have an account yet? <a href="#" onClick={setRedirectSignup}>Sign up</a></p>
         <Button
-          className="button"
+          className="button-b"
           block
           size="lg"
           type="submit"
-          disabled={!validateForm()}
+          disabled={!validateForm() || disabled}
         >
           Login
         </Button>

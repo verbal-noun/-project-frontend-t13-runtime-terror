@@ -33,8 +33,8 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/login"><LoginPage /></Route>
-        <Route path="/"><HomePage /></Route>
+        <Route path="/login" component={LoginPage} />
+        <Route path="/" component={HomePage} />
       </Switch>
     </Router>
   );

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 import './HomePage.css';
 import foodLogo from './assets/food_logo.png'
 import profileImage from './assets/profile_image.png'
@@ -28,6 +29,7 @@ function HomePage(props) {
     return (
       <Redirect to="/login" />
     )
+
   }
   return (
     <div className='container'>
@@ -56,6 +58,7 @@ function HomePage(props) {
             <span id='order-list-list-item'>Orders</span>
           </li>
           <li onClick={() => ChangeTab('menu')}>
+
             <span id='menu-list-item'>Menu</span>
           </li>
         </ul>

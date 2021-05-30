@@ -143,6 +143,9 @@
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    
+  .form-name{
+    margin-top: 50px;
   }
 }
 
@@ -156,6 +159,12 @@
     opacity: 1;
     padding: 20px 40px;
     width: 440px;
+    
+  .logo-image{
+    margin: 0 auto 0;
+    width: 60%;
+    margin-top:1%;
+    margin-bottom: -40px;
   }
 }
 
@@ -180,6 +189,10 @@
   width: 60%;
   margin-top:1%;
   margin-bottom: -40px;
+
+.login-error {
+  color: red;
+}
 
   
 }

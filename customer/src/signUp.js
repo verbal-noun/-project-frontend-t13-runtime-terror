@@ -1,132 +1,115 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import { useHistory } from "react-router-dom";
-import { useAppContext } from "../libs/contextLib";
-import { useFormFields } from "../libs/hooksLib";
-import { Redirect } from "react-router-dom";
+import { Form } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
-//import { onError } from "../libs/errorLib";
 import "./signUp.css";
 
-function SignupPage() {
-  const [fields, handleFieldChange] = useFormFields({
-    fullName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    confirmationCode: "",
-  });
-
-  const history = useHistory();
-  const [newUser, setNewUser] = useState(null);
-  const { userHasAuthenticated } = useAppContext();
-  const [isLoading, setIsLoading] = useState(false);
+function SignUp(props) {
+  const [givenname, setGivenName] = useState("");
+  const [familyname, setFamilyName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [redirectLogin, setRedirectLogin] = useState(false);
+  const [error, setError] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   function validateForm() {
     return (
-      fields.fullName.length > 0 &&
-      fields.email.length > 0 &&
-      fields.password.length > 0 &&
-      fields.password === fields.confirmPassword
+      givenname.length > 0  && 
+      familyname.length > 0 &&
+      email.length > 0      && 
+      password.length > 0
     );
   }
 
-  function validateConfirmationForm() {
-    return fields.confirmationCode.length > 0;
-  }
-
-  async function handleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
-
-    setIsLoading(true);
-
-    setNewUser("test");
-
-    setIsLoading(false);
+    setDisabled(true);
+    let postData = {givenname, familyname, email, password};
+    axios
+      .post(
+        `https://info30005-customer-backend.herokuapp.com/api/customer/register`,
+        postData
+      )
+      .then((res) => {
+        setRedirectLogin(true);
+        setDisabled(false);
+      })
+      .catch((err) => {
+        setError(err.response.data);
+        setDisabled(false);
+      });
   }
 
-  async function handleConfirmationSubmit(event) {
-    event.preventDefault();
-
-    setIsLoading(true);
+  if (redirectLogin) {
+    return <Redirect to="/login" />;
   }
-
-  function renderConfirmationForm() {
-    return (
-      <Form onSubmit={handleConfirmationSubmit}>
-        <Form.Group controlId="confirmationCode" size="lg">
-          <Form.Label>Confirmation Code</Form.Label>
-          <Form.Control
-            autoFocus
-            type="tel"
-            onChange={handleFieldChange}
-            value={fields.confirmationCode}
-          />
-          <Form.Text muted>
-            Please check your email for the confirmation code.
-          </Form.Text>
-        </Form.Group>
-        <LoaderButton
-          block
-          size="lg"
-          type="submit"
-          variant="success"
-          isLoading={isLoading}
-          disabled={!validateConfirmationForm()}
-        >
-          Verify
-        </LoaderButton>
-      </Form>
-    );
-  }
-
-  function renderForm() {
-    return (
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="email" size="lg">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            autoFocus
-            type="email"
-            value={fields.email}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="password" size="lg">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={fields.password}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="confirmPassword" size="lg">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            onChange={handleFieldChange}
-            value={fields.confirmPassword}
-          />
-        </Form.Group>
-        <LoaderButton
-          block
-          size="lg"
-          type="submit"
-          variant="success"
-          isLoading={isLoading}
-          disabled={!validateForm()}
-        >
-          Signup
-        </LoaderButton>
-      </Form>
-    );
-  }
-
   return (
-    <div className="Signup">
-      {newUser === null ? renderForm() : renderConfirmationForm()}
+    <div className="Login">
+      <div className="left">
+      <img className="logo-image" src="https://i.imgur.com/kiMFyeA.png" />
+      <div className="header">
+        
+        <h4 className="animation a2"> Create a New Account</h4>
+      </div>
+      <Form className="form" onSubmit={handleSubmit}>
+        <Form.Group size="lg" controlId="text">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a3" placeholder="Email"
+            autoFocus
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Group>
+        
+        <Form.Group size="lg" controlId="text">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a3" placeholder="Given Name"
+            autoFocus
+            type="text"
+            value={givenname}
+            onChange={(e) => setGivenName(e.target.value)}
+          />
+        </Form.Group>
+        
+        <Form.Group size="lg" controlId="text">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a3" placeholder="Family Name"
+            autoFocus
+            type="text"
+            value={familyname}
+            onChange={(e) => setFamilyName(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group size="lg" controlId="password">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a4" placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        
+        {error.length ? <p className="error">{error}</p> : null}
+        <p className="animation a5">Already have an account? <a href="#" onClick={setRedirectLogin}>Login</a></p>
+        <Button
+          className="button-b"
+          block
+          size="lg"
+          type="submit"
+          disabled={!validateForm() || disabled}
+        >
+          Save
+        </Button>
+      </Form>
+      </div>
+      <div className="right"></div>
     </div>
+
   );
 }
 
-export default SignupPage;
+export default SignUp;

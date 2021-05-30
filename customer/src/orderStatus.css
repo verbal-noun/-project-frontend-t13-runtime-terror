@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap");
 
-.homepage {
+.confirm-card {
   font-family: "Roboto Condensed";
-  background-image: url("./assets/homePageBackground.png");
+  background: linear-gradient(135deg, #022c18 60%, #00b68b);
   width: 100vw;
   height: 100vh;
   background-size: cover;
@@ -11,17 +11,95 @@
   position: relative;
 }
 
+.super-man{
+  width: 30%;
+  margin-left: 31%;
+
+
+
+}
+
+
+
 .confirm-card {
   top: -20;
   align-self: center;
+  
 }
 
 .confirm-vector {
   align-self: center;
 }
 
+
 .confirm-text {
   font-style: normal;
+  margin-left: 38%;
+  color: beige;
   font-weight: normal;
   font-size: 36px;
+  align-self: center;
+  
+}
+
+.remaining-time{
+  font-style: normal;
+  margin-left: 35%;
+  color: rgb(245, 245, 94);
+  font-weight: normal;
+  font-size: 25px;
+  align-self: center;
+
+}
+
+.discount-time{
+  font-style: normal;
+  margin-left: 36%;
+  color: rgb(255, 115, 0);
+  font-weight: normal;
+  font-size: 25px;
+  align-self: center;
+
+}
+.button-div{
+  margin-right:100%;
+  margin-left:42%;
+  margin-bottom: 10%;
+
+}
+
+.button:disabled{
+  display: none;
+}
+
+
+@media (max-width: 640px) 
+{
+
+  .confirm-text{
+    margin-left:20%;
+    
+  }
+
+  .button-div{
+    width:25%;
+    font-size: 12px;
+    margin-left:25%;
+    
+  }
+
+  .button:disabled{
+    display: none;
+  }
+
+  .discount-time{
+    margin-left:22%;
+    font-size: 20px;
+  }
+
+  .remaining-time{
+    margin-left:20%;
+    font-size: 20px;
+  }
+  
 }

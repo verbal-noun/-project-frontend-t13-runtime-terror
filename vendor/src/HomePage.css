@@ -137,6 +137,14 @@ li {
   bottom: 20px;
   left: 0px;
   width: 100%;
+  padding: 10px 0 10px 0;
+  cursor: pointer;
+}
+
+#nav-log-out:hover {
+  cursor: grab;
+  color: white;
+  background-color: rgb(195, 95, 95);
 }
 
 /* CONTENT CONTAINER */

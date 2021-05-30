@@ -1,6 +1,6 @@
 * { box-sizing: border-box; }
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap');
-@media all and (min-width: 480px) {
+
   
   .Login {
     /*background: linear-gradient(#86efc3, #f3f3f3);*/
@@ -39,7 +39,7 @@
   
   .header > h4 {
     margin-top: 10px;
-    margin-left:28%;
+    margin-right: 10%;
     font-weight: normal;
     font-size: 15px;
     color: rgba(0,0,0,.4);
@@ -163,11 +163,6 @@
     background: #047e61;
     border-radius: 40px;
   }
-  
-  .button:disabled {
-    color: rgb(194, 194, 194);
-    background: #4e4e4e;
-  }
 
   .form-name{
     margin-right: 20px;
@@ -185,10 +180,11 @@
 
   
 
-}
 
-.button{
+
+.button-b{
   margin-left: 20px;
+  top:20px;
 }
 
 
