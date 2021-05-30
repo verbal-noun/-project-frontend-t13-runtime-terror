@@ -18,7 +18,7 @@ ReactDOM.render(
 // If user is logged in add token to request header
 axios.interceptors.request.use(
   (config) => {
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if(token) {
       config.headers.common.Authorization = `Bearer ${token}`;  
     }
@@ -28,6 +28,7 @@ axios.interceptors.request.use(
     return Promise.reject(err);
   }
 );
+
 
 export default function App() {
   return (

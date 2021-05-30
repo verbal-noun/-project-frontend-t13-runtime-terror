@@ -4,6 +4,7 @@ import dateFormat from "dateformat";
 
 import './OrderList.css'
 
+// Entry point for order list content
 function OrderList(props) {
     return (
         <div className='orders-container'>
@@ -13,15 +14,9 @@ function OrderList(props) {
 }
 
 
+// Gets all orders and displays them
 function DisplayOrders() {
     let [orders, loadOrders] = useState([]);
-
-    /*useEffect(() => {
-        axios.get('https://info30005-vendor-backend.herokuapp.com/api/vendor/allOrders')
-        .then((res) => {
-            loadOrders(res.data);
-        });
-    }, [orders]);*/
 
     useEffect(() => {
         
@@ -48,25 +43,23 @@ function DisplayOrders() {
                 <OrderDetailsCard
                 key={order._id}
                 orderID={order._id}
-                orderTime={order.createdAt}
-                orderStatus={order.status}
-                customerDetails={order.customer} />
+                orderStatus={order.status} />
             ))}
         </div>
     )
 }
 
-function OrderDetailsCard({orderID, orderTime, orderStatus, customerDetails}) {
+function OrderDetailsCard({orderID, orderStatus}) {
     return (
         <div className="orders-tab-item">
 
-            {GetOrderItems({orderID})}
+            {GetOrderItems({orderID, orderStatus})}
         </div>
     )
 }   
 
 
-function GetOrderItems({orderID}) {
+function GetOrderItems({orderID, orderStatus}) {
     let [orderData, loadOrderData] = useState([]);
     const colourGreen = "rgb(21, 207, 70)";
     const colourOrange = "rgb(247, 182, 42)";
@@ -86,11 +79,11 @@ function GetOrderItems({orderID}) {
         return
     }
 
-    if (orderData.status === "Ready for pickup") {
+    if (orderStatus === "Ready for pickup") {
         colour = colourGreen;
-    } else if (orderData.status === "Cancelled") {
+    } else if (orderStatus === "Cancelled") {
         colour = colourRed;
-    } else if (orderData.status === "Preparing") {
+    } else if (orderStatus === "Preparing") {
         colour = colourOrange;
     }
 
@@ -110,7 +103,7 @@ function GetOrderItems({orderID}) {
             </div>
             <div className="orders-tab-attribute-values">
                 <br />
-                <p style={{color: colour, fontSize: '26px'}}><b>{orderData.status}</b></p>
+                <p style={{color: colour, fontSize: '26px'}}><b>{orderStatus}</b></p>
                 <br />
                 <p>{dateFormat(orderData.createdAt, "dddd, mmmm dS")}</p>
                 <p>{dateFormat(orderData.createdAt, "HH:MM")}</p>

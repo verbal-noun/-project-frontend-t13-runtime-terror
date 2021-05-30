@@ -4,6 +4,7 @@ import dateFormat from 'dateformat';
 
 import './DashBoard.css'
 
+// Entry point for dashboard content
 function DashBoard(props) {
     return (
         <div className='dashboard-container'>
@@ -19,14 +20,16 @@ function DashBoard(props) {
     )
 }
 
+// Display content for Open/Close view at top of dashboard
 function OpenCloseItem() {
-    const vendorData = JSON.parse(sessionStorage.getItem('vendor-data'));
+
+    const vendorData = JSON.parse(localStorage.getItem('vendor-data'));
 
     if (!vendorData) {
         return
     }
 
-    var isOpen = sessionStorage.getItem('isopen');
+    var isOpen = localStorage.getItem('isopen');
 
     if (isOpen == null) {
         isOpen = vendorData.open == true;
@@ -34,6 +37,7 @@ function OpenCloseItem() {
         isOpen = isOpen == 'true';
     }
 
+    // display different content depending on it the truck is open
     if (vendorData.open == false) {
         return (
             <div>
@@ -63,8 +67,10 @@ function OpenCloseItem() {
     }
 }
 
+
+// Get content for displaying orders
 function DisplayOrders() {
-    var intervalms = 5000;
+    // get order content and global values (discount amount and time limit)
     let [orders, loadOrders] = useState([]);
     let [globals, setGlobals] = useState([]);
     
@@ -90,8 +96,6 @@ function DisplayOrders() {
             <div className="no-orders">You don't currently have any orders</div>
         )
     }
-
-    console.log(globals);
  
     return (
         <div className="order-list">
@@ -117,10 +121,13 @@ function DisplayOrders() {
 }
 
 
+// Create order cards from each order's attributes
 function OrderCard( {orderID, orderTime, orderStatus, customerDetails, globals} ) {
+    // calculate estimated time remaining for order and until discount is applied
     var timeRemaining = parseInt((new Date(orderTime).getTime() - new Date().getTime())/(1000*60)) + globals[1].value;
     var timeRemainingMessage = timeRemaining;
 
+    // create message based on time left
     if (timeRemaining <= 0 && orderStatus === "Preparing") {
         timeRemainingMessage = "Discount Applied";
     } 
@@ -148,6 +155,7 @@ function OrderCard( {orderID, orderTime, orderStatus, customerDetails, globals} 
 }
 
 
+// Toggles whether order details is expanded/visible or not
 function ToggleExpandOrder( { orderID } ) {
     var elem = document.getElementById("expanded-order-"+orderID);
     var toggleButton = document.getElementById("toggle-button-" + orderID);
@@ -165,6 +173,8 @@ function ToggleExpandOrder( { orderID } ) {
     }
 }
 
+
+// Displays content for expanded order information
 function DisplayOrderData( { orderID, globals }, timeRemaining ) {
     let [orderData, loadOrderData] = useState([]);
 
@@ -198,7 +208,7 @@ function DisplayOrderData( { orderID, globals }, timeRemaining ) {
                     <div>Total:</div>
                     <div>${orderData.totalPrice}</div>
                 </div>
-                <div className={"discount-applied-message-"+orderID}>
+                <div id={"discount-applied-message-"+orderID}>
                     { orderData.status == "Preparing" ? (timeRemaining > 0 ? <p>A {globals[1].amount}% discount will be applied in {timeRemaining} minute(s).</p> 
                     : <p>A {globals[1].amount}% discount has been applied.</p>) : <p></p>}
                 </div>
@@ -208,6 +218,8 @@ function DisplayOrderData( { orderID, globals }, timeRemaining ) {
     )
 }
 
+
+// Gets buttons at bottom of expanded order, allowing cancellation, completion and fulfilment of order
 function GetBottomButtons( orderStatus, {orderID} ) {
     if (orderStatus === "Preparing") {
         return (
@@ -236,11 +248,13 @@ function GetBottomButtons( orderStatus, {orderID} ) {
     }
 }
 
+// Talks with API to complete the order fully
 function CompleteOrder( { orderID }, e) {
     const confirmMessage = "Click Again to Confirm";
     const originalMessage = "Order Picked Up";
-    e.stopPropagation();
+    e.stopPropagation(); // prevent expanded order being clicked 
 
+    // force a double click within 5 seconds so accidents don't happen
     if (e.target.innerHTML != confirmMessage) {
         e.target.innerHTML = confirmMessage;
         setTimeout(function() {
@@ -249,16 +263,20 @@ function CompleteOrder( { orderID }, e) {
         return
     }
 
+    // hide order
     document.getElementById("order-"+orderID).style.display = "none";
 
+    // complete order in db
     axios.post('https://info30005-vendor-backend.herokuapp.com/api/vendor/orderPickup', {order: orderID});
 }
 
+// Talks with API to cancel order
 function CancelOrder( { orderID }, e ) {
     const confirmMessage = "Click Again to Confirm";
     const originalMessage = "Cancel & Refund";
     e.stopPropagation();
 
+    // force a double click to prevent accidents
     if (e.target.innerHTML != confirmMessage) {
         e.target.innerHTML = confirmMessage;
         setTimeout(function() {
@@ -267,8 +285,10 @@ function CancelOrder( { orderID }, e ) {
         return
     }
 
+    // hide order
     document.getElementById("order-"+orderID).style.display = "none";
 
+    // cancel order in db
     axios.post('https://info30005-vendor-backend.herokuapp.com/api/vendor/cancelOrder', {orderID: orderID});
 }
 
@@ -277,6 +297,7 @@ function FulfillOrder( {orderID}, e ) {
     const originalMessage = "Ready for Pick-up";
     e.stopPropagation();
 
+    // force a double click to prevent accidents
     if (e.target.innerHTML != confirmMessage) {
         e.target.innerHTML = confirmMessage;
         setTimeout(function() {
@@ -285,18 +306,21 @@ function FulfillOrder( {orderID}, e ) {
         return
     }
 
+    // change buttons
     document.getElementById("order-details-ready-cancel-"+orderID).style.display = "none";
     document.getElementById("order-details-complete-"+orderID).style.display = "block";
     document.getElementById("discount-applied-message-"+orderID).style.display = "none";
 
+    // fulfill order and mark as ready to pick up
     axios.post('https://info30005-vendor-backend.herokuapp.com/api/vendor/fulfillOrder', {order: orderID});
 }
 
+// Calculates time in minutes since order created and colours text based on time elapsed
 function CalculateElapsedTime(timeCreated) {
     const colourRed = "rgb(207, 37, 31)";
     const colourOrange = "rgb(240, 184, 65)";
     const timeWellOver = 20;
-    const timeWarning = 8;
+    const timeWarning = 10;
 
     var timeElapsed = parseInt((new Date().getTime() - new Date(timeCreated).getTime())/(1000*60))
     var warningIndicator = "rgb(0, 0, 0)";
@@ -307,11 +331,11 @@ function CalculateElapsedTime(timeCreated) {
         warningIndicator = colourOrange; 
     }
 
-
     return (<b><span style={{color: warningIndicator}}>{timeElapsed} minutes</span></b>)
 }
 
 
+// Creates row with information on items in order
 function OrderDetailsItemCard( { itemID, quantity } ) {
     let [itemData, loadItemData] = useState([]);
 
@@ -336,6 +360,7 @@ function OrderDetailsItemCard( { itemID, quantity } ) {
     )
 }
 
+// Creates message box requiring confirmation for open/close of business
 function MessageBox() {
     return (
         <div id="message-box">
@@ -347,6 +372,7 @@ function MessageBox() {
     )
 }
 
+// Makes message box visible
 function OpenMessageBox(toOpen) {
     var msgBox = document.getElementById("message-box");
     var msgBoxTextarea = document.getElementById("message-box-textarea");
@@ -365,6 +391,7 @@ function OpenMessageBox(toOpen) {
     }
 }
 
+// Close message box
 function CloseMessageBox() {
     var msgBox = document.getElementById("message-box");
     var screenDarken = document.getElementById("screen-darken");
@@ -372,10 +399,14 @@ function CloseMessageBox() {
     screenDarken.style.display = "none";
 }
 
+
+// Talks with API to open or close business
 function ToggleBusinessOperations() {
     var toOpen = document.getElementById("message-box-open") != null;
     var locationDescription = document.getElementById("message-box-textarea").value;
     
+    // get geolocation, then post geolocation and area description
+    // once confirmed, reload page
     if (toOpen) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((geopos) => {
@@ -392,10 +423,11 @@ function ToggleBusinessOperations() {
                 .catch((err) => {
                     console.log(err);
                 })
-                sessionStorage.setItem('isopen', 'true');
+                localStorage.setItem('isopen', 'true');
             })
         }
-        
+    
+    // post close request and reload page
     } else {
         axios.post('https://info30005-vendor-backend.herokuapp.com/api/vendor/close')
         .then((res) => {
@@ -407,13 +439,14 @@ function ToggleBusinessOperations() {
         .catch((err) => {
             console.log(err);
         })
-        sessionStorage.setItem('isopen', 'false');
+        localStorage.setItem('isopen', 'false');
     }
     CloseMessageBox();
 
 }
 
 
+// Creates post request to update location
 function ChangeLocation() {
     var newLocation = document.getElementById("new-location-text").value;
     if (navigator.geolocation) {
@@ -428,11 +461,9 @@ function ChangeLocation() {
             .catch((err) => {
                 console.log(err);
             })
-            sessionStorage.setItem('isopen', 'true');
+            localStorage.setItem('isopen', 'true');
         })
     }
 }
-
-
 
 export default DashBoard

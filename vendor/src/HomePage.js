@@ -12,18 +12,23 @@ import axios from "axios";
 
 const date_formatter = new Intl.DateTimeFormat('en-au', { month: 'long', day: 'numeric', year: 'numeric'})
 
+
+// Entry point for main page of site
 function HomePage(props) {
+
+  // get vendor data to personalise page
   let [vendorData, setVendorData] = useState([]);
 
   useEffect(() => {
     axios.get('https://info30005-vendor-backend.herokuapp.com/api/vendor/vendorData')
     .then((res) => {
       setVendorData(res.data);
-      sessionStorage.setItem('vendor-data', JSON.stringify(res.data));
+      localStorage.setItem('vendor-data', JSON.stringify(res.data));
     })
   }, []);
 
-  const token = sessionStorage.getItem('token');
+  // redirect to login if no token (not logged in)
+  const token = localStorage.getItem('token');
   if (!token) {
     return (
       <Redirect to="/login" />
@@ -79,7 +84,7 @@ function HomePage(props) {
 
 export default HomePage;
 
-
+// Handles tab change when a list item is clicked
 function ChangeTab(tabName) {
   var contentContainer = document.getElementById("content-container")
   var children = contentContainer.children
@@ -97,6 +102,8 @@ function ChangeTab(tabName) {
   document.getElementById(tabName+'-list-item').style['font-weight'] = '700'
 }
 
+
+// Log out
 function LogOut() {
-  sessionStorage.clear()
+  localStorage.clear()
 }

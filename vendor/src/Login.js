@@ -5,6 +5,8 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 
+
+// Entry for login page
 function LoginPage(props) {
   const [vendor_id, setVendorID] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +14,7 @@ function LoginPage(props) {
   const [failed, setFailed] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
-  const token = sessionStorage.getItem('token');
+  const token = localStorage.getItem('token');
   if (token) {
     return (
       <Redirect to="/" />
@@ -23,10 +25,12 @@ function LoginPage(props) {
     return vendor_id.length > 0 && password.length > 0;
   }
 
+  // handle login submit
   function handleSubmit(event) {
     event.preventDefault();
     setDisabled(true);
     let postData = { name: vendor_id, password };
+
     axios
       .post(
         `https://info30005-vendor-backend.herokuapp.com/api/vendor/login`,
@@ -34,7 +38,8 @@ function LoginPage(props) {
       )
       .then((res) => {
         // Set global auth token for whenever an axios request is sent
-        sessionStorage.setItem('token', res.data.token);
+        localStorage.setItem('token', res.data.token);
+        window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
         setRedirectHome(true);
       })
       .catch((err) => {
