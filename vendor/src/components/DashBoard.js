@@ -186,7 +186,7 @@ function DisplayOrderData( { orderID } ) {
                 ))}
                 <div className="order-details-total">
                     <div>Total:</div>
-                    <div>$0</div>
+                    <div>${orderData.totalPrice}</div>
                 </div>
                 {GetBottomButtons(orderData.status, {orderID})}
             </div>
@@ -202,15 +202,26 @@ function GetBottomButtons( orderStatus, {orderID} ) {
     console.log(orderStatus);
     if (orderStatus === "Preparing") {
         return (
-            <div id={"order-details-ready-cancel-"+orderID}>
-                <div className="order-details-ready" onClick={(e) => FulfillOrder({orderID}, e)}>Ready for Pick-up</div>
-                <div className="order-details-cancel" onClick={(e) => CancelOrder({orderID}, e)}>Cancel & Refund</div>
+            <div>
+                <div id={"order-details-ready-cancel-"+orderID}>
+                    <div className="order-details-ready" onClick={(e) => FulfillOrder({orderID}, e)}>Ready for Pick-up</div>
+                    <div className="order-details-cancel" onClick={(e) => CancelOrder({orderID}, e)}>Cancel & Refund</div>
+                </div>
+                <div id={"order-details-complete-"+orderID} style={{display: 'none'}}>
+                    <div className="order-details-complete" onClick={(e) => CompleteOrder({orderID}, e)}>Order Picked Up</div>
+                </div>
             </div>
         )
     } else if (orderStatus === "Ready for pickup") {
         return (
-            <div id={"order-details-complete-"+orderID}>
-                <div className="order-details-complete" onClick={(e) => CompleteOrder({orderID}, e)}>Order Picked Up</div>
+            <div>
+                <div id={"order-details-ready-cancel-"+orderID} style={{display: 'none'}}>
+                    <div className="order-details-ready" onClick={(e) => FulfillOrder({orderID}, e)}>Ready for Pick-up</div>
+                    <div className="order-details-cancel" onClick={(e) => CancelOrder({orderID}, e)}>Cancel & Refund</div>
+                </div>
+                <div id={"order-details-complete-"+orderID}>
+                    <div className="order-details-complete" onClick={(e) => CompleteOrder({orderID}, e)}>Order Picked Up</div>
+                </div>
             </div>
         )
     }
@@ -230,6 +241,8 @@ function CompleteOrder( { orderID }, e) {
     }
 
     document.getElementById("order-"+orderID).style.display = "none";
+
+    axios.post('https://info30005-vendor-backend.herokuapp.com/api/vendor/orderPickup', {order: orderID});
 }
 
 function CancelOrder( { orderID }, e ) {
@@ -247,7 +260,7 @@ function CancelOrder( { orderID }, e ) {
 
     document.getElementById("order-"+orderID).style.display = "none";
 
-    //axios.post('https://info30005-vendor-backend.herokuapp.com/api/vendor/fulfillOrder/'+orderID);
+    axios.post('https://info30005-vendor-backend.herokuapp.com/api/vendor/cancelOrder', {order: orderID});
 }
 
 function FulfillOrder( {orderID}, e ) {
@@ -264,6 +277,7 @@ function FulfillOrder( {orderID}, e ) {
     }
 
     document.getElementById("order-details-ready-cancel-"+orderID).style.display = "none";
+    document.getElementById("order-details-complete-"+orderID).style.display = "block";
 
     axios.post('https://info30005-vendor-backend.herokuapp.com/api/vendor/fulfillOrder', {order: orderID});
 }
