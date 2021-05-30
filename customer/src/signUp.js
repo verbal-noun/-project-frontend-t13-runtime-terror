@@ -37,7 +37,7 @@ function SignUp(props) {
         setDisabled(false);
       })
       .catch((err) => {
-        setError(err.message);
+        setError(err.response.data);
         setDisabled(false);
       });
   }
