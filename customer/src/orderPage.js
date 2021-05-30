@@ -25,16 +25,17 @@ function OrderPage(props) {
   let [menuRedirect, setMenuRedirect] = useState(false);
   let [cancelRedirect, setCancelRedirect] = useState(false);
   let [successfulOrder, setSuccess] = useState(null);
+  let orderSum = 0;
 
   useEffect(() => {
     if (!orderData) {
       return;
     }
-    let sum = 0;
+
     for (let orderItem of orderData.order) {
-      sum += orderItem.price * orderItem.quantity;
+      orderSum += orderItem.price * orderItem.quantity;
     }
-    setTotal(sum);
+    setTotal(orderSum);
   }, []);
 
   let submitOrder = () => {
@@ -45,9 +46,10 @@ function OrderPage(props) {
         quantity: orderItem.quantity,
       });
     }
-    if(orderData.orderID) {
+    if (orderData.orderID) {
       // Update the existing order
       postData.orderID = orderData.orderID;
+      postData.totalPrice = orderSum;
       axios
         .put(
           "https://info30005-customer-backend.herokuapp.com/api/customer/changeOrder",
@@ -61,8 +63,7 @@ function OrderPage(props) {
           setLoginRedirect(true);
           console.log(err.message);
         });
-    }
-    else {
+    } else {
       // Post the new order
       axios
         .post(
@@ -102,7 +103,7 @@ function OrderPage(props) {
   }
   if (successfulOrder) {
     // TODO: Redirect to order watch page
-    return <Redirect to="/orders"/>;
+    return <Redirect to="/orders" />;
   }
   return (
     <div className="orderpage">
