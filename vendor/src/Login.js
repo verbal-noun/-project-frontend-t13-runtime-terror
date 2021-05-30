@@ -45,7 +45,7 @@ function LoginPage(props) {
       <div className="left">
       <img className="logo-image" src="https://i.imgur.com/kiMFyeA.png" />
       <div className="header">
-        <h2 className="animation a1">Welcome!</h2>
+        <h2 className="animation a1"> Welcome!</h2>
         <h4 className="animation a2"> Log in to your account with your vendor ID and password.</h4>
       </div>
       <Form className="form" onSubmit={handleSubmit}>

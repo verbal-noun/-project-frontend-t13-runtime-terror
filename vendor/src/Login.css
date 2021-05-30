@@ -1,7 +1,7 @@
 * { box-sizing: border-box; }
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap');
 @media all and (min-width: 480px) {
-  
+
   .Login {
     /*background: linear-gradient(#86efc3, #f3f3f3);*/
     display:flex;
@@ -46,14 +46,14 @@
     margin: 0;
     color: #eee;
   }
-  
+
   .header > h4 {
     margin-top: 20px;
     font-weight: normal;
     font-size: 15px;
     color: rgba(255,255,255,.7);
   }
-  
+
   .form {
     max-width: 80%;
     display: flex;
@@ -68,12 +68,12 @@
   .form > p {
     text-align: right;
   }
-  
+
   .form > p > a {
     color: #ccc;
     font-size: 14px;
   }
-  
+
   .form-field {
     height: 46px;
     padding: 0 16px;
@@ -85,11 +85,11 @@
     margin-top: 20px;
     width: 100%;
   }
-  
+
   .form-field:focus {
     border-color: #0f7ef1;
   }
-  
+
 
   .form > button {
     padding: 12px 10px;
@@ -116,58 +116,58 @@
     cursor: default;
   }
 
-  
+
   .animation {
     animation-name: move;
     animation-duration: .4s;
     animation-fill-mode: both;
     animation-delay: 2s;
   }
-  
+
   .a1 {
     animation-delay: 2s;
   }
-  
+
   .a2 {
     animation-delay: 2.1s;
   }
-  
+
   .a3 {
     animation-delay: 2.2s;
   }
-  
+
   .a4 {
     animation-delay: 2.3s;
   }
-  
+
   .a5 {
     animation-delay: 2.4s;
   }
-  
+
   .a6 {
     animation-delay: 2.5s;
   }
-  
+
   @keyframes move {
     0% {
       opacity: 0;
       visibility: hidden;
       transform: translateY(-40px);
     }
-  
+
     100% {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
     }
   }
-  
+
   @keyframes left {
     0% {
       opacity: 0;
       width: 0;
     }
-  
+
     100% {
       opacity: 1;
       padding: 20px 40px;
@@ -188,7 +188,6 @@
 
   .form-name{
     margin-top: 50px;
-    
   }
 
   .logo-image{
