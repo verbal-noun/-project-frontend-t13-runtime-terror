@@ -4,7 +4,6 @@ import './HomePage.css';
 import foodLogo from './assets/food_logo.png'
 import profileImage from './assets/profile_image.png'
 import calendarIcon from './assets/calendar_icon.png'
-import { Link, Redirect } from "react-router-dom";
 
 import DashBoard from './components/DashBoard'
 import MenuList from './components/MenuList'

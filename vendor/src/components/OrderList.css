@@ -11,7 +11,7 @@
 }
 
 .all-orders-list .orders-tab-item:nth-of-type(odd) {
-    background-color: rgb(202, 247, 221);
+    background-color: rgb(221, 255, 235);
 }
 
 .orders-tab-item {
