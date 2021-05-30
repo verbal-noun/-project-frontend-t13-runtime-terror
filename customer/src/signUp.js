@@ -6,34 +6,43 @@ import axios from "axios";
 import "./signUp.css";
 
 function SignUp(props) {
-  
-  const [name, setName] = useState("");
+  const [givenname, setGivenName] = useState("");
+  const [familyname, setFamilyName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [redirectHome, setRedirectHome] = useState(false);
+  const [redirectLogin, setRedirectLogin] = useState(false);
+  const [error, setError] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   function validateForm() {
-    return (email.length > 0 || (password.length > 0 && password == passwordConfirm)) ;
+    return (
+      givenname.length > 0  && 
+      familyname.length > 0 &&
+      email.length > 0      && 
+      password.length > 0
+    );
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    
+    setDisabled(true);
+    let postData = {givenname, familyname, email, password};
     axios
       .post(
-        `https://info30005-customer-backend.herokuapp.com/api/customer/update`
-        
+        `https://info30005-customer-backend.herokuapp.com/api/customer/register`,
+        postData
       )
       .then((res) => {
-        setRedirectHome(true);
+        setRedirectLogin(true);
+        setDisabled(false);
       })
       .catch((err) => {
-        console.log(err.message);
+        setError(err.message);
+        setDisabled(false);
       });
   }
 
-  if (redirectHome) {
+  if (redirectLogin) {
     return <Redirect to="/login" />;
   }
   return (
@@ -47,16 +56,6 @@ function SignUp(props) {
       <Form className="form" onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="text">
           <Form.Label className="form-name" ></Form.Label>
-          <Form.Control className="form-field animation a3" placeholder="Full Name"
-            autoFocus
-            type="text"
-            value={name}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
-        
-        <Form.Group size="lg" controlId="text">
-          <Form.Label className="form-name" ></Form.Label>
           <Form.Control className="form-field animation a3" placeholder="Email"
             autoFocus
             type="text"
@@ -64,6 +63,27 @@ function SignUp(props) {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
+        
+        <Form.Group size="lg" controlId="text">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a3" placeholder="Given Name"
+            autoFocus
+            type="text"
+            value={givenname}
+            onChange={(e) => setGivenName(e.target.value)}
+          />
+        </Form.Group>
+        
+        <Form.Group size="lg" controlId="text">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a3" placeholder="Family Name"
+            autoFocus
+            type="text"
+            value={familyname}
+            onChange={(e) => setFamilyName(e.target.value)}
+          />
+        </Form.Group>
+
         <Form.Group size="lg" controlId="password">
           <Form.Label className="form-name" ></Form.Label>
           <Form.Control className="form-field animation a4" placeholder="Password"
@@ -72,22 +92,15 @@ function SignUp(props) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Form.Group size="lg" controlId="confirmPassword">
-          <Form.Label className="form-name" ></Form.Label>
-          <Form.Control className="form-field animation a4" placeholder="Confirm Password"
-            type="password"
-            value={passwordConfirm}
-            onChange={(e) => setPasswordConfirm(e.target.value)}
-          />
-        </Form.Group>
         
-        <p className="animation a5"><a href="#">Forgot Password</a></p>
+        {error.length ? <p className="error">{error}</p> : null}
+        <p className="animation a5">Already have an account? <a href="#" onClick={setRedirectLogin}>Login</a></p>
         <Button
           className="button"
           block
           size="lg"
           type="submit"
-          disabled={!validateForm()}
+          disabled={!validateForm() || disabled}
         >
           Save
         </Button>
