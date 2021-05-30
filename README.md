@@ -1,5 +1,5 @@
 # Runtime Terror Front-end Repository
-## INFO30005 Deliverable 3 - Frontend + Backend (Customer App)
+## INFO30005 Deliverable 4 - Web Application
 
 ## Team: Runtime Terror
 
@@ -86,28 +86,49 @@ To run the vendor website type:
 | Test-Vendor | 1234567E |
 | Hannah      | 1234     |
 
-### Example Screenshots of various pages
+### Screenshots of customer website pages
 
-**Home Page**: Lists nearest 5 vans and displays those on Google map. If the customer doesn't share location then Homepage will show the default page overlooking Melbourne CBD. Logged-in view will display the button to view orders.
 * Home Page (Default/not logged in)
-    <img src="resources/homepagedefault.png" alt="Find a van page. Nearest 5 vans listed and displayed on the map">
+    <img src="resources/customer/homepage.png" alt="Find a van page. Nearest 5 vans listed and displayed on the map">
+
 * Home Page (Logged in)
-    <img src="resources/hopmepageloggedin.png" alt="Find a van page. Nearest 5 vans listed and displayed on the map">
+    <img src="resources/customer/homepage2.png" alt="Find a van page. Nearest 5 vans listed and displayed on the map">
+
+* Login Page
+    <img src="resources/customer/loginpage.png" alt="Van Page">
+
+* Login Page for invalid credentials
+    <img src="resources/customer/logininvalid.png" alt="Order Status Page">
+
+* Edit Profile Page
+    <img src="resources/customer/editProfile.png" alt="Van Page">
+
+* Van Page (Where food items are displayed)
+    <img src="resources/customer/vanpage.png" alt="Van Page">
+
+* Order History Page
+    <img src="resources/customer/orderHistory.png" alt="Order Status Page">
+
+* Order Status Page
+    <img src="resources/customer/orderstatus.png" alt="Order Status Page">
+
+* Order Status Page
+    <img src="resources/customer/ratings.png" alt="Order Status Page">
 
 
-**Van Page**: Clicking a van from the home page will redirect to Van page where a customer can see the menu and add to to order.
--   <img src="resources/vanpage.png" alt="Van Page">
+### Screenshots of vendor website pages
 
-**Order Status Page**: Order status page shows the items ordered and the total payable amount.
-- <img src="resources/orderstatus.png" alt="Order Status Page">
+* Login Page
+    <img src="resources/vendor/login.png" alt="Van Page">
 
+* Vendor Dashboard Page
+    <img src="resources/vendor/dashb.png" alt="Van Page">
 
+* Order Management Page
+    <img src="resources/vendor/order.png" alt="Van Page">
 
-
-
-
-
-
+* Vendor Menu Page
+    <img src="resources/vendor/final.png" alt="Van Page">
 
 
 ### Other Information:
