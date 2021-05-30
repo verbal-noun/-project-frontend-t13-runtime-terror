@@ -25,14 +25,14 @@ function OrderPage(props) {
   let [menuRedirect, setMenuRedirect] = useState(false);
   let [cancelRedirect, setCancelRedirect] = useState(false);
   let [successfulOrder, setSuccess] = useState(null);
-  let orderSum = 0;
+  let [orderSum, setOrderSum] = useState(0);
 
   useEffect(() => {
     if (!orderData) {
       return;
     }
     for (let orderItem of orderData.order) {
-      orderSum += orderItem.price * orderItem.quantity;
+      setOrderSum((orderSum += orderItem.price * orderItem.quantity));
     }
     setTotal(orderSum);
   }, []);
@@ -67,6 +67,7 @@ function OrderPage(props) {
         });
     } else {
       // Post the new order
+      console.log(postData);
       axios
         .post(
           "https://info30005-customer-backend.herokuapp.com/api/customer/order",
