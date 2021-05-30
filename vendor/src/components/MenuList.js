@@ -28,7 +28,7 @@ function MenuList(props) {
     return (
         <div className='menu-container'>
             <h1>Menu Items</h1>
-            {items.map((item) => <ItemCard item={item}/>)}
+            {items.map((item) => <ItemCard key={item._id} item={item}/>)}
         </div>
     )
 }

@@ -42,7 +42,7 @@ function OpenCloseItem() {
                     <p>Would you like to open now?</p>
                 </div>
                 <div className="button-toggle-operations" onClick={() => OpenMessageBox(true)}>
-                    <h3>Open for business</h3>
+                    <h3>Open Truck</h3>
                 </div>
             </div>
         )
@@ -56,7 +56,7 @@ function OpenCloseItem() {
                     <div className="submit-button" onClick={() => ChangeLocation()}>Submit</div>
                 </div>
                 <div className="button-toggle-operations" onClick={() => OpenMessageBox(false)}>
-                    <h3>Close for the day</h3>
+                    <h3>Close Truck</h3>
                 </div>
             </div>
         )

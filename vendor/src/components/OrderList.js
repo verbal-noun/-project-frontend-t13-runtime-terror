@@ -42,7 +42,9 @@ function DisplayOrders() {
     
     return (
         <div className="all-orders-list">
-            {orders.map((order) => (
+            {orders
+                .sort((o1, o2) => (new Date(o2.createdAt) - new Date(o1.createdAt)))
+                .map((order) => (
                 <OrderDetailsCard
                 key={order._id}
                 orderID={order._id}
