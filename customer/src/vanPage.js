@@ -95,6 +95,9 @@ function VanPage(props) {
   if (!data) {
     return <Redirect to="/" />;
   }
+  if(!localStorage.getItem('token')) {
+    return <Redirect to="/login" />;
+  }
 
   // Functions to update the order items
   let addOrder = (itemObj) => {
