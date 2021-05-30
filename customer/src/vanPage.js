@@ -3,6 +3,9 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import "./vanPage.css";
 import redTruck from "./assets/redTruck.png";
+import EditUser from "./editUser";
+
+import dashboard from "./assets/dashboard-button.png";
 
 function ItemCard(props) {
   return (
@@ -35,6 +38,7 @@ function VanPage(props) {
   let [order, setOrder] = useState([]);
   let [checkout, gotoCheckout] = useState(false);
   let [back, goBack] = useState(false);
+  let [goToEditUser, setGoToEditUser] = useState(false);
 
   let data = props.location.state;
   useEffect(() => {
@@ -140,11 +144,20 @@ function VanPage(props) {
   if (back) {
     return <Redirect to="/" />;
   }
+
+  if(goToEditUser) {
+    return <Redirect to="/edit"/>;
+  }
+
   return (
     <div className="vanpage">
+      
       <button className="back-button" onClick={() => goBack(true)}>
         <span className="left-arrow"></span>
       </button>
+      <img  id="dashboard" src={dashboard} onClick={() => setGoToEditUser(true)}/>
+            
+      
       <div className="menu-row">
         <div className="menu-items">
           {items.map((item, index) => (
@@ -182,6 +195,7 @@ function VanPage(props) {
       <button className="order-button" onClick={() => gotoCheckout(true)}>
             Order
       </button>
+      
     </div>
   );
 }
