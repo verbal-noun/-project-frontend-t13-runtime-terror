@@ -227,7 +227,7 @@
   margin-top:50px;
 }
 
-@media (max-width: 900px) 
+@media (max-width: 800px) 
 {
   .menu-row {
     margin-left: 2rem;
@@ -354,7 +354,7 @@
     width: 150px;
     height: 50px;
     border-radius: 25%/75%;
-    margin-left:65%;
+    margin-left:50%;
     margin-bottom: 5%;
     background-color: #fdfdfd;
     color: rgb(5, 63, 41);
