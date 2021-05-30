@@ -150,6 +150,10 @@
     }
   }
 
+  .error {
+    color: red;
+  }
+
   .button {
     width: 196px;
     height: 40px;
@@ -159,6 +163,11 @@
 
     background: #047e61;
     border-radius: 40px;
+  }
+
+  .button:disabled {
+    color: rgb(194, 194, 194);
+    background: #4e4e4e;
   }
 
   .form-name{
