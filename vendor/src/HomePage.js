@@ -4,31 +4,40 @@ import './HomePage.css';
 import foodLogo from './assets/food_logo.png'
 import profileImage from './assets/profile_image.png'
 import calendarIcon from './assets/calendar_icon.png'
+import { Link, Redirect } from "react-router-dom";
 
 import DashBoard from './components/DashBoard'
 import MenuList from './components/MenuList'
 import OrderList from './components/OrderList'
+import axios from "axios";
 
 const date_formatter = new Intl.DateTimeFormat('en-au', { month: 'long', day: 'numeric', year: 'numeric'})
 
-
-
 function HomePage(props) {
-  let [redirectHome, setRedirectHome] = useState(false);
+  let [vendorData, setVendorData] = useState([]);
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    setRedirectHome(true);
-  };
+  useEffect(() => {
+    axios.get('https://info30005-vendor-backend.herokuapp.com/api/vendor/vendorData')
+    .then((res) => {
+      setVendorData(res.data);
+      sessionStorage.setItem('vendor-data', JSON.stringify(res.data));
+    })
+  }, []);
 
-  let isLoggedIn = localStorage.getItem('token');
-  if(!isLoggedIn || redirectHome) {
-    return <Redirect to="/login"/>;
+  const token = sessionStorage.getItem('token');
+  if (!token) {
+    return (
+      <Redirect to="/login" />
+    )
+
   }
   return (
     <div className='container'>
       <div className="header-main">
         <img id="logo-main" src = {foodLogo} />
+        <div className="header-vendor-name">
+          <h3>Hello, {vendorData.name}!</h3>
+        </div>
         <div className="header-date">
           <img id="calendar-icon" src = {calendarIcon} />
           <p>
@@ -46,15 +55,16 @@ function HomePage(props) {
             <span id='dashboard-list-item'>Dashboard</span>
           </li>
           <li onClick={() => ChangeTab('order-list')}>
-          <span id='order-list-list-item'>Orders</span>
+            <span id='order-list-list-item'>Orders</span>
           </li>
           <li onClick={() => ChangeTab('menu')}>
-          <span id='menu-list-item'>Menu</span>
+
+            <span id='menu-list-item'>Menu</span>
           </li>
         </ul>
-        <span id='nav-log-out' onClick={logout}>
+        <a href="/login" onClick={() => LogOut()} id='nav-log-out'>
           Log Out
-        </span>
+        </a>
       </div>
 
       <div id='content-container'>
@@ -62,6 +72,8 @@ function HomePage(props) {
         <div id ='order-list'><OrderList /></div>
         <div id ='menu'><MenuList /></div>
       </div>
+
+      <div id="screen-darken"></div>
     </div>
   );
 }
@@ -83,6 +95,9 @@ function ChangeTab(tabName) {
   }
 
   document.getElementById(tabName).style.display = 'block'
-  console.log(tabName+'-list-item')
   document.getElementById(tabName+'-list-item').style['font-weight'] = '700'
+}
+
+function LogOut() {
+  sessionStorage.clear()
 }

@@ -1,0 +1,63 @@
+.all-orders-list {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 5px 5px #ddd;
+    border-radius: 20px;
+    background-color: #fff;
+}
+
+.all-orders-list h4 {
+    margin: 0;
+}
+
+.all-orders-list .orders-tab-item:nth-of-type(odd) {
+    background-color: rgb(202, 247, 221);
+}
+
+.orders-tab-item {
+    box-shadow: 0px 5px 5px #ddd;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.order-tab-item-card {
+    width: 100%;
+}
+
+.order-tab-item-card > div {
+    width: 33%;
+    display: inline-block;
+    height: 20px;
+    vertical-align: middle;
+    font-size: 16px;
+}
+
+.order-tab-item-card-name {
+    width: 40% !important;
+}
+
+.orders-tab-order-title {
+    font-size: 24px;
+    text-align: center;
+}
+
+.orders-tab-attribute-names {
+    width: 50%;
+    display: inline-block;
+}
+
+.orders-tab-attribute-values {
+    width: 50%;
+    display: inline-block;
+}
+
+.order-total-cost {
+    width: 33%;
+    float: right;
+}
+
+.discount-applied-order {
+    margin-top: 10px;
+    text-align: center;
+}
