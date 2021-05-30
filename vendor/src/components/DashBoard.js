@@ -198,7 +198,7 @@ function DisplayOrderData( { orderID, globals }, timeRemaining ) {
                     <div>Total:</div>
                     <div>${orderData.totalPrice}</div>
                 </div>
-                <div className="discount-applied-message">
+                <div className={"discount-applied-message-"+orderID}>
                     { orderData.status == "Preparing" ? (timeRemaining > 0 ? <p>A {globals[1].amount}% discount will be applied in {timeRemaining} minute(s).</p> 
                     : <p>A {globals[1].amount}% discount has been applied.</p>) : <p></p>}
                 </div>
@@ -287,6 +287,7 @@ function FulfillOrder( {orderID}, e ) {
 
     document.getElementById("order-details-ready-cancel-"+orderID).style.display = "none";
     document.getElementById("order-details-complete-"+orderID).style.display = "block";
+    document.getElementById("discount-applied-message-"+orderID).style.display = "none";
 
     axios.post('https://info30005-vendor-backend.herokuapp.com/api/vendor/fulfillOrder', {order: orderID});
 }
