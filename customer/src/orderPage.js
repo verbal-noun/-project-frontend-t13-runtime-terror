@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import "./orderPage.css";
 
+
+// Function to order food/drinks from the order page
 function OrderItem(props) {
   return (
     <div className="shopping-cart">
@@ -18,6 +20,7 @@ function OrderItem(props) {
   );
 }
 
+// Primary codebase for the functional orderpage
 function OrderPage(props) {
   let orderData = props.location.state;
   let [total, setTotal] = useState(0);

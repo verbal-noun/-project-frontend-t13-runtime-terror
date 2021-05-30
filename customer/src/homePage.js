@@ -7,7 +7,7 @@ import redTruck from "./assets/redTruck.png";
 import CustomGoogleMap from './CustomGoogleMap';
 
 
-//home page display jsx part to display components
+// Function to make a react component to display the trucks
 function TruckCard(props) {
   return (
     <div className="truck-card-base" onClick={props.onClick}>
@@ -29,6 +29,7 @@ function TruckCard(props) {
   );
 }
 
+// Function to render the homepage properties
 function HomePage(props) {
   let [coords, setCoords] = useState({longitude: 144.9605765, latitude: -37.8102361});
   let [trucks, loadTrucks] = useState([]);
@@ -49,7 +50,7 @@ function HomePage(props) {
       });
     }
     else {
-      // Melbourne Central Default
+      // Melbourne CBD Default
       axios.get(`https://info30005-customer-backend.herokuapp.com/api/customer/nearby/${coords.longitude},${coords.latitude}`)
         .then((res) => {
           loadTrucks(res.data);
@@ -66,7 +67,7 @@ function HomePage(props) {
       setButtonRedirect("/login");
     }
   }
-  
+
   // Visit a vendor page
   if (selectedID) {
     return <Redirect to={{ pathname: `/van`, state: { selectedID } }} />;
@@ -77,9 +78,9 @@ function HomePage(props) {
   return (
     <div className="homepage">
       <div className="truck-card-list">
-        
+
           <h1 className="logo">Find A Van</h1>
-       
+
         {trucks.map((truck, index) => {
           if (truck.open) {
             return (

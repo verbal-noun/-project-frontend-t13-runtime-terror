@@ -7,9 +7,9 @@ import greenTick from "./assets/greenTick.png";
 import { ProgressBar } from "react-bootstrap";
 
 
+// Function to display the order confirmation page
 function OrderStatus(props) {
   let [redirect, setRedirect] = useState(null);
-   
 
   if(redirect) {
     console.log(redirect);
@@ -25,9 +25,8 @@ function OrderStatus(props) {
       />
       <h1 className="confirm-text">Thanks For Your Order!</h1>
       <h2 className="rating-text">How would you rate your interaction us?</h2>
-      
-      
-        
+
+
       <div class="rate">
         <input type="radio" id="star5" name="rate" value="5" />
         <label for="star5" title="text">5 stars</label>
@@ -45,9 +44,7 @@ function OrderStatus(props) {
           title="Home"
           color="#047E61"
         >Submit</Button>
-        
-        
-       
+
     </div>
   );
 }

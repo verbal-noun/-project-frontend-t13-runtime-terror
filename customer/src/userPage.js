@@ -4,8 +4,9 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import "./userPage.css";
 
-function elapsed(since) {
 
+// Function that shows th elapsed time since a order was created
+function elapsed(since) {
   // order time calculation
   let now = new Date();
   let diff = now - since;
@@ -17,12 +18,12 @@ function elapsed(since) {
     else return `${hours} hour ago`;
   }
   else if(seconds >= 60) {
-    let minutes = Math.round(seconds / 60); 
+    let minutes = Math.round(seconds / 60);
     if(minutes == 1) return `${minutes} minute ago`;
     else return `${minutes} minutes ago`;
   }
   else {
-    return `${seconds} seconds ago`; 
+    return `${seconds} seconds ago`;
   }
 }
 
