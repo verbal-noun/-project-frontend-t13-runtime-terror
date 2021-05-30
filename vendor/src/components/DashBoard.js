@@ -208,7 +208,7 @@ function DisplayOrderData( { orderID, globals }, timeRemaining ) {
                     <div>Total:</div>
                     <div>${orderData.totalPrice}</div>
                 </div>
-                <div id={"discount-applied-message-"+orderID}>
+                <div id={"discount-applied-message-"+orderID} className="discount-applied-message">
                     { orderData.status == "Preparing" ? (timeRemaining > 0 ? <p>A {globals[1].amount}% discount will be applied in {timeRemaining} minute(s).</p> 
                     : <p>A {globals[1].amount}% discount has been applied.</p>) : <p></p>}
                 </div>
