@@ -34,7 +34,7 @@ function OrderCard(props) {
           <span className="order-header">{props.order.vendorName} is creating your order!</span>
           <div className="order-status">{props.order.status}</div>
         </div><br/>
-        <Button className="button" onClick={props.setSelected}>View Details</Button>
+        <Button className="button" id="details" onClick={props.setSelected}>View Details</Button>
 
         <div className="order-time">{elapsed(props.order.createdWhen)+" "}</div>
     </div>

@@ -33,14 +33,16 @@
   }
 
   .header > h2 {
-    margin: 0;
+    padding-left: 27%;
     color: #07662e;
+
   }
   
   .header > h4 {
     margin-top: 10px;
     font-weight: normal;
     font-size: 15px;
+    
     color: rgba(0,0,0,.4);
   }
   

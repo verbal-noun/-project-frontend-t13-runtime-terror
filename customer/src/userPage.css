@@ -52,7 +52,8 @@
 .button{
   margin-bottom: 10%;
   margin-right: 60%;
-
+  background: linear-gradient(to right, #034b07 0%,#b40707 100%); 
+    
 }
 
 
@@ -81,10 +82,39 @@
 
   #home{
     margin-left:40%;
+    font-size: 20px;
+    background: linear-gradient(to right, #034b07 0%,#b40707 100%); 
+    border-radius: 3px;
+    margin-top: 10px;
+    color: #fff;
+    border:0;
+    letter-spacing: 1px;
+    font-family: 'Rubik', sans-serif;
+    
   }
 
   #logout{
     margin-left:40%;
+    margin-bottom: 2%;
+    font-size: 20px;
+    margin-top:-10%;
+    background: linear-gradient(to right, #034b07 0%,#b40707 100%); 
+    border-radius: 3px;
+    margin-top: 10px;
+    border:0;
+    color: #fff;
+    letter-spacing: 1px;
+    font-family: 'Rubik', sans-serif;
+  }
+
+  #details{
+    background: linear-gradient(to right, #034b07 0%,#b40707 100%); 
+    border-radius: 3px;
+    margin-top: 10px;
+    color: #fff;
+    border: 0;
+    letter-spacing: 1px;
+    font-family: 'Rubik', sans-serif;
   }
 
  
