@@ -1,132 +1,102 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import { useHistory } from "react-router-dom";
-import { useAppContext } from "../libs/contextLib";
-import { useFormFields } from "../libs/hooksLib";
-import { Redirect } from "react-router-dom";
+import { Form } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
-//import { onError } from "../libs/errorLib";
 import "./signUp.css";
 
-function SignupPage() {
-  const [fields, handleFieldChange] = useFormFields({
-    fullName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    confirmationCode: "",
-  });
-
-  const history = useHistory();
-  const [newUser, setNewUser] = useState(null);
-  const { userHasAuthenticated } = useAppContext();
-  const [isLoading, setIsLoading] = useState(false);
+function SignUp(props) {
+  
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [redirectHome, setRedirectHome] = useState(false);
 
   function validateForm() {
-    return (
-      fields.fullName.length > 0 &&
-      fields.email.length > 0 &&
-      fields.password.length > 0 &&
-      fields.password === fields.confirmPassword
-    );
+    return (email.length > 0 || (password.length > 0 && password == passwordConfirm)) ;
   }
 
-  function validateConfirmationForm() {
-    return fields.confirmationCode.length > 0;
-  }
-
-  async function handleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
-
-    setIsLoading(true);
-
-    setNewUser("test");
-
-    setIsLoading(false);
+    
+    axios
+      .post(
+        `https://info30005-customer-backend.herokuapp.com/api/customer/update`
+        
+      )
+      .then((res) => {
+        setRedirectHome(true);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }
 
-  async function handleConfirmationSubmit(event) {
-    event.preventDefault();
-
-    setIsLoading(true);
+  if (redirectHome) {
+    return <Redirect to="/login" />;
   }
-
-  function renderConfirmationForm() {
-    return (
-      <Form onSubmit={handleConfirmationSubmit}>
-        <Form.Group controlId="confirmationCode" size="lg">
-          <Form.Label>Confirmation Code</Form.Label>
-          <Form.Control
+  return (
+    <div className="Login">
+      <div className="left">
+      <img className="logo-image" src="https://i.imgur.com/kiMFyeA.png" />
+      <div className="header">
+        
+        <h4 className="animation a2"> Create a New Account</h4>
+      </div>
+      <Form className="form" onSubmit={handleSubmit}>
+        <Form.Group size="lg" controlId="text">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a3" placeholder="Full Name"
             autoFocus
-            type="tel"
-            onChange={handleFieldChange}
-            value={fields.confirmationCode}
+            type="text"
+            value={name}
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <Form.Text muted>
-            Please check your email for the confirmation code.
-          </Form.Text>
         </Form.Group>
-        <LoaderButton
+        
+        <Form.Group size="lg" controlId="text">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a3" placeholder="Email"
+            autoFocus
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group size="lg" controlId="password">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a4" placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group size="lg" controlId="confirmPassword">
+          <Form.Label className="form-name" ></Form.Label>
+          <Form.Control className="form-field animation a4" placeholder="Confirm Password"
+            type="password"
+            value={passwordConfirm}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+          />
+        </Form.Group>
+        
+        <p className="animation a5"><a href="#">Forgot Password</a></p>
+        <Button
+          className="button"
           block
           size="lg"
           type="submit"
-          variant="success"
-          isLoading={isLoading}
-          disabled={!validateConfirmationForm()}
-        >
-          Verify
-        </LoaderButton>
-      </Form>
-    );
-  }
-
-  function renderForm() {
-    return (
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="email" size="lg">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            autoFocus
-            type="email"
-            value={fields.email}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="password" size="lg">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={fields.password}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="confirmPassword" size="lg">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            onChange={handleFieldChange}
-            value={fields.confirmPassword}
-          />
-        </Form.Group>
-        <LoaderButton
-          block
-          size="lg"
-          type="submit"
-          variant="success"
-          isLoading={isLoading}
           disabled={!validateForm()}
         >
-          Signup
-        </LoaderButton>
+          Save
+        </Button>
       </Form>
-    );
-  }
-
-  return (
-    <div className="Signup">
-      {newUser === null ? renderForm() : renderConfirmationForm()}
+      </div>
+      <div className="right"></div>
     </div>
+
   );
 }
 
-export default SignupPage;
+export default SignUp;
