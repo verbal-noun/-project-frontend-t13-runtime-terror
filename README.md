@@ -1,9 +1,6 @@
 # Runtime Terror Front-end Repository
 ## INFO30005 Deliverable 3 - Frontend + Backend (Customer App)
 
-
-<br>
-
 ## Team: Runtime Terror
 
 ### Tutor: Xiao Han
@@ -14,13 +11,13 @@
 
 ### Team Members:
 
-| Name     | Student ID | Email                               | Working On |
-| -------- | ---------- | ----------------------------------- | ---------- |
-| Kaif     | 1068214    | kahsan@student.unimelb.edu.au       | Back-end   |
-| Kamyar   | 1068176    | kkarimifakhr@student.unimelb.edu.au | Front-end  |
-| Keith    | 1118943    | kleonardo@student.unimelb.edu.au    | Back-end   |
-| Hasan    | 1118853    | sohi@student.unimelb.edu.au         | Front-end  |
-| Mitchell | 823604     | mneedham@student.unimelb.edu.au     | Back-end   |
+| Name     | Student ID | Email                               |
+| -------- | ---------- | ----------------------------------- |
+| Kaif     | 1068214    | kahsan@student.unimelb.edu.au       |
+| Kamyar   | 1068176    | kkarimifakhr@student.unimelb.edu.au |
+| Keith    | 1118943    | kleonardo@student.unimelb.edu.au    |
+| Hasan    | 1118853    | sohi@student.unimelb.edu.au         |
+| Mitchell | 823604     | mneedham@student.unimelb.edu.au     |
 
 ## Tech Stack
 
@@ -45,12 +42,49 @@ MongoDB connection string:
 | Vendor | https://info30005-vendor-frontend.herokuapp.com/ | https://info30005-vendor-backend.herokuapp.com/ |
 
 
+## How to run the websites
+#### Customer Website
+From the root directory, go to the customer folder:
 
-### Example Login Credentials
-| Email | Password|
-| --- | --- |
-|k@gmail.com|admin123|
-|jsmith@jmail.com|12345|
+        cd customer
+
+Install the required packages:
+
+        npm install
+
+To run the customer website type:
+
+        npm start
+
+
+#### Vendor Website
+From the root directory, go to the vendor folder:
+
+        cd vendor
+
+Install the required packages:
+
+        npm install
+
+To run the vendor website type:
+
+        npm start
+
+## Credentials
+
+#### Customer
+
+| Email           | Password |
+| --------------- | -------- |
+| random@test.com | 1234567e |
+| kamy@elon       | 1234ASDF |
+
+#### Vendor
+
+| Name        | Password |
+| ----------- | -------- |
+| Test-Vendor | 1234567E |
+| Hannah      | 1234     |
 
 ### Example Screenshots of various pages
 
