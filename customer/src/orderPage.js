@@ -31,11 +31,6 @@ function OrderPage(props) {
     if (!orderData) {
       return;
     }
-<<<<<<< HEAD
-    //let sum = 0;
-=======
-
->>>>>>> feature/order-sum
     for (let orderItem of orderData.order) {
       orderSum += orderItem.price * orderItem.quantity;
     }
@@ -43,7 +38,11 @@ function OrderPage(props) {
   }, []);
 
   let submitOrder = () => {
-    let postData = { orderItems: [], vendor: orderData.vendor };
+    let postData = {
+      orderItems: [],
+      vendor: orderData.vendor,
+      totalPrice: orderSum,
+    };
     for (let orderItem of orderData.order) {
       postData.orderItems.push({
         item: orderItem.item,
@@ -53,7 +52,6 @@ function OrderPage(props) {
     if (orderData.orderID) {
       // Update the existing order
       postData.orderID = orderData.orderID;
-      postData.totalPrice = orderSum;
       axios
         .put(
           "https://info30005-customer-backend.herokuapp.com/api/customer/changeOrder",
