@@ -6,6 +6,8 @@ import "./homePage.css";
 import redTruck from "./assets/redTruck.png";
 import CustomGoogleMap from './CustomGoogleMap';
 
+
+//home page display jsx part to display components
 function TruckCard(props) {
   return (
     <div className="truck-card-base" onClick={props.onClick}>
@@ -19,7 +21,7 @@ function TruckCard(props) {
         <span className="truck-card-address">{props.truck.address}</span>
       </div>
       <div className="truck-card-column truck-card-distance-section">
-        <span className="truck-card-distance">
+        <span className="truck-card-distance" id="distance">
           {Math.round(props.truck.distance * 100) / 100} km
         </span>
       </div>

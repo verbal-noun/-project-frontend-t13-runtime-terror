@@ -44,6 +44,8 @@ function LoginPage(props) {
   if (redirectSignup) {
     return <Redirect to="/signup" />;
   }
+  
+  //login page display jsx part to display components
   return (
 
     <div className="Login">
@@ -75,7 +77,7 @@ function LoginPage(props) {
         {error.length ? <p className="error">{error}</p> : null}
         <p className="animation a5">Don't have an account yet? <a href="#" onClick={setRedirectSignup}>Sign up</a></p>
         <Button
-          className="button"
+          className="button-b"
           block
           size="lg"
           type="submit"
