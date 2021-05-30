@@ -77,9 +77,10 @@ function HomePage(props) {
   }
   return (
     <div className="homepage">
+      
       <div className="truck-card-list">
 
-          <h1 className="logo">Find A Van</h1>
+          <h1 className="logo" id="white">Find A Van</h1>
 
         {trucks.map((truck, index) => {
           if (truck.open) {
