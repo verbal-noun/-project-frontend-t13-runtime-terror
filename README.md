@@ -24,23 +24,27 @@
 
 ## Tech Stack
 
-- Front-end
-  - Figma
-  - CSS
-  - React Native
-  - Bootstrap
+| Front-end | Back-end|
+| --------- | ------- |
+| Figma | Node.js|
+| Canva | MongoDB|
+| React.js | MongoDB Atlas |
+| CSS | MongoDB Compass |
+| Bootstrap | Postman |
 
-- Back-end
-  - Node.js
-  - MongoDB
-  - Heruko
+### MongoDB
+MongoDB connection string:
+
+    mongodb+srv://root:testtest@cluster0.iyw6v.mongodb.net/snacksInAVan?retryWrites=true&w=majority
 
 
-### Heruko URL
-Link: https://info30005-customer-frontend.herokuapp.com/
+## Heruko URL
+| App | Front-end | Back-end |
+| --- | --------- | -------- |
+| Customer | https://info30005-customer-frontend.herokuapp.com | https://info30005-customer-backend.herokuapp.com/ |
+| Vendor | https://info30005-vendor-frontend.herokuapp.com/ | https://info30005-vendor-backend.herokuapp.com/ |
 
-### MongoDB 
-MongoDB connection string: mongodb+srv://root:testtest@cluster0.iyw6v.mongodb.net/snacksInAVan?retryWrites=true&w=majority
+
 
 ### Example Login Credentials
 | Email | Password|
