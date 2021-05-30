@@ -28,7 +28,7 @@ axios.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
     if(token) {
-      config.headers.common.Authorization = `Bearer ${token}`;  
+      config.headers.common.Authorization = `Bearer ${token}`;
     }
     return config;
   },
@@ -50,7 +50,7 @@ export default function App() {
         <Route path="/confirm" render={(props) => <OrderConfirm {...props} />} />
         <Route path="/edit" component={EditUser}/>
         <Route path="/" component={HomePage} />
-        
+
       </Switch>
     </Router>
   );

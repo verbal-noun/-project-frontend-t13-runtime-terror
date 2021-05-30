@@ -7,6 +7,7 @@ import EditUser from "./editUser";
 
 import dashboard from "./assets/dashboard-button.png";
 
+// Function to render an item component
 function ItemCard(props) {
   return (
     <div className="item-card-base" onClick={props.onClick}>
@@ -21,6 +22,7 @@ function ItemCard(props) {
   );
 }
 
+// Function to order items
 function OrderItemCard(props) {
   return (
     <div className="order-item-card-base" onClick={props.onClick}>
@@ -31,6 +33,7 @@ function OrderItemCard(props) {
   );
 }
 
+// Function that displays the components of the van page
 function VanPage(props) {
   let [items, loadItems] = useState([]);
   let [vendor, loadVendor] = useState({});
@@ -200,14 +203,12 @@ function VanPage(props) {
               );
             })}
           </div>
-          
         </div>
-        
       </div>
       <button className="order-button" onClick={() => gotoCheckout(true)}>
             Order
       </button>
-      
+
     </div>
   );
 }

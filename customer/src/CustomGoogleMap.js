@@ -7,7 +7,7 @@ import Marker from './components/marker';
 import style from './mapStyles/purple.json'
 
 
-//function for displaying the Google map section in the homepage and siplay the current vendors
+// function for displaying the Google map section in the homepage and siplay the current vendors
 
 
 function CustomGoogleMap({longitude, latitude, className}) {

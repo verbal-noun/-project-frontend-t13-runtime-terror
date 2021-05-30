@@ -5,6 +5,8 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import "./login.css";
 
+
+// Function for displaying the login page where a user gets to login
 function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,10 +15,12 @@ function LoginPage(props) {
   const [error, setError] = useState("");
   const [disabled, setDisabled] = useState(false);
 
+  // Requires a valid credential to login
   function validateForm() {
     return email.length > 0 && password.length > 0;
   }
 
+  // Function that deals with the backend validation
   function handleSubmit(event) {
     event.preventDefault();
     let postData = { email, password };
@@ -44,8 +48,8 @@ function LoginPage(props) {
   if (redirectSignup) {
     return <Redirect to="/signup" />;
   }
-  
-  //login page display jsx part to display components
+
+  // login page display jsx part to display components
   return (
 
     <div className="Login">
