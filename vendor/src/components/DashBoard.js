@@ -82,7 +82,7 @@ function DisplayOrders() {
             <div className="no-orders">You don't currently have any orders</div>
         )
     }
-
+ 
     return (
         <div className="order-list">
             <div className="grid-orders">
@@ -362,6 +362,9 @@ function ToggleBusinessOperations() {
                 axios.post('https://info30005-vendor-backend.herokuapp.com/api/vendor/open', postData)
                 .then((res) => {
                     console.log(res);
+                    setTimeout(function() {
+                        window.location.reload(false);
+                    }, 1000);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -374,6 +377,9 @@ function ToggleBusinessOperations() {
         axios.post('https://info30005-vendor-backend.herokuapp.com/api/vendor/close')
         .then((res) => {
             console.log(res);
+            setTimeout(function() {
+                window.location.reload(false);
+            }, 1000);
         })
         .catch((err) => {
             console.log(err);
@@ -381,9 +387,7 @@ function ToggleBusinessOperations() {
         sessionStorage.setItem('isopen', 'false');
     }
     CloseMessageBox();
-    setTimeout(function() {
-        window.location.reload(false);
-    }, 1000);
+
 }
 
 

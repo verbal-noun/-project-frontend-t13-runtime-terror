@@ -138,7 +138,6 @@
     grid-template-areas: 
         "cust-name time-created time-rem order-status action"
         "expanded-order expanded-order expanded-order expanded-order expanded-order";
-    margin-top: 15px;
 }
 
 .item-order > div {
@@ -371,5 +370,7 @@
 #message-box-cancel:hover {
     background-color: rgb(189, 189, 189);
 }
+
+
 
 
