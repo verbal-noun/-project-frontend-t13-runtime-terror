@@ -7,9 +7,9 @@ function ItemCard(props) {
     let { item } = props;
     return (
         <div className="item-card">
-            <img src={item.photoURL} className="item-card-image"/>
-            <div className="item-card-name">{item.name}</div>
-            <div className="item-card-price">{item.unitPrice}$</div>
+            <div className="item-card-image"><img src={item.photoURL} /></div>
+            <div className="item-card-name"><p>{item.name}</p></div>
+            <div className="item-card-price"><p>${item.unitPrice}</p></div>
         </div>
     );
 }
@@ -27,7 +27,7 @@ function MenuList(props) {
     });
     return (
         <div className='menu-container'>
-            <h1>Item</h1>
+            <h1>Menu Items</h1>
             {items.map((item) => <ItemCard item={item}/>)}
         </div>
     )

@@ -42,6 +42,7 @@ function VanPage(props) {
   let [checkout, gotoCheckout] = useState(false);
   let [back, goBack] = useState(false);
   let [goToEditUser, setGoToEditUser] = useState(false);
+  let [goToLogin, setGoToLogin] = useState(false);
 
   let data = props.location.state;
   useEffect(() => {
@@ -94,16 +95,12 @@ function VanPage(props) {
       });
   }, []);
 
-  // Invalid access
-  if (!data) {
-    return <Redirect to="/" />;
-  }
-  if(!localStorage.getItem('token')) {
-    return <Redirect to="/login" />;
-  }
-
   // Functions to update the order items
   let addOrder = (itemObj) => {
+    if(!localStorage.getItem('token')) {
+      setGoToLogin(true);
+      return;
+    }
     let newOrder = order.slice();
     let found = newOrder.find((orderItem) => orderItem.item == itemObj._id);
     if (!found) {
@@ -120,6 +117,10 @@ function VanPage(props) {
     setOrder(newOrder);
   };
   let removeOrder = (orderItem) => {
+    if(!localStorage.getItem('token')) {
+      setGoToLogin(true);
+      return;
+    }
     let newOrder = order.slice();
     orderItem.quantity--;
     if (orderItem.quantity == 0) {
@@ -151,8 +152,16 @@ function VanPage(props) {
     return <Redirect to="/" />;
   }
 
-  if(goToEditUser) {
+  if (goToEditUser) {
     return <Redirect to="/edit"/>;
+  }
+
+  // Invalid access
+  if (!data) {
+    return <Redirect to="/" />;
+  }
+  if (goToLogin) {
+    return <Redirect to="/login" />;
   }
 
   return (
