@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import "./orderConfirm.css";
+import "./homePage";
 import greenTick from "./assets/greenTick.png";
+import { ProgressBar } from "react-bootstrap";
 
 
 function OrderStatus(props) {
   let [redirect, setRedirect] = useState(null);
+   
 
   if(redirect) {
     console.log(redirect);
@@ -21,7 +24,7 @@ function OrderStatus(props) {
         alt="green tick illustration"
       />
       <h1 className="confirm-text">Thanks For Your Order!</h1>
-      <h2 className="rating-text">Rate your experience with vendorName</h2>
+      <h2 className="rating-text">How would you rate your interaction us?</h2>
       
       
         
@@ -37,7 +40,7 @@ function OrderStatus(props) {
         <input type="radio" id="star1" name="rate" value="1" />
         <label for="star1" title="text">1 star</label>
       </div>
-      <Button className="button"
+      <Button className="button" id="submit-btn"
           onClick={() => setRedirect("/")}
           title="Home"
           color="#047E61"

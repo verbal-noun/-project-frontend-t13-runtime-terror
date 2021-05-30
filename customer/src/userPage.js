@@ -45,6 +45,7 @@ function UserPage(props) {
   let [orders, loadOrders] = useState([]);
   let [selectedID, setSelectedID] = useState(null);
   let [gotoHome, setGotoHome] = useState(false);
+  let [homeRedirect, setHomeRedirect] = useState(false);
 
   let isLoggedIn = localStorage.getItem("token");
   useEffect(() => {
@@ -100,6 +101,9 @@ function UserPage(props) {
   if (selectedID) {
     return <Redirect to={{pathname: `/status`, state: {selectedID}}}/>;
   }
+  if(homeRedirect) {
+    return <Redirect to="/"/>;
+  }
   return (
     <div className="userpage">
       <div className="order-card-list">
@@ -107,6 +111,7 @@ function UserPage(props) {
           <h1>Order History</h1>
         </div>
         <Button className="button" onClick={logout}>Logout</Button>
+        <Button className="button" onClick={() => setHomeRedirect(true)}>Home</Button>
         {orders.map((order, index) => {
           return (
             <OrderCard

@@ -13,6 +13,7 @@ import UserPage from "./userPage";
 import OrderStatus from './orderStatus';
 import OrderConfirm from "./orderConfirm";
 import EditUser from "./editUser";
+import SignUp from "./signUp";
 
 
 ReactDOM.render(
@@ -43,6 +44,7 @@ export default function App() {
         <Route path="/van" render={(props) => <VanPage {...props} />} />
         <Route path="/checkout" render={(props) => <OrderPage {...props} />} />
         <Route path="/login" component={LoginPage} />
+        <Route path="/signup" component={SignUp} />
         <Route path="/orders" component={UserPage} />
         <Route path="/status" render={(props) => <OrderStatus {...props} />} />
         <Route path="/confirm" render={(props) => <OrderConfirm {...props} />} />

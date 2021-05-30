@@ -179,6 +179,10 @@
   
 }
 
+#dashboard{
+  top:0%;
+}
+
 .back-button {
   margin-left: 2rem;
   margin-top: 1rem;
@@ -217,7 +221,13 @@
 }
 }
 
-@media (max-width: 840px) 
+#dashboard{
+  width: 80px;
+  margin-left:1100px;
+  margin-top:50px;
+}
+
+@media (max-width: 900px) 
 {
   .menu-row {
     margin-left: 2rem;
@@ -399,7 +409,13 @@
     margin-bottom: 20px;
     
   }
+
+  #dashboard{
+    margin-left:250px;
+    font-size: 20px;
   }
+  }
+
 
 
 
