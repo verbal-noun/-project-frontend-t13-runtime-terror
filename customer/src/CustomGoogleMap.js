@@ -7,7 +7,8 @@ import Marker from './components/marker';
 import style from './mapStyles/purple.json'
 
 
-/* function for displaying the Google map section in the homepage and display the current vendors */
+//function for displaying the Google map section in the homepage and siplay the current vendors
+
 
 function CustomGoogleMap({longitude, latitude, className}) {
   const [trucks, loadTrucks] = useState([])
@@ -22,6 +23,7 @@ function CustomGoogleMap({longitude, latitude, className}) {
       .catch((err) => { })
   }, [])
 
+  console.log(trucks)
 
   if (!trucks || trucks.length === 0) {
     return null;
@@ -29,15 +31,12 @@ function CustomGoogleMap({longitude, latitude, className}) {
 
   return (
     <div className={className}>
-
-      /* Retrieve the data for google map and display it */
       <GoogleMapReact
         options={{styles: style, scrollwheel: false, fullscreenControl: false, zoomControl: false}}
         defaultZoom={14}
         bootstrapURLKeys={{ key: "AIzaSyAlXVQH0CDISyvqYDSUThVfGKggA8vaqtU" }}
         defaultCenter={{ lat: parseFloat(latitude), lng: parseFloat(longitude) }}
       >
-        /* Display truck markers on the map */
         {trucks
           .filter(truck => truck.open === true)
           .map((truck) => (
