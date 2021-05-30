@@ -4,8 +4,6 @@ import dateFormat from 'dateformat';
 
 import './DashBoard.css'
 
-const TIME_BEFORE_DISCOUNT = 10;
-
 function DashBoard(props) {
     return (
         <div className='dashboard-container'>
@@ -35,8 +33,6 @@ function OpenCloseItem() {
     } else {
         isOpen = isOpen == 'true';
     }
-
-    console.log(isOpen);
 
     if (vendorData.open == false) {
         return (
@@ -68,20 +64,34 @@ function OpenCloseItem() {
 }
 
 function DisplayOrders() {
+    var intervalms = 5000;
     let [orders, loadOrders] = useState([]);
+    let [globals, setGlobals] = useState([]);
+    
+    useEffect(() => {
+        axios.get('https://info30005-vendor-backend.herokuapp.com/api/vendor/globals')
+        .then((res) => {
+            setGlobals(res.data);
+        })
+    }, []);
 
     useEffect(() => {
-        axios.get('https://info30005-vendor-backend.herokuapp.com/api/vendor/orders')
-        .then((res) => {
-            loadOrders(res.data);
-        });
-    }, []);
+        const timer = setTimeout(() => {
+            axios.get('https://info30005-vendor-backend.herokuapp.com/api/vendor/orders')
+            .then((res) => {
+                loadOrders(res.data);
+            });
+        }, 3000);
+        return () => {clearTimeout(timer);};
+    }, [orders]);
 
     if (!orders) {
         return (
             <div className="no-orders">You don't currently have any orders</div>
         )
     }
+
+    console.log(globals);
  
     return (
         <div className="order-list">
@@ -98,7 +108,8 @@ function DisplayOrders() {
                 orderID={order._id}
                 orderTime={order.createdAt}
                 orderStatus={order.status}
-                customerDetails={order.customer} />
+                customerDetails={order.customer}
+                globals={globals} />
             ))}
         </div>
     )
@@ -106,29 +117,30 @@ function DisplayOrders() {
 }
 
 
-function OrderCard( {orderID, orderTime, orderStatus, customerDetails} ) {
-    var timeRemaining = parseInt((new Date(orderTime).getTime() - new Date().getTime())/(1000*60)) + TIME_BEFORE_DISCOUNT;
+function OrderCard( {orderID, orderTime, orderStatus, customerDetails, globals} ) {
+    var timeRemaining = parseInt((new Date(orderTime).getTime() - new Date().getTime())/(1000*60)) + globals[1].value;
+    var timeRemainingMessage = timeRemaining;
 
-    if (timeRemaining < 0 && orderStatus === "Preparing") {
-        timeRemaining = "Discount Applied";
+    if (timeRemaining <= 0 && orderStatus === "Preparing") {
+        timeRemainingMessage = "Discount Applied";
     } 
     else if (orderStatus === "Ready for pickup") {
-        timeRemaining = "Ready";
+        timeRemainingMessage = "Ready";
     } 
     else {
-        timeRemaining = timeRemaining + " minutes";
+        timeRemainingMessage = timeRemainingMessage + " minutes";
     }
 
     return (
         <div className="item-order" id={"order-" + orderID} onClick={() => ToggleExpandOrder({orderID})}>
             <div className="cust-name">{customerDetails.name.given} {customerDetails.name.family}</div>
             <div className="time-created">{dateFormat(orderTime, "HH:MM")}</div>
-            <div className="time-rem">{timeRemaining}</div>
+            <div className="time-rem">{timeRemainingMessage}</div>
             <div className="order-status">{orderStatus}</div>
             <div className="button-expand" id={"toggle-button-" + orderID}>Expand</div>
             <div className="expanded-order" id={"expanded-order-" + orderID} style={{display:'none', height:'0%'}}>
                 <div className="inner-expanded-order">
-                    {DisplayOrderData({orderID})}
+                    {DisplayOrderData({orderID, globals}, timeRemaining)}
                 </div>
             </div>
         </div>
@@ -153,7 +165,7 @@ function ToggleExpandOrder( { orderID } ) {
     }
 }
 
-function DisplayOrderData( { orderID } ) {
+function DisplayOrderData( { orderID, globals }, timeRemaining ) {
     let [orderData, loadOrderData] = useState([]);
 
     useEffect(() => {
@@ -162,8 +174,6 @@ function DisplayOrderData( { orderID } ) {
             loadOrderData(res.data);
         });
     }, []);
-
-    console.log(orderData);
 
     if (orderData.length == 0) {
         return
@@ -188,18 +198,17 @@ function DisplayOrderData( { orderID } ) {
                     <div>Total:</div>
                     <div>${orderData.totalPrice}</div>
                 </div>
+                <div className="discount-applied-message">
+                    { orderData.status == "Preparing" ? (timeRemaining > 0 ? <p>A {globals[1].amount}% discount will be applied in {timeRemaining} minute(s).</p> 
+                    : <p>A {globals[1].amount}% discount has been applied.</p>) : <p></p>}
+                </div>
                 {GetBottomButtons(orderData.status, {orderID})}
-            </div>
-            <div className="order-details-right">
-                <p>Need more time? Apply Discount</p>
-                <p>Discount will be applied in </p>
             </div>
         </div>
     )
 }
 
 function GetBottomButtons( orderStatus, {orderID} ) {
-    console.log(orderStatus);
     if (orderStatus === "Preparing") {
         return (
             <div>
@@ -260,7 +269,7 @@ function CancelOrder( { orderID }, e ) {
 
     document.getElementById("order-"+orderID).style.display = "none";
 
-    axios.post('https://info30005-vendor-backend.herokuapp.com/api/vendor/cancelOrder', {order: orderID});
+    axios.post('https://info30005-vendor-backend.herokuapp.com/api/vendor/cancelOrder', {orderID: orderID});
 }
 
 function FulfillOrder( {orderID}, e ) {
@@ -297,7 +306,6 @@ function CalculateElapsedTime(timeCreated) {
         warningIndicator = colourOrange; 
     }
 
-    console.log(warningIndicator);
 
     return (<b><span style={{color: warningIndicator}}>{timeElapsed} minutes</span></b>)
 }

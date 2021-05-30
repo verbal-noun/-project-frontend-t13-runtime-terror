@@ -1,3 +1,5 @@
+/************* DASHBOARD STYLING ***************/
+
 .dashboard-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -195,8 +197,8 @@
 }
 
 .order-details-left {
-    width: 70%;
-    float: left;
+    width: 100%;
+    margin: 0 auto 0;
 }
 
 .order-details-header {
@@ -303,6 +305,11 @@
 
 .order-item-card-img {
     padding-top: 0 !important;
+}
+
+.discount-applied-message {
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
 

@@ -16,22 +16,33 @@ function OrderList(props) {
 function DisplayOrders() {
     let [orders, loadOrders] = useState([]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         axios.get('https://info30005-vendor-backend.herokuapp.com/api/vendor/allOrders')
         .then((res) => {
             loadOrders(res.data);
         });
-    }, []);
+    }, [orders]);*/
+
+    useEffect(() => {
+        
+        const timer = setTimeout(() => {
+            axios.get('https://info30005-vendor-backend.herokuapp.com/api/vendor/allorders')
+            .then((res) => {
+                loadOrders(res.data);
+            });
+        }, 3000);
+        return () => {clearTimeout(timer);};
+    }, [orders]);
 
     if (!orders) {
         return (
             <div className="no-orders">You don't currently have any orders</div>
         )
     }
- 
+    
     return (
         <div className="all-orders-list">
-            {orders.reverse().map((order) => (
+            {orders.map((order) => (
                 <OrderDetailsCard
                 key={order._id}
                 orderID={order._id}
@@ -68,9 +79,6 @@ function GetOrderItems({orderID}) {
             loadOrderData(res.data);
         });
     }, []);
-
-    console.log(orderData);
-
     
     if (orderData.length == 0) {
         return
@@ -127,6 +135,7 @@ function GetOrderItems({orderID}) {
                 <div className="order-tab-card-quantity"></div>
                 <div className="order-tab-card-price"><b>${orderData.totalPrice}</b></div>
             </div>
+            <div className="discount-applied-order">{orderData.discounted ? <p>A discount was applied to this order</p> : <p></p>}</div>
         </div>
     )
 }

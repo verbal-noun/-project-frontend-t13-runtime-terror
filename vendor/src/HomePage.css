@@ -180,13 +180,20 @@ li {
 
 @media only screen and (max-width: 700px) {
   .nav-bar {
-    display: none;
+    position: absolute;
     z-index: 3;
+    height: 200px;
+    width: 100%;
   }
 
   #content-container {
     width: 99%;
     max-width: none;
+    top: 300px;
+  }
+
+  #nav-list li {
+    padding: 3px;
   }
 
   #header-profile-image {

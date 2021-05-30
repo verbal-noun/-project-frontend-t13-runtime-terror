@@ -8,7 +8,6 @@ import { Link, Redirect } from "react-router-dom";
 import DashBoard from './components/DashBoard'
 import MenuList from './components/MenuList'
 import OrderList from './components/OrderList'
-import TruckGrid from './components/TruckGrid'
 import axios from "axios";
 
 const date_formatter = new Intl.DateTimeFormat('en-au', { month: 'long', day: 'numeric', year: 'numeric'})
@@ -59,9 +58,6 @@ function HomePage(props) {
           <li onClick={() => ChangeTab('menu')}>
             <span id='menu-list-item'>Menu</span>
           </li>
-          <li onClick={() => ChangeTab('truck-grid')}>
-            <span id='truck-grid-list-item'>Trucks</span>
-          </li>
         </ul>
         <a href="/login" onClick={() => LogOut()} id='nav-log-out'>
           Log Out
@@ -72,7 +68,6 @@ function HomePage(props) {
         <div id ='dashboard'><DashBoard /></div>
         <div id ='order-list'><OrderList /></div>
         <div id ='menu'><MenuList /></div>
-        <div id ='truck-grid'><TruckGrid /></div>
       </div>
 
       <div id="screen-darken"></div>
