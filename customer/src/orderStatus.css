@@ -68,7 +68,9 @@
 
 }
 
-
+.button:disabled{
+  display: none;
+}
 
 
 @media (max-width: 640px) 
@@ -86,7 +88,9 @@
     
   }
 
-  
+  .button:disabled{
+    display: none;
+  }
 
   .discount-time{
     margin-left:22%;

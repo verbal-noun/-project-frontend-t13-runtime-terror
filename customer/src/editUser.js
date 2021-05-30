@@ -16,7 +16,8 @@ function EditUser(props) {
   function validateForm() {
     return (newEmail.length > 0 || (newPassword.length > 0 && newPassword == newPasswordConfirm)) && password.length > 0;
   }
-
+  
+  // hadnling the submission of new user details and check for validation and difference with previous old credentials
   function handleSubmit(event) {
     event.preventDefault();
     let postData = { old_password: password };
@@ -42,6 +43,8 @@ function EditUser(props) {
   if (redirectHome) {
     return <Redirect to="/login" />;
   }
+  
+  // jsx starts from here to display components 
   return (
     <div className="Login">
       <div className="left">
@@ -50,6 +53,7 @@ function EditUser(props) {
         
         <h4 className="animation a2"> You can change your account email and password here</h4>
       </div>
+      
       <Form className="form" onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="text">
           <Form.Label className="form-name" ></Form.Label>
@@ -84,9 +88,9 @@ function EditUser(props) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <p className="animation a5"><a href="#">Forgot Password</a></p>
+        
         <Button
-          className="button"
+          className="button-b"
           block
           size="lg"
           type="submit"

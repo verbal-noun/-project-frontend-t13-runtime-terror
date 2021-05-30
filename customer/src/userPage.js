@@ -110,8 +110,8 @@ function UserPage(props) {
         <div className="logo">
           <h1>Order History</h1>
         </div>
-        <Button className="button" onClick={logout}>Logout</Button>
-        <Button className="button" onClick={() => setHomeRedirect(true)}>Home</Button>
+        <Button className="button" id="logout" onClick={logout}>Logout</Button>
+        <Button className="button" id="home" onClick={() => setHomeRedirect(true)}>Home</Button>
         {orders.map((order, index) => {
           return (
             <OrderCard

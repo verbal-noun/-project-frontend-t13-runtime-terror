@@ -79,7 +79,13 @@
     transform: translateY(-3px);
   }
 
+  #home{
+    margin-left:40%;
+  }
 
+  #logout{
+    margin-left:40%;
+  }
 
  
  
@@ -90,7 +96,7 @@
 
   .logo {
     background-color: white;
-    font-size: 20px;
+    font-size: 10px;
     width: 90%;
     height: 125px;
     line-height: 125px;
@@ -113,5 +119,12 @@
     float: right;
   }
   
+  #home{
+    margin-left:36%;
+  }
+
+  #logout{
+    margin-left:36%;
+  }
   
 }

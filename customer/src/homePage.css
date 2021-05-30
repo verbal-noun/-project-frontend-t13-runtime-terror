@@ -172,12 +172,25 @@
 
 @media (max-width: 840px) 
 {
-
+  .homepage {
+    font-family: "Roboto Condensed";
+    background: linear-gradient(135deg, #022c18 60%, #00b68b);
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    mix-blend-mode: normal;
+    overflow-y: scroll;
+    position: relative;
+  }
+  
+  
+  
+  
   .logo {
-    background-color: rgb(250, 250, 250);
-    font-size: 12px;
+    background-color: rgb(255, 255, 255);
+    font-size: 35px;
     width: 70%;
-    height: 80px;
+    height: 50px;
     line-height: 1px;
     margin-top: 5%;
     margin-left: 50%;
@@ -251,18 +264,20 @@
   .truck-card-address {
     font-style: normal;
     font-weight: normal;
-    font-size: 10px;
+    font-size: 8px;
   }
   
   .truck-card-distance-section {
     width: 15%;
     line-height: 125px;
-    font-size: 8px;
-    right: 1030px;
+    font-size: 6px;
+    
     font-weight: bold;
     
   }
   
+  
+
   .truck-card-list {
     width: 50%;
     height: 100%;

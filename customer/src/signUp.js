@@ -96,7 +96,7 @@ function SignUp(props) {
         {error.length ? <p className="error">{error}</p> : null}
         <p className="animation a5">Already have an account? <a href="#" onClick={setRedirectLogin}>Login</a></p>
         <Button
-          className="button"
+          className="button-b"
           block
           size="lg"
           type="submit"

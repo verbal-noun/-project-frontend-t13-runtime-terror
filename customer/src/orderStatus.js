@@ -50,6 +50,8 @@ function OrderStatus(props) {
             let startTime = new Date(order.modifiedAt).getTime();
             setModifyTime(startTime + globals.orderChangeLimit*60000);
             setDiscountTime(startTime + globals.discountLimit*60000);
+            
+
         });
       });
 
@@ -58,7 +60,7 @@ function OrderStatus(props) {
         clearInterval(interval);
       }
   }, []);
-
+  
   const cancelOrder = () => {
     let data = props.location.state;
     axios.post(`https://info30005-customer-backend.herokuapp.com/api/customer/cancelOrder/`, {orderID: data.selectedID})
@@ -85,7 +87,7 @@ function OrderStatus(props) {
   if(gotoHome) {
     return <Redirect to="/"/>;
   }
-
+  //style={{marginRight: spacing + 'em'}} 
   // Edit order and cancel order buttons are disabled after respective times has elapsed
   return (
     <div className="confirm-card">
@@ -95,26 +97,26 @@ function OrderStatus(props) {
         alt="green tick illustration"
       />
       <h1 className="confirm-text">Thanks For Your Order!</h1>
-      <h2 className="remaining-time">You have {elapsed(modifyTime - time)} left to modify your order</h2>
-      <h2 className="discount-time">{elapsed(discountTime - time)} until a 20% Discount is applied</h2>
+      <h2 className="remaining-time" style={modifyTime - time < 0 ? {opacity: 0}:{}}>You have {elapsed(modifyTime - time - 1)} left to modify your order</h2>
+      <h2 className="discount-time" style={discountTime - time < 0 ? {opacity: 0}:{}}>{elapsed(discountTime - time - 1)} until a 20% Discount is applied</h2>
       
       <div className="button-div">
         <Button className="button"
-          onClick={() => setGotoHome(true)}
+          onClick={() => setGotoHome(true) }
           title="Home"
           color="#047E61"
         >Home</Button>
 
         <Button className="button"
-          onClick={() => setGotoEditOrder(true)}
+          onClick={ () => setGotoEditOrder(true)}
           color="#047E61"
-          // disabled={() => modifyTime - time >= 0}
+          style={modifyTime - time < 0 ? {opacity: 0}:{}}
         >Edit Order</Button>
         
         <Button className="button"
           onClick={cancelOrder}
           color="#047E61"
-          disabled={() => modifyTime - time >= 0}
+          style={modifyTime - time < 0 ? {opacity: 0}:{}}
         >Cancel Order</Button>
       </div>  
     </div>

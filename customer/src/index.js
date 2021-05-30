@@ -36,7 +36,7 @@ axios.interceptors.request.use(
     return Promise.reject(err);
   }
 );
-
+//web page routing has been implemented here
 export default function App() {
   return (
     <Router>
