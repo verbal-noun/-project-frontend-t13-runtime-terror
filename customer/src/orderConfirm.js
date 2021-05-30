@@ -5,16 +5,41 @@ import "./orderConfirm.css";
 import "./homePage";
 import greenTick from "./assets/greenTick.png";
 import { ProgressBar } from "react-bootstrap";
+import axios from "axios";
 
 
 // Function to display the order confirmation page
 function OrderStatus(props) {
-  let [redirect, setRedirect] = useState(null);
+  let [gotoHome, setGotoHome] = useState(null);
+  let [ratingValue, setRatingValue] = useState(null);
 
-  if(redirect) {
-    console.log(redirect);
-    return <Redirect to={redirect} />;
+  let handleSubmit = () => {
+    if(!ratingValue) {
+      setGotoHome(true);
+      return;
+    }
+    let data = props.location.state;
+    console.log(data.order.id);
+    axios.post(
+      'https://info30005-customer-backend.herokuapp.com/api/customer/rate', 
+      {
+        orderID: data.order.id, 
+        rating: {
+          value: ratingValue,
+          comment: "",
+          order: data.order._id
+        }
+      })
+      .then(() => setGotoHome("/"))
+      .catch((err) => {
+        setGotoHome("/");
+    });
   }
+
+  if(gotoHome) {
+    return <Redirect to={gotoHome}/>;
+  }
+
   // Visit a vendor page
   return (
     <div className="confirm-card">
@@ -28,19 +53,20 @@ function OrderStatus(props) {
 
 
       <div class="rate">
-        <input type="radio" id="star5" name="rate" value="5" />
+        <input type="radio" id="star5" name="rate" value="5" onClick={() => setRatingValue(5)}/>
         <label for="star5" title="text">5 stars</label>
-        <input type="radio" id="star4" name="rate" value="4" />
+        <input type="radio" id="star4" name="rate" value="4" onClick={() => setRatingValue(4)}/>
         <label for="star4" title="text">4 stars</label>
-        <input type="radio" id="star3" name="rate" value="3" />
+        <input type="radio" id="star3" name="rate" value="3" onClick={() => setRatingValue(3)}/>
         <label for="star3" title="text">3 stars</label>
-        <input type="radio" id="star2" name="rate" value="2" />
+        <input type="radio" id="star2" name="rate" value="2" onClick={() => setRatingValue(2)}/>
         <label for="star2" title="text">2 stars</label>
-        <input type="radio" id="star1" name="rate" value="1" />
+        <input type="radio" id="star1" name="rate" value="1" onClick={() => setRatingValue(1)}/>
         <label for="star1" title="text">1 star</label>
       </div>
+
       <Button className="button" id="submit-btn"
-          onClick={() => setRedirect("/")}
+          onClick={handleSubmit}
           title="Home"
           color="#047E61"
         >Submit</Button>

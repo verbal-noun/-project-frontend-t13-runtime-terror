@@ -72,9 +72,15 @@ function OrderStatus(props) {
         console.log(err.message);
     });
   }
-
+  if(order.status == "Done") {
+    return <Redirect
+      to={{
+        pathname: `/confirm`,
+        state: { order },
+      }}
+    />;
+  }
   if(gotoEditOrder) {
-    console.log("Hi");
     return <Redirect
       to={{
         pathname: `/van`,
